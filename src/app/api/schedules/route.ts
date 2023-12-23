@@ -1,3 +1,4 @@
+import { Song } from '@/models/song';
 import prisma from 'db';
 
 export async function GET(request: Request) {
@@ -75,7 +76,7 @@ export async function POST(request: Request) {
           date: schedule.date,
           scheduleSongs: {
             createMany: {
-              data: songs.map((s) => ({
+              data: songs.map((s: Song) => ({
                 songId: s.id,
               })),
             },
