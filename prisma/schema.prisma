@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  id             Int             @id @default(autoincrement())
+  name           String
+  author         String
+  key            String
+  chordSheetType String
+  version        Int             @default(1)
+  lyric          String          @db.Text
+  createdAt      DateTime        @default(now())
+  Schedule       Schedule?       @relation(fields: [scheduleId], references: [id])
+  scheduleId     Int?
+  ScheduleSongs  ScheduleSongs[]
+}
+
+model Schedule {
+  id            Int             @id @default(autoincrement())
+  date          DateTime
+  scheduleSongs ScheduleSongs[]
+  Song          Song[]
+}
+
+model ScheduleSongs {
+  id         Int       @id @default(autoincrement())
+  song       Song?     @relation(fields: [songId], references: [id])
+  songId     Int
+  Schedule   Schedule? @relation(fields: [scheduleId], references: [id])
+  scheduleId Int?
+}
