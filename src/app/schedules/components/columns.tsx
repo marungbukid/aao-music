@@ -3,13 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Song } from '@/models/song'
+import { Schedule } from '@/models/schedule';
 import { DotsHorizontalIcon, Pencil1Icon } from '@radix-ui/react-icons';
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
+import { format } from 'date-fns';
 import { DeleteIcon } from 'lucide-react';
 import Link from 'next/link';
-import { format } from 'date-fns'
-import { Schedule } from '@prisma/client';
 
 
 export const columns: ColumnDef<Schedule>[] = [
