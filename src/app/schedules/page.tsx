@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
+import { fetcher } from '@/lib/fetch';
+import { Paged } from '@/models/paged';
+import { Schedule } from '@/models/schedule';
 import Link from 'next/link';
 import { columns } from './components/columns';
-import { Paged } from '@/models/paged';
-import { Schedule } from '@prisma/client';
-import { fetcher } from '@/lib/fetch';
 
 
 async function getSchedules(pageNumber: number, query?: string): Promise<Paged<Schedule>> {
