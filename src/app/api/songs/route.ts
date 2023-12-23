@@ -1,3 +1,4 @@
+import { Song } from '@/models/song';
 import prisma from 'db';
 import { NextResponse } from 'next/server';
 
@@ -47,7 +48,7 @@ export async function GET(request: Request) {
         totalCount: totalCount,
         pageSize: pageSize,
         currentPage: pageNumber,
-        items: songs.map((e) => ({
+        items: songs.map((e: Song) => ({
           ...e,
           lyric: '',
         })),
