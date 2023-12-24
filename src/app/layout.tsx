@@ -6,18 +6,17 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const roboto_mono = Roboto_Mono({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-roboto-mono'
+})
+
 export const metadata: Metadata = {
   title: 'AAO Music Team - Lyrics Database',
   description: 'AAO Church Music/Lyrics Database',
 }
 
-const roboto_mono = Roboto_Mono({
-  weight: ['500'],
-  style: ['normal'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono'
-})
 
 export default function RootLayout({
   children,
@@ -25,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className + ` min-h-screen bg-background font-sans antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className + ` min-h-screen bg-background font-sans antialiased ` + roboto_mono.variable}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
