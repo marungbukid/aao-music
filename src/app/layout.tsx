@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import Header from '@/components/ui/header'
 import type { Metadata } from 'next'
 import { Inter, Roboto_Mono } from 'next/font/google'
+import { Toaster } from "@/components/ui/sonner"
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className='relative flex min-h-screen flex-col'>
             <Header />
             {children}
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>

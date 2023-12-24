@@ -21,6 +21,7 @@ import { Loader2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 import { Song } from '@/models/song';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   name: z.string(),
@@ -51,6 +52,7 @@ export function EditSongForm({
     try {
       await editSong(id, { ...values });
       router.replace('/songs');
+      toast.success(`${song.name} updated`)
     } catch (error) {
       console.error(error)
     }
