@@ -9,8 +9,6 @@ export async function GET(request: Request) {
   const pageSize: number = parseInt(searchParams.get('pageSize') ?? '10');
   const query = searchParams.get('query');
 
-  console.log(pageNumber, pageSize, query)
-
   const totalCount = await prisma.song.count({
     where: {
       ...(query && {
@@ -23,8 +21,6 @@ export async function GET(request: Request) {
   });
 
   const totalPages = Math.ceil(totalCount / pageSize);
-
-  console.log('finding songs');
 
   const songs = await prisma.song.findMany({
     skip: (pageNumber - 1) * pageSize,
@@ -39,8 +35,6 @@ export async function GET(request: Request) {
       }),
     },
   });
-
-  console.log('songs found');
 
   return Response.json(
     {

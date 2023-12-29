@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        mono: ['var(--font-roboto-mono)']
+        mono: ['var(--font-geist-mono)']
       },
       colors: {
         border: "hsl(var(--border))",

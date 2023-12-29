@@ -1,6 +1,6 @@
-import { fetcher } from '@/lib/fetch'
-import { redirect } from 'next/navigation';
+import { fetcher } from '@/lib/fetch';
 import { Schedule } from '@/models/schedule';
+import { redirect } from 'next/navigation';
 import ScheduleSongsView from './components/schedule-songs-view';
 
 async function getScheduleDetails(id: string): Promise<Schedule | null> {
@@ -28,8 +28,7 @@ export default async function ScheduleViewPage({
 
   return (
     <div>
-      <ScheduleSongsView songs={res.scheduleSongs.map(s => s.song)}/>
-      
+      <ScheduleSongsView songs={res.scheduleSongs.map(s => s.song)} />
     </div>
   )
 }
