@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation';
 
 function isValidTenant(tenant: string): tenant is TenantType {
   switch (tenant) {
-    case 'taytay':
-    case 'binangonan':
-    case 'bulacan':
+    case '1':
+    case '2':
+    case '3':
       return true;
     default: return false;
   }
