@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import prisma from 'db';
 
 export async function GET(
