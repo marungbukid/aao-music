@@ -9,7 +9,7 @@ import LocationSelect from '@/components/ui/location-select';
 import { TenantType } from '@/models/tenant-type';
 
 
-async function getSchedules(pageNumber: number, query?: string): Promise<Paged<Schedule>> {
+async function getSchedules(locationId: string, pageNumber: number, query?: string): Promise<Paged<Schedule>> {
   const noRes = {
     pagination: {
       currentPage: 1,
@@ -24,6 +24,7 @@ async function getSchedules(pageNumber: number, query?: string): Promise<Paged<S
 
   try {
     const res = await fetcher('/api/schedules?' + new URLSearchParams({
+      locationId: locationId,
       pageNumber: pageNumber.toString(),
       pageSize: '10',
       ...(query && { query: query })
@@ -41,13 +42,16 @@ async function getSchedules(pageNumber: number, query?: string): Promise<Paged<S
 
 
 export default async function SchedulesPage({
-  searchParams: { page = '1', query = '' }
+  searchParams: { page = '1', query = '' },
+  params: { tenant }
 }: {
   searchParams: {
     page?: string,
-    query?: string,
-    location?: number
+    query?: string
   },
+  params: {
+    tenant: TenantType
+  }
 }) {
   let pageNumber = 1;
 
@@ -58,7 +62,7 @@ export default async function SchedulesPage({
     pageNumber = 1;
   }
 
-  const { data, pagination } = await getSchedules(pageNumber, query);
+  const { data, pagination } = await getSchedules(tenant, pageNumber, query);
 
   return (
     <div>

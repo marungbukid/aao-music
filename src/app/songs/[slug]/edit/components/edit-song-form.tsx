@@ -206,7 +206,7 @@ export function EditSongForm({
           />
 
           <div className='flex flex-row gap-2 justify-between'>
-            <Button onClick={() => router.back()} variant='ghost'>
+            <Button onClick={() => router.back()} variant='ghost' type='button'>
               Cancel
             </Button>
             <div className='flex flex-row gap-2'>

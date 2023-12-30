@@ -27,7 +27,7 @@ export default function SelectLocationPage() {
             <div
               className={
                 clsx({
-                  'rounded border shadow p-6 bg-cover bg-opacity-40 flex flex-col': true,
+                  'rounded border shadow p-6 bg-cover bg-opacity-40 flex flex-col min-h-64': true,
                   'bg-[linear-gradient(to_bottom,rgba(255,255,255,0.75),rgba(255,255,255,1)),url("/images/team-taytay.jpg")] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.75),rgba(0,0,0,1)),url("/images/team-taytay.jpg")]': location.id === 1
                 })
               }>

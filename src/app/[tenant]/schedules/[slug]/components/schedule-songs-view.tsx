@@ -14,8 +14,8 @@ export default function ScheduleSongsView({
           <CarouselItem key={song.id}>
             <div>
               <div className=''>
-                <p className='font-heading scroll-m-20 font-semibold tracking-tight first:mt-0'>{song.name}</p>
-                <p className='text-muted-foreground text-sm mb-4'>
+                <p className='font-heading text-xl scroll-m-20 font-semibold tracking-tight first:mt-0'>{song.name}</p>
+                <p className='text-muted-foreground text-lg mb-4'>
                   {song.author}
                 </p>
               </div>
