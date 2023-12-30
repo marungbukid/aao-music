@@ -1,26 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { fetcher } from '@/lib/fetch';
+import { defaultLocations } from '@/lib/data/default-locations';
 import { Location } from '@/lib/generated/client';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
-import { Navigation2Icon } from 'lucide-react';
 import Link from 'next/link';
 
-async function getLocations(): Promise<Location[] | null> {
-  try {
-    const res = await fetcher('/api/locations', {
-      method: 'get'
-    });
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  return null;
-}
-
-export default async function SelectLocationPage() {
-  const locations = await getLocations();
+export default function SelectLocationPage() {
+  const locations = defaultLocations;
 
   function getLocationName(location: Location) {
     switch (location.id) {
