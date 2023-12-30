@@ -1,7 +1,7 @@
 import { fetcher } from '@/lib/fetch';
 import { Schedule } from '@/models/schedule';
+import EditScheduleForm from './components/edit-schedule-form';
 import { redirect } from 'next/navigation';
-import ScheduleSongsView from './components/schedule-songs-view';
 
 async function getScheduleDetails(id: string): Promise<Schedule | null> {
   try {
@@ -16,19 +16,19 @@ async function getScheduleDetails(id: string): Promise<Schedule | null> {
   return null;
 }
 
-export default async function ScheduleViewPage({
+export default async function EditSchedulePage({
   params: { slug }
 }: {
   params: {
     slug: string
   }
 }) {
-  const res = await getScheduleDetails(slug);
-  if (!res) redirect('/schedules')
+  const schedule = await getScheduleDetails(slug);
+  if (!schedule) redirect('/schedules')
 
   return (
     <div>
-      <ScheduleSongsView songs={res.scheduleSongs.toSorted((a, b) => a.order - b.order).map(s => s.song)} />
+      <EditScheduleForm schedule={schedule} />
     </div>
   )
 }

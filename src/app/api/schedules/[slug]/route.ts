@@ -1,3 +1,4 @@
+import { Song } from '@/models/song';
 import prisma from 'db';
 
 export async function GET(
@@ -10,9 +11,9 @@ export async function GET(
     include: {
       scheduleSongs: {
         include: {
-          song: true
-        }
-      }
+          song: true,
+        },
+      },
     },
     where: {
       id: {
@@ -24,4 +25,61 @@ export async function GET(
   return Response.json(schedule, {
     status: 200,
   });
+}
+
+export async function PUT(
+  request: Request,
+  { params }: { params: { slug: string } }
+) {
+  try {
+    const slug = parseInt(params.slug);
+    const schedule = await request.json();
+
+    try {
+      const songs = await prisma.song.findMany({
+        where: {
+          id: {
+            in: schedule.songs.map((s: any) => s.id),
+          },
+        },
+      });
+
+      await prisma.scheduleSongs.deleteMany({
+        where: {
+          scheduleId: {
+            equals: slug,
+          },
+        },
+      });
+
+      await prisma.schedule.update({
+        where: {
+          id: slug,
+        },
+        data: {
+          date: schedule.date,
+          scheduleSongs: {
+            createMany: {
+              data: songs.map((s: Song) => ({
+                songId: s.id,
+                order:
+                  (schedule.songs as { id: number; order: number }[]).find(
+                    (requestSong: any) => requestSong.id === s.id
+                  )?.order ?? 0,
+              })),
+            },
+          },
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      return Response.json(error, {
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+  return Response.json(null, { status: 200 });
 }

@@ -76,7 +76,7 @@ div.chord-sheet > div.paragraph > .row > .column > .chord {
 }
 
 div.chord-sheet > div.paragraph > .row > .column > .lyrics {
-  @apply inline-block whitespace-pre font-mono;
+  @apply inline-block whitespace-pre font-mono text-muted-foreground;
 }
 
 div.chord-sheet > div.paragraph > .row > .column:has(> div.chord:empty ~ div.lyrics:empty) {

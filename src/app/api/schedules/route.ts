@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       const songs = await prisma.song.findMany({
         where: {
           id: {
-            in: schedule.songIds,
+            in: schedule.songs.map((s: any) => s.id),
           },
         },
       });
@@ -78,6 +78,10 @@ export async function POST(request: Request) {
             createMany: {
               data: songs.map((s: Song) => ({
                 songId: s.id,
+                order:
+                  (schedule.songs as { id: number; order: number }[]).find(
+                    (requestSong: any) => requestSong.id === s.id
+                  )?.order ?? 0,
               })),
             },
           },

@@ -3129,30 +3129,35 @@ export namespace Prisma {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    order: number | null
   }
 
   export type ScheduleSongsSumAggregateOutputType = {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    order: number | null
   }
 
   export type ScheduleSongsMinAggregateOutputType = {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    order: number | null
   }
 
   export type ScheduleSongsMaxAggregateOutputType = {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    order: number | null
   }
 
   export type ScheduleSongsCountAggregateOutputType = {
     id: number
     songId: number
     scheduleId: number
+    order: number
     _all: number
   }
 
@@ -3161,30 +3166,35 @@ export namespace Prisma {
     id?: true
     songId?: true
     scheduleId?: true
+    order?: true
   }
 
   export type ScheduleSongsSumAggregateInputType = {
     id?: true
     songId?: true
     scheduleId?: true
+    order?: true
   }
 
   export type ScheduleSongsMinAggregateInputType = {
     id?: true
     songId?: true
     scheduleId?: true
+    order?: true
   }
 
   export type ScheduleSongsMaxAggregateInputType = {
     id?: true
     songId?: true
     scheduleId?: true
+    order?: true
   }
 
   export type ScheduleSongsCountAggregateInputType = {
     id?: true
     songId?: true
     scheduleId?: true
+    order?: true
     _all?: true
   }
 
@@ -3278,6 +3288,7 @@ export namespace Prisma {
     id: number
     songId: number
     scheduleId: number | null
+    order: number
     _count: ScheduleSongsCountAggregateOutputType | null
     _avg: ScheduleSongsAvgAggregateOutputType | null
     _sum: ScheduleSongsSumAggregateOutputType | null
@@ -3303,6 +3314,7 @@ export namespace Prisma {
     id?: boolean
     songId?: boolean
     scheduleId?: boolean
+    order?: boolean
     song?: boolean | ScheduleSongs$songArgs<ExtArgs>
     Schedule?: boolean | ScheduleSongs$ScheduleArgs<ExtArgs>
   }, ExtArgs["result"]["scheduleSongs"]>
@@ -3311,6 +3323,7 @@ export namespace Prisma {
     id?: boolean
     songId?: boolean
     scheduleId?: boolean
+    order?: boolean
   }
 
   export type ScheduleSongsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3329,6 +3342,7 @@ export namespace Prisma {
       id: number
       songId: number
       scheduleId: number | null
+      order: number
     }, ExtArgs["result"]["scheduleSongs"]>
     composites: {}
   }
@@ -3729,6 +3743,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ScheduleSongs", 'Int'>
     readonly songId: FieldRef<"ScheduleSongs", 'Int'>
     readonly scheduleId: FieldRef<"ScheduleSongs", 'Int'>
+    readonly order: FieldRef<"ScheduleSongs", 'Int'>
   }
     
 
@@ -4128,7 +4143,8 @@ export namespace Prisma {
   export const ScheduleSongsScalarFieldEnum: {
     id: 'id',
     songId: 'songId',
-    scheduleId: 'scheduleId'
+    scheduleId: 'scheduleId',
+    order: 'order'
   };
 
   export type ScheduleSongsScalarFieldEnum = (typeof ScheduleSongsScalarFieldEnum)[keyof typeof ScheduleSongsScalarFieldEnum]
@@ -4354,6 +4370,7 @@ export namespace Prisma {
     id?: IntFilter<"ScheduleSongs"> | number
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    order?: IntFilter<"ScheduleSongs"> | number
     song?: XOR<SongNullableRelationFilter, SongWhereInput> | null
     Schedule?: XOR<ScheduleNullableRelationFilter, ScheduleWhereInput> | null
   }
@@ -4362,6 +4379,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
+    order?: SortOrder
     song?: SongOrderByWithRelationInput
     Schedule?: ScheduleOrderByWithRelationInput
   }
@@ -4373,6 +4391,7 @@ export namespace Prisma {
     NOT?: ScheduleSongsWhereInput | ScheduleSongsWhereInput[]
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    order?: IntFilter<"ScheduleSongs"> | number
     song?: XOR<SongNullableRelationFilter, SongWhereInput> | null
     Schedule?: XOR<ScheduleNullableRelationFilter, ScheduleWhereInput> | null
   }, "id">
@@ -4381,6 +4400,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
+    order?: SortOrder
     _count?: ScheduleSongsCountOrderByAggregateInput
     _avg?: ScheduleSongsAvgOrderByAggregateInput
     _max?: ScheduleSongsMaxOrderByAggregateInput
@@ -4395,6 +4415,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"ScheduleSongs"> | number
     songId?: IntWithAggregatesFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableWithAggregatesFilter<"ScheduleSongs"> | number | null
+    order?: IntWithAggregatesFilter<"ScheduleSongs"> | number
   }
 
   export type SongCreateInput = {
@@ -4522,6 +4543,7 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsCreateInput = {
+    order?: number
     song?: SongCreateNestedOneWithoutScheduleSongsInput
     Schedule?: ScheduleCreateNestedOneWithoutScheduleSongsInput
   }
@@ -4530,9 +4552,11 @@ export namespace Prisma {
     id?: number
     songId: number
     scheduleId?: number | null
+    order?: number
   }
 
   export type ScheduleSongsUpdateInput = {
+    order?: IntFieldUpdateOperationsInput | number
     song?: SongUpdateOneWithoutScheduleSongsNestedInput
     Schedule?: ScheduleUpdateOneWithoutScheduleSongsNestedInput
   }
@@ -4541,22 +4565,25 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsCreateManyInput = {
     id?: number
     songId: number
     scheduleId?: number | null
+    order?: number
   }
 
   export type ScheduleSongsUpdateManyMutationInput = {
-
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4781,30 +4808,35 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    order?: SortOrder
   }
 
   export type ScheduleSongsAvgOrderByAggregateInput = {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    order?: SortOrder
   }
 
   export type ScheduleSongsMaxOrderByAggregateInput = {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    order?: SortOrder
   }
 
   export type ScheduleSongsMinOrderByAggregateInput = {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    order?: SortOrder
   }
 
   export type ScheduleSongsSumOrderByAggregateInput = {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    order?: SortOrder
   }
 
   export type ScheduleCreateNestedOneWithoutSongInput = {
@@ -5154,12 +5186,14 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsCreateWithoutSongInput = {
+    order?: number
     Schedule?: ScheduleCreateNestedOneWithoutScheduleSongsInput
   }
 
   export type ScheduleSongsUncheckedCreateWithoutSongInput = {
     id?: number
     scheduleId?: number | null
+    order?: number
   }
 
   export type ScheduleSongsCreateOrConnectWithoutSongInput = {
@@ -5217,15 +5251,18 @@ export namespace Prisma {
     id?: IntFilter<"ScheduleSongs"> | number
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    order?: IntFilter<"ScheduleSongs"> | number
   }
 
   export type ScheduleSongsCreateWithoutScheduleInput = {
+    order?: number
     song?: SongCreateNestedOneWithoutScheduleSongsInput
   }
 
   export type ScheduleSongsUncheckedCreateWithoutScheduleInput = {
     id?: number
     songId: number
+    order?: number
   }
 
   export type ScheduleSongsCreateOrConnectWithoutScheduleInput = {
@@ -5421,25 +5458,30 @@ export namespace Prisma {
   export type ScheduleSongsCreateManySongInput = {
     id?: number
     scheduleId?: number | null
+    order?: number
   }
 
   export type ScheduleSongsUpdateWithoutSongInput = {
+    order?: IntFieldUpdateOperationsInput | number
     Schedule?: ScheduleUpdateOneWithoutScheduleSongsNestedInput
   }
 
   export type ScheduleSongsUncheckedUpdateWithoutSongInput = {
     id?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsUncheckedUpdateManyWithoutSongInput = {
     id?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsCreateManyScheduleInput = {
     id?: number
     songId: number
+    order?: number
   }
 
   export type SongCreateManyScheduleInput = {
@@ -5454,17 +5496,20 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsUpdateWithoutScheduleInput = {
+    order?: IntFieldUpdateOperationsInput | number
     song?: SongUpdateOneWithoutScheduleSongsNestedInput
   }
 
   export type ScheduleSongsUncheckedUpdateWithoutScheduleInput = {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsUncheckedUpdateManyWithoutScheduleInput = {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type SongUpdateWithoutScheduleInput = {

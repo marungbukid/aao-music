@@ -5,4 +5,5 @@ export type ScheduleSong = {
   songId: number;
   scheduleId: number;
   song: Song;
+  order: number;
 }

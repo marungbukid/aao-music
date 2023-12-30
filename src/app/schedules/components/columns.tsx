@@ -53,7 +53,7 @@ export const columns: ColumnDef<Schedule>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <Link href={`/schedule/edit/${schedule.id}`}>
+              <Link href={`/schedules/edit/${schedule.id}`}>
                 <DropdownMenuItem>
                   <Pencil1Icon className='h-4 w-4 me-2' /> Edit
                 </DropdownMenuItem>

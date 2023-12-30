@@ -93,12 +93,33 @@ export async function deleteSong(id: number) {
 
 export async function addSchedule(params: {
   date: Date,
-  songIds: number[]
+  songs: {
+    id: number,
+    order: number
+  }[]
 }) {
   try {
     await fetcher('/api/schedules', {
       body: JSON.stringify(params),
       method: 'post'
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+export async function updateSchedule(id: number, params: {
+  date: Date,
+  songs: {
+    id: number,
+    order: number
+  }[]
+}) {
+  try {
+    await fetcher(`/api/schedules/${id}`, {
+      body: JSON.stringify(params),
+      method: 'put'
     })
   } catch (error) {
     console.error(error)

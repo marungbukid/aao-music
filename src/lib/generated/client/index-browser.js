@@ -127,7 +127,8 @@ exports.Prisma.ScheduleScalarFieldEnum = {
 exports.Prisma.ScheduleSongsScalarFieldEnum = {
   id: 'id',
   songId: 'songId',
-  scheduleId: 'scheduleId'
+  scheduleId: 'scheduleId',
+  order: 'order'
 };
 
 exports.Prisma.SortOrder = {

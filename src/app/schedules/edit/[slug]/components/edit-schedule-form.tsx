@@ -1,24 +1,24 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
+import SearchSongCommand from '@/app/schedules/add/components/search-song-command'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
+import { DroppableSong } from '@/components/ui/droppable-song'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { revalidate, updateSchedule } from '@/lib/actions/actions'
 import { cn } from '@/lib/utils'
+import { Schedule } from '@/models/schedule'
+import { Song } from '@/models/song'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { format, startOfDay } from 'date-fns'
-import { CalendarIcon, MusicIcon } from 'lucide-react'
-import { useState } from 'react'
+import { CalendarIcon, Loader2, MusicIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import SearchSongCommand from './search-song-command'
-import { addSchedule, revalidate } from '@/lib/actions/actions'
-import { useRouter } from 'next/navigation'
-import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
-import { DroppableSong } from '@/components/ui/droppable-song'
-import { Song } from '@/models/song'
 
 const formSchema = z.object({
   date: z.date(),
@@ -30,7 +30,7 @@ const formSchema = z.object({
   }))
 })
 
-export default function AddScheduleForm() {
+export default function EditScheduleForm({ schedule }: { schedule: Schedule }) {
   const router = useRouter();
   const [popoversState, setPopoverState] = useState<{
     calendarOpen: boolean,
@@ -39,14 +39,34 @@ export default function AddScheduleForm() {
     calendarOpen: false,
     songsCommandOpen: false,
   });
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date()
+      date: new Date(schedule.date),
+      songs: schedule.scheduleSongs.map(ss => ({
+        id: ss.songId,
+        name: ss.song.name,
+        author: ss.song.author,
+        order: ss.order
+      }))
     }
   })
 
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await updateSchedule(schedule.id, {
+        date: values.date,
+        songs: values.songs.map(s => ({
+          id: s.id,
+          order: s.order
+        }))
+      })
+      await revalidate('/schedules');
+      router.replace('/schedules');
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   function reorder(songList: Song[], startIndex: number, endIndex: number) {
     const result = Array.from(songList);
@@ -74,22 +94,6 @@ export default function AddScheduleForm() {
       author: os.author,
       order: idx
     })));
-  }
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      await addSchedule({
-        date: values.date,
-        songs: values.songs.map(s => ({
-          id: s.id,
-          order: s.order
-        }))
-      })
-      await revalidate('/schedules');
-      router.replace('/schedules');
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   const { isSubmitting } = form.formState;
@@ -172,7 +176,7 @@ export default function AddScheduleForm() {
                   <SearchSongCommand
                     onSelect={e => {
                       setPopoverState(v => ({ ...v, songsCommandOpen: false }))
-                      form.setValue('songs', [...(field.value ? field.value : []), e])
+                      form.setValue('songs', [...(field.value ? field.value : []), {...e, order: field.value.length + 1}])
                     }} />
                 </PopoverContent>
               </Popover>
@@ -216,10 +220,10 @@ export default function AddScheduleForm() {
           )}
         />
 
-
         <div className='flex flex-row justify-end'>
           <Button type='submit'>
-            Save
+            {isSubmitting && <Loader2 className='h-4 w-4 me-2' />}
+            Update
           </Button>
         </div>
       </form>
