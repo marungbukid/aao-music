@@ -1,81 +1,63 @@
 import { Button } from '@/components/ui/button';
-import { DataTable } from '@/components/ui/data-table';
 import { fetcher } from '@/lib/fetch';
-import { Paged } from '@/models/paged';
-import { Schedule } from '@/models/schedule';
+import { Location } from '@/lib/generated/client';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
+import { Navigation2Icon } from 'lucide-react';
 import Link from 'next/link';
-import { columns } from './components/columns';
 
-
-async function getSchedules(pageNumber: number, query?: string): Promise<Paged<Schedule>> {
-  const noRes = {
-    pagination: {
-      currentPage: 1,
-      hasNext: false,
-      hasPrevious: false,
-      pageSize: 10,
-      totalCount: 0,
-      totalPages: 0
-    },
-    data: []
-  } as unknown as Paged<Schedule>;
-
+async function getLocations(): Promise<Location[] | null> {
   try {
-    const res = await fetcher('/api/schedules?' + new URLSearchParams({
-      pageNumber: pageNumber.toString(),
-      pageSize: '10',
-      ...(query && { query: query })
-    }), {
+    const res = await fetcher('/api/locations', {
       method: 'get'
     });
-    if (!res.ok) return noRes;
     return await res.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 
-  return noRes
+  return null;
 }
 
+export default async function SelectLocationPage() {
+  const locations = await getLocations();
 
-export default async function SchedulesPage({
-  searchParams: { page = '1', query = '' }
-}: {
-  searchParams: {
-    page?: string,
-    query?: string
+  function getLocationName(location: Location) {
+    switch (location.id) {
+      case 1: return 'Taytay';
+      case 2: return 'Binangonan';
+      case 3: return 'Bulacan';
+    }
+    return '';
   }
-}) {
-  let pageNumber = 1;
-
-  try {
-    pageNumber = parseInt(page);
-    if (pageNumber < 1) pageNumber = 1;
-  } catch (e) {
-    pageNumber = 1;
-  }
-
-  const { data, pagination } = await getSchedules(pageNumber, query);
 
   return (
-    <div>
-      <div className=''>
-        <p className='font-heading scroll-m-20 font-semibold tracking-tight first:mt-0'>Schedules</p>
-        <p className='text-muted-foreground text-sm mb-4'>
-          These are the set of songs by schedule
-        </p>
+    <div className='w-full container py-10'>
+
+      <div className='grid grid-flow-row sm:grid-flow-col sm:grid-cols-3 gap-6 w-full'>
+        {locations && locations.map(location => (
+          <Link href={location.id + '/schedules'}
+            key={location.address}>
+            <div
+              className={
+                clsx({
+                  'rounded border shadow p-6 bg-cover bg-opacity-40 flex flex-col': true,
+                  'bg-[linear-gradient(to_bottom,rgba(255,255,255,0.75),rgba(255,255,255,1)),url("/images/team-taytay.jpg")] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.75),rgba(0,0,0,1)),url("/images/team-taytay.jpg")]': location.id === 1
+                })
+              }>
+              <h1 className='scroll-m-20 text-4xl font-bold tracking-tight mb-4'>{getLocationName(location)}</h1>
+              <p className='mb-6'>{location.address}</p>
+
+              <div className='inline-flex justify-end mt-auto'>
+                <Button variant='link' size='icon'>
+                  <ArrowRightIcon className='h-6 w-6' />
+                </Button>
+              </div>
+            </div>
+          </Link>
+        ))}
+
       </div>
-
-      <Link href='/schedules/add'>
-        <Button>
-          Add Schedule
-        </Button>
-      </Link>
-
-      <DataTable
-        columns={columns}
-        pagination={pagination}
-        data={data} />
     </div>
   )
 }

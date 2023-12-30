@@ -121,7 +121,9 @@ exports.Prisma.SongScalarFieldEnum = {
 
 exports.Prisma.ScheduleScalarFieldEnum = {
   id: 'id',
-  date: 'date'
+  date: 'date',
+  songLeadId: 'songLeadId',
+  locationId: 'locationId'
 };
 
 exports.Prisma.ScheduleSongsScalarFieldEnum = {
@@ -129,6 +131,26 @@ exports.Prisma.ScheduleSongsScalarFieldEnum = {
   songId: 'songId',
   scheduleId: 'scheduleId',
   order: 'order'
+};
+
+exports.Prisma.SongLeadScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  locationId: 'locationId'
+};
+
+exports.Prisma.LocationScalarFieldEnum = {
+  id: 'id',
+  address: 'address',
+  lat: 'lat',
+  long: 'long'
+};
+
+exports.Prisma.LocationSongLeadScalarFieldEnum = {
+  id: 'id',
+  locationId: 'locationId',
+  songLeadId: 'songLeadId'
 };
 
 exports.Prisma.SortOrder = {
@@ -150,7 +172,10 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Song: 'Song',
   Schedule: 'Schedule',
-  ScheduleSongs: 'ScheduleSongs'
+  ScheduleSongs: 'ScheduleSongs',
+  SongLead: 'SongLead',
+  Location: 'Location',
+  LocationSongLead: 'LocationSongLead'
 };
 
 /**

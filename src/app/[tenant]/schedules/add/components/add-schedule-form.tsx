@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { format, startOfDay } from 'date-fns'
-import { CalendarIcon, MusicIcon } from 'lucide-react'
+import { CalendarIcon, Loader2, MusicIcon, SaveIcon } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -19,6 +19,9 @@ import { useRouter } from 'next/navigation'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import { DroppableSong } from '@/components/ui/droppable-song'
 import { Song } from '@/models/song'
+import { SongLead } from '@/lib/generated/client'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { TenantType } from '@/models/tenant-type'
 
 const formSchema = z.object({
   date: z.date(),
@@ -27,10 +30,17 @@ const formSchema = z.object({
     name: z.string(),
     author: z.string(),
     order: z.number()
-  }))
+  })),
+  songLeadId: z.coerce.number()
 })
 
-export default function AddScheduleForm() {
+export default function AddScheduleForm({
+  songLeads,
+  tenant
+}: {
+  songLeads: SongLead[],
+  tenant: TenantType
+}) {
   const router = useRouter();
   const [popoversState, setPopoverState] = useState<{
     calendarOpen: boolean,
@@ -43,7 +53,7 @@ export default function AddScheduleForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date()
+      date: new Date(),
     }
   })
 
@@ -78,15 +88,16 @@ export default function AddScheduleForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await addSchedule({
+      await addSchedule(tenant, {
         date: values.date,
         songs: values.songs.map(s => ({
           id: s.id,
           order: s.order
-        }))
+        })),
+        songLeadId: values.songLeadId
       })
-      await revalidate('/schedules');
-      router.replace('/schedules');
+      await revalidate('/' + tenant + '/schedules');
+      router.replace('/' + tenant + '/schedules');
     } catch (error) {
       console.error(error)
     }
@@ -172,7 +183,7 @@ export default function AddScheduleForm() {
                   <SearchSongCommand
                     onSelect={e => {
                       setPopoverState(v => ({ ...v, songsCommandOpen: false }))
-                      form.setValue('songs', [...(field.value ? field.value : []), e])
+                      form.setValue('songs', [...(field.value ? field.value : []), ({...e, order: (field.value?.length ?? 0) + 1})])
                     }} />
                 </PopoverContent>
               </Popover>
@@ -217,8 +228,35 @@ export default function AddScheduleForm() {
         />
 
 
+        <FormField
+          control={form.control}
+          name='songLeadId'
+          render={({ field }) => (
+            <FormItem className='flex flex-col'>
+              <FormLabel>Song Lead *</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select song lead" className='capitalize'/>
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {songLeads.map(s => (
+                    <SelectItem key={s.id} value={s.id.toString()}>
+                      <span className='capitalize'>{s.firstName.toLowerCase()} {s.lastName.toLowerCase()}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+
         <div className='flex flex-row justify-end'>
           <Button type='submit'>
+            {isSubmitting ? <Loader2 className='h-4 w-4 me-2 animate-spin' /> : <SaveIcon className='h-4 w-4 me-2' />}
             Save
           </Button>
         </div>

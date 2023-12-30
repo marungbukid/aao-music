@@ -27,11 +27,30 @@ export async function GET(
   });
 }
 
+export async function DELETE(
+  request: Request,
+  { params }: { params: { slug: string } }
+) {
+  await prisma.schedule.delete({
+    where: {
+      id: parseInt(params.slug),
+    },
+  });
+  
+  return Response.json(
+    {},
+    {
+      status: 200,
+    }
+  );
+}
+
 export async function PUT(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
   try {
+    const { searchParams } = new URL(request.url);
     const slug = parseInt(params.slug);
     const schedule = await request.json();
 
@@ -58,6 +77,8 @@ export async function PUT(
         },
         data: {
           date: schedule.date,
+          songLeadId: schedule.songLeadId,
+          locationId: parseInt(searchParams.get('locationId') ?? '1'),
           scheduleSongs: {
             createMany: {
               data: songs.map((s: Song) => ({

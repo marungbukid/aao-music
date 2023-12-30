@@ -7,9 +7,6 @@ export async function GET(request: Request) {
   const pageNumber: number = parseInt(searchParams.get('pageNumber') ?? '1');
   const pageSize: number = parseInt(searchParams.get('pageSize') ?? '10');
   const query = searchParams.get('query');
-
-  console.log(pageNumber, pageSize, query);
-
   const totalCount = await prisma.schedule.count({
     where: {
       ...(query && {
@@ -22,8 +19,6 @@ export async function GET(request: Request) {
 
   const totalPages = Math.ceil(totalCount / pageSize);
 
-  console.log('finding schedules');
-
   const schedules = await prisma.schedule.findMany({
     skip: (pageNumber - 1) * pageSize,
     take: pageSize,
@@ -34,10 +29,14 @@ export async function GET(request: Request) {
           equals: searchParams.get('query')!,
         },
       }),
+      locationId: {
+        equals: parseInt(searchParams.get('locationId') ?? '1'),
+      },
+    },
+    include: {
+      songLead: true,
     },
   });
-
-  console.log('schedules', schedules);
 
   return Response.json(
     {
@@ -60,6 +59,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
     const schedule = await request.json();
 
     try {
@@ -74,6 +74,8 @@ export async function POST(request: Request) {
       await prisma.schedule.create({
         data: {
           date: schedule.date,
+          songLeadId: schedule.songLeadId,
+          locationId: parseInt(searchParams.get('locationId') ?? '1'),
           scheduleSongs: {
             createMany: {
               data: songs.map((s: Song) => ({

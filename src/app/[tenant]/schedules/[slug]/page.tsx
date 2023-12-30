@@ -24,7 +24,7 @@ export default async function ScheduleViewPage({
   }
 }) {
   const res = await getScheduleDetails(slug);
-  if (!res) redirect('/schedules')
+  if (!res) redirect('schedules')
 
   return (
     <div>

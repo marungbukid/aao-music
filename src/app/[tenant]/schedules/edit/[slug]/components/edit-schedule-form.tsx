@@ -1,19 +1,22 @@
 'use client'
 
-import SearchSongCommand from '@/app/schedules/add/components/search-song-command'
+import SearchSongCommand from '@/app/[tenant]/schedules/add/components/search-song-command'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { DroppableSong } from '@/components/ui/droppable-song'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { revalidate, updateSchedule } from '@/lib/actions/actions'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { revalidate, updateScheduleById } from '@/lib/actions/actions'
+import { SongLead } from '@/lib/generated/client'
 import { cn } from '@/lib/utils'
 import { Schedule } from '@/models/schedule'
 import { Song } from '@/models/song'
+import { TenantType } from '@/models/tenant-type'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { format, startOfDay } from 'date-fns'
-import { CalendarIcon, Loader2, MusicIcon } from 'lucide-react'
+import { CalendarIcon, Loader2, MusicIcon, SaveIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
@@ -27,10 +30,11 @@ const formSchema = z.object({
     name: z.string(),
     author: z.string(),
     order: z.number()
-  }))
+  })),
+  songLeadId: z.number(),
 })
 
-export default function EditScheduleForm({ schedule }: { schedule: Schedule }) {
+export default function EditScheduleForm({ schedule, songLeads, tenant }: { schedule: Schedule, songLeads: SongLead[], tenant: TenantType }) {
   const router = useRouter();
   const [popoversState, setPopoverState] = useState<{
     calendarOpen: boolean,
@@ -48,21 +52,23 @@ export default function EditScheduleForm({ schedule }: { schedule: Schedule }) {
         name: ss.song.name,
         author: ss.song.author,
         order: ss.order
-      }))
+      })),
+      songLeadId: schedule.songLeadId
     }
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await updateSchedule(schedule.id, {
+      await updateScheduleById(schedule.id, tenant, {
         date: values.date,
         songs: values.songs.map(s => ({
           id: s.id,
           order: s.order
-        }))
+        })),
+        songLeadId: values.songLeadId
       })
-      await revalidate('/schedules');
-      router.replace('/schedules');
+      await revalidate('/' + tenant + '/schedules');
+      router.replace('/' + tenant + '/schedules');
     } catch (error) {
       console.error(error)
     }
@@ -176,7 +182,7 @@ export default function EditScheduleForm({ schedule }: { schedule: Schedule }) {
                   <SearchSongCommand
                     onSelect={e => {
                       setPopoverState(v => ({ ...v, songsCommandOpen: false }))
-                      form.setValue('songs', [...(field.value ? field.value : []), {...e, order: field.value.length + 1}])
+                      form.setValue('songs', [...(field.value ? field.value : []), { ...e, order: (field.value.length ?? 0) + 1 }])
                     }} />
                 </PopoverContent>
               </Popover>
@@ -220,9 +226,35 @@ export default function EditScheduleForm({ schedule }: { schedule: Schedule }) {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name='songLeadId'
+          render={({ field }) => (
+            <FormItem className='flex flex-col'>
+              <FormLabel>Song Lead *</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select song lead" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {songLeads.map(s => (
+                    <SelectItem key={s.id} value={s.id.toString()}>
+                      <span className='capitalize'>{s.firstName.toLowerCase()} {s.lastName.toLowerCase()}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+
         <div className='flex flex-row justify-end'>
           <Button type='submit'>
-            {isSubmitting && <Loader2 className='h-4 w-4 me-2' />}
+            {isSubmitting ? <Loader2 className='h-4 w-4 me-2 animate-spin' /> : <SaveIcon className='h-4 w-4 me-2' />}
             Update
           </Button>
         </div>

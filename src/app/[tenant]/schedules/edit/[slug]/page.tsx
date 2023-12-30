@@ -2,6 +2,8 @@ import { fetcher } from '@/lib/fetch';
 import { Schedule } from '@/models/schedule';
 import EditScheduleForm from './components/edit-schedule-form';
 import { redirect } from 'next/navigation';
+import { getSongLeads } from '@/lib/actions/actions';
+import { TenantType } from '@/models/tenant-type';
 
 async function getScheduleDetails(id: string): Promise<Schedule | null> {
   try {
@@ -17,18 +19,25 @@ async function getScheduleDetails(id: string): Promise<Schedule | null> {
 }
 
 export default async function EditSchedulePage({
-  params: { slug }
+  params: { slug, tenant }
 }: {
   params: {
-    slug: string
+    slug: string;
+    tenant: TenantType
   }
 }) {
   const schedule = await getScheduleDetails(slug);
   if (!schedule) redirect('/schedules')
 
+  console.log(schedule)
+
+  const songLeads = await getSongLeads(tenant)
+
   return (
     <div>
-      <EditScheduleForm schedule={schedule} />
+      <EditScheduleForm
+        tenant={tenant}
+        schedule={schedule} songLeads={songLeads ?? []} />
     </div>
   )
 }

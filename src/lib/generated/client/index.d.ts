@@ -28,6 +28,21 @@ export type Schedule = $Result.DefaultSelection<Prisma.$SchedulePayload>
  * 
  */
 export type ScheduleSongs = $Result.DefaultSelection<Prisma.$ScheduleSongsPayload>
+/**
+ * Model SongLead
+ * 
+ */
+export type SongLead = $Result.DefaultSelection<Prisma.$SongLeadPayload>
+/**
+ * Model Location
+ * 
+ */
+export type Location = $Result.DefaultSelection<Prisma.$LocationPayload>
+/**
+ * Model LocationSongLead
+ * 
+ */
+export type LocationSongLead = $Result.DefaultSelection<Prisma.$LocationSongLeadPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -180,6 +195,36 @@ export class PrismaClient<
     * ```
     */
   get scheduleSongs(): Prisma.ScheduleSongsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.songLead`: Exposes CRUD operations for the **SongLead** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SongLeads
+    * const songLeads = await prisma.songLead.findMany()
+    * ```
+    */
+  get songLead(): Prisma.SongLeadDelegate<ExtArgs>;
+
+  /**
+   * `prisma.location`: Exposes CRUD operations for the **Location** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Locations
+    * const locations = await prisma.location.findMany()
+    * ```
+    */
+  get location(): Prisma.LocationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.locationSongLead`: Exposes CRUD operations for the **LocationSongLead** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LocationSongLeads
+    * const locationSongLeads = await prisma.locationSongLead.findMany()
+    * ```
+    */
+  get locationSongLead(): Prisma.LocationSongLeadDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -652,7 +697,10 @@ export namespace Prisma {
   export const ModelName: {
     Song: 'Song',
     Schedule: 'Schedule',
-    ScheduleSongs: 'ScheduleSongs'
+    ScheduleSongs: 'ScheduleSongs',
+    SongLead: 'SongLead',
+    Location: 'Location',
+    LocationSongLead: 'LocationSongLead'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -669,7 +717,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'song' | 'schedule' | 'scheduleSongs'
+      modelProps: 'song' | 'schedule' | 'scheduleSongs' | 'songLead' | 'location' | 'locationSongLead'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -868,6 +916,204 @@ export namespace Prisma {
           count: {
             args: Prisma.ScheduleSongsCountArgs<ExtArgs>,
             result: $Utils.Optional<ScheduleSongsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SongLead: {
+        payload: Prisma.$SongLeadPayload<ExtArgs>
+        fields: Prisma.SongLeadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SongLeadFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SongLeadFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          findFirst: {
+            args: Prisma.SongLeadFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SongLeadFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          findMany: {
+            args: Prisma.SongLeadFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>[]
+          }
+          create: {
+            args: Prisma.SongLeadCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          createMany: {
+            args: Prisma.SongLeadCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.SongLeadDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          update: {
+            args: Prisma.SongLeadUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          deleteMany: {
+            args: Prisma.SongLeadDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SongLeadUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.SongLeadUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>
+          }
+          aggregate: {
+            args: Prisma.SongLeadAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSongLead>
+          }
+          groupBy: {
+            args: Prisma.SongLeadGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SongLeadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SongLeadCountArgs<ExtArgs>,
+            result: $Utils.Optional<SongLeadCountAggregateOutputType> | number
+          }
+        }
+      }
+      Location: {
+        payload: Prisma.$LocationPayload<ExtArgs>
+        fields: Prisma.LocationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LocationFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LocationFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          findFirst: {
+            args: Prisma.LocationFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LocationFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          findMany: {
+            args: Prisma.LocationFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>[]
+          }
+          create: {
+            args: Prisma.LocationCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          createMany: {
+            args: Prisma.LocationCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.LocationDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          update: {
+            args: Prisma.LocationUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          deleteMany: {
+            args: Prisma.LocationDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LocationUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.LocationUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>
+          }
+          aggregate: {
+            args: Prisma.LocationAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateLocation>
+          }
+          groupBy: {
+            args: Prisma.LocationGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<LocationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LocationCountArgs<ExtArgs>,
+            result: $Utils.Optional<LocationCountAggregateOutputType> | number
+          }
+        }
+      }
+      LocationSongLead: {
+        payload: Prisma.$LocationSongLeadPayload<ExtArgs>
+        fields: Prisma.LocationSongLeadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LocationSongLeadFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LocationSongLeadFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          findFirst: {
+            args: Prisma.LocationSongLeadFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LocationSongLeadFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          findMany: {
+            args: Prisma.LocationSongLeadFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>[]
+          }
+          create: {
+            args: Prisma.LocationSongLeadCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          createMany: {
+            args: Prisma.LocationSongLeadCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.LocationSongLeadDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          update: {
+            args: Prisma.LocationSongLeadUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          deleteMany: {
+            args: Prisma.LocationSongLeadDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LocationSongLeadUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.LocationSongLeadUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>
+          }
+          aggregate: {
+            args: Prisma.LocationSongLeadAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateLocationSongLead>
+          }
+          groupBy: {
+            args: Prisma.LocationSongLeadGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<LocationSongLeadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LocationSongLeadCountArgs<ExtArgs>,
+            result: $Utils.Optional<LocationSongLeadCountAggregateOutputType> | number
           }
         }
       }
@@ -1089,6 +1335,104 @@ export namespace Prisma {
    */
   export type ScheduleCountOutputTypeCountSongArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SongWhereInput
+  }
+
+
+
+  /**
+   * Count Type SongLeadCountOutputType
+   */
+
+  export type SongLeadCountOutputType = {
+    Schedule: number
+    LocationSongLead: number
+  }
+
+  export type SongLeadCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Schedule?: boolean | SongLeadCountOutputTypeCountScheduleArgs
+    LocationSongLead?: boolean | SongLeadCountOutputTypeCountLocationSongLeadArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * SongLeadCountOutputType without action
+   */
+  export type SongLeadCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLeadCountOutputType
+     */
+    select?: SongLeadCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * SongLeadCountOutputType without action
+   */
+  export type SongLeadCountOutputTypeCountScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleWhereInput
+  }
+
+
+  /**
+   * SongLeadCountOutputType without action
+   */
+  export type SongLeadCountOutputTypeCountLocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LocationSongLeadWhereInput
+  }
+
+
+
+  /**
+   * Count Type LocationCountOutputType
+   */
+
+  export type LocationCountOutputType = {
+    locationSongLead: number
+    SongLead: number
+    Schedule: number
+  }
+
+  export type LocationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    locationSongLead?: boolean | LocationCountOutputTypeCountLocationSongLeadArgs
+    SongLead?: boolean | LocationCountOutputTypeCountSongLeadArgs
+    Schedule?: boolean | LocationCountOutputTypeCountScheduleArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * LocationCountOutputType without action
+   */
+  export type LocationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationCountOutputType
+     */
+    select?: LocationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * LocationCountOutputType without action
+   */
+  export type LocationCountOutputTypeCountLocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LocationSongLeadWhereInput
+  }
+
+
+  /**
+   * LocationCountOutputType without action
+   */
+  export type LocationCountOutputTypeCountSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SongLeadWhereInput
+  }
+
+
+  /**
+   * LocationCountOutputType without action
+   */
+  export type LocationCountOutputTypeCountScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleWhereInput
   }
 
 
@@ -2159,50 +2503,70 @@ export namespace Prisma {
 
   export type ScheduleAvgAggregateOutputType = {
     id: number | null
+    songLeadId: number | null
+    locationId: number | null
   }
 
   export type ScheduleSumAggregateOutputType = {
     id: number | null
+    songLeadId: number | null
+    locationId: number | null
   }
 
   export type ScheduleMinAggregateOutputType = {
     id: number | null
     date: Date | null
+    songLeadId: number | null
+    locationId: number | null
   }
 
   export type ScheduleMaxAggregateOutputType = {
     id: number | null
     date: Date | null
+    songLeadId: number | null
+    locationId: number | null
   }
 
   export type ScheduleCountAggregateOutputType = {
     id: number
     date: number
+    songLeadId: number
+    locationId: number
     _all: number
   }
 
 
   export type ScheduleAvgAggregateInputType = {
     id?: true
+    songLeadId?: true
+    locationId?: true
   }
 
   export type ScheduleSumAggregateInputType = {
     id?: true
+    songLeadId?: true
+    locationId?: true
   }
 
   export type ScheduleMinAggregateInputType = {
     id?: true
     date?: true
+    songLeadId?: true
+    locationId?: true
   }
 
   export type ScheduleMaxAggregateInputType = {
     id?: true
     date?: true
+    songLeadId?: true
+    locationId?: true
   }
 
   export type ScheduleCountAggregateInputType = {
     id?: true
     date?: true
+    songLeadId?: true
+    locationId?: true
     _all?: true
   }
 
@@ -2295,6 +2659,8 @@ export namespace Prisma {
   export type ScheduleGroupByOutputType = {
     id: number
     date: Date
+    songLeadId: number | null
+    locationId: number | null
     _count: ScheduleCountAggregateOutputType | null
     _avg: ScheduleAvgAggregateOutputType | null
     _sum: ScheduleSumAggregateOutputType | null
@@ -2319,19 +2685,27 @@ export namespace Prisma {
   export type ScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     date?: boolean
+    songLeadId?: boolean
+    locationId?: boolean
     scheduleSongs?: boolean | Schedule$scheduleSongsArgs<ExtArgs>
     Song?: boolean | Schedule$SongArgs<ExtArgs>
+    songLead?: boolean | Schedule$songLeadArgs<ExtArgs>
+    location?: boolean | Schedule$locationArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schedule"]>
 
   export type ScheduleSelectScalar = {
     id?: boolean
     date?: boolean
+    songLeadId?: boolean
+    locationId?: boolean
   }
 
   export type ScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     scheduleSongs?: boolean | Schedule$scheduleSongsArgs<ExtArgs>
     Song?: boolean | Schedule$SongArgs<ExtArgs>
+    songLead?: boolean | Schedule$songLeadArgs<ExtArgs>
+    location?: boolean | Schedule$locationArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2341,10 +2715,14 @@ export namespace Prisma {
     objects: {
       scheduleSongs: Prisma.$ScheduleSongsPayload<ExtArgs>[]
       Song: Prisma.$SongPayload<ExtArgs>[]
+      songLead: Prisma.$SongLeadPayload<ExtArgs> | null
+      location: Prisma.$LocationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       date: Date
+      songLeadId: number | null
+      locationId: number | null
     }, ExtArgs["result"]["schedule"]>
     composites: {}
   }
@@ -2714,6 +3092,10 @@ export namespace Prisma {
 
     Song<T extends Schedule$SongArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$SongArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    songLead<T extends Schedule$songLeadArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$songLeadArgs<ExtArgs>>): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    location<T extends Schedule$locationArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$locationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2744,6 +3126,8 @@ export namespace Prisma {
   interface ScheduleFieldRefs {
     readonly id: FieldRef<"Schedule", 'Int'>
     readonly date: FieldRef<"Schedule", 'DateTime'>
+    readonly songLeadId: FieldRef<"Schedule", 'Int'>
+    readonly locationId: FieldRef<"Schedule", 'Int'>
   }
     
 
@@ -3094,6 +3478,38 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
+  }
+
+
+  /**
+   * Schedule.songLead
+   */
+  export type Schedule$songLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    where?: SongLeadWhereInput
+  }
+
+
+  /**
+   * Schedule.location
+   */
+  export type Schedule$locationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    where?: LocationWhereInput
   }
 
 
@@ -4104,6 +4520,3004 @@ export namespace Prisma {
 
 
   /**
+   * Model SongLead
+   */
+
+  export type AggregateSongLead = {
+    _count: SongLeadCountAggregateOutputType | null
+    _avg: SongLeadAvgAggregateOutputType | null
+    _sum: SongLeadSumAggregateOutputType | null
+    _min: SongLeadMinAggregateOutputType | null
+    _max: SongLeadMaxAggregateOutputType | null
+  }
+
+  export type SongLeadAvgAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+  }
+
+  export type SongLeadSumAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+  }
+
+  export type SongLeadMinAggregateOutputType = {
+    id: number | null
+    firstName: string | null
+    lastName: string | null
+    locationId: number | null
+  }
+
+  export type SongLeadMaxAggregateOutputType = {
+    id: number | null
+    firstName: string | null
+    lastName: string | null
+    locationId: number | null
+  }
+
+  export type SongLeadCountAggregateOutputType = {
+    id: number
+    firstName: number
+    lastName: number
+    locationId: number
+    _all: number
+  }
+
+
+  export type SongLeadAvgAggregateInputType = {
+    id?: true
+    locationId?: true
+  }
+
+  export type SongLeadSumAggregateInputType = {
+    id?: true
+    locationId?: true
+  }
+
+  export type SongLeadMinAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    locationId?: true
+  }
+
+  export type SongLeadMaxAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    locationId?: true
+  }
+
+  export type SongLeadCountAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    locationId?: true
+    _all?: true
+  }
+
+  export type SongLeadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SongLead to aggregate.
+     */
+    where?: SongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SongLeads to fetch.
+     */
+    orderBy?: SongLeadOrderByWithRelationInput | SongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SongLeads
+    **/
+    _count?: true | SongLeadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SongLeadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SongLeadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SongLeadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SongLeadMaxAggregateInputType
+  }
+
+  export type GetSongLeadAggregateType<T extends SongLeadAggregateArgs> = {
+        [P in keyof T & keyof AggregateSongLead]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSongLead[P]>
+      : GetScalarType<T[P], AggregateSongLead[P]>
+  }
+
+
+
+
+  export type SongLeadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SongLeadWhereInput
+    orderBy?: SongLeadOrderByWithAggregationInput | SongLeadOrderByWithAggregationInput[]
+    by: SongLeadScalarFieldEnum[] | SongLeadScalarFieldEnum
+    having?: SongLeadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SongLeadCountAggregateInputType | true
+    _avg?: SongLeadAvgAggregateInputType
+    _sum?: SongLeadSumAggregateInputType
+    _min?: SongLeadMinAggregateInputType
+    _max?: SongLeadMaxAggregateInputType
+  }
+
+  export type SongLeadGroupByOutputType = {
+    id: number
+    firstName: string
+    lastName: string
+    locationId: number | null
+    _count: SongLeadCountAggregateOutputType | null
+    _avg: SongLeadAvgAggregateOutputType | null
+    _sum: SongLeadSumAggregateOutputType | null
+    _min: SongLeadMinAggregateOutputType | null
+    _max: SongLeadMaxAggregateOutputType | null
+  }
+
+  type GetSongLeadGroupByPayload<T extends SongLeadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SongLeadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SongLeadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SongLeadGroupByOutputType[P]>
+            : GetScalarType<T[P], SongLeadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SongLeadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    locationId?: boolean
+    Schedule?: boolean | SongLead$ScheduleArgs<ExtArgs>
+    Location?: boolean | SongLead$LocationArgs<ExtArgs>
+    LocationSongLead?: boolean | SongLead$LocationSongLeadArgs<ExtArgs>
+    _count?: boolean | SongLeadCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["songLead"]>
+
+  export type SongLeadSelectScalar = {
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    locationId?: boolean
+  }
+
+  export type SongLeadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Schedule?: boolean | SongLead$ScheduleArgs<ExtArgs>
+    Location?: boolean | SongLead$LocationArgs<ExtArgs>
+    LocationSongLead?: boolean | SongLead$LocationSongLeadArgs<ExtArgs>
+    _count?: boolean | SongLeadCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $SongLeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SongLead"
+    objects: {
+      Schedule: Prisma.$SchedulePayload<ExtArgs>[]
+      Location: Prisma.$LocationPayload<ExtArgs> | null
+      LocationSongLead: Prisma.$LocationSongLeadPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      firstName: string
+      lastName: string
+      locationId: number | null
+    }, ExtArgs["result"]["songLead"]>
+    composites: {}
+  }
+
+
+  type SongLeadGetPayload<S extends boolean | null | undefined | SongLeadDefaultArgs> = $Result.GetResult<Prisma.$SongLeadPayload, S>
+
+  type SongLeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SongLeadFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: SongLeadCountAggregateInputType | true
+    }
+
+  export interface SongLeadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SongLead'], meta: { name: 'SongLead' } }
+    /**
+     * Find zero or one SongLead that matches the filter.
+     * @param {SongLeadFindUniqueArgs} args - Arguments to find a SongLead
+     * @example
+     * // Get one SongLead
+     * const songLead = await prisma.songLead.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends SongLeadFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadFindUniqueArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one SongLead that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {SongLeadFindUniqueOrThrowArgs} args - Arguments to find a SongLead
+     * @example
+     * // Get one SongLead
+     * const songLead = await prisma.songLead.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends SongLeadFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first SongLead that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadFindFirstArgs} args - Arguments to find a SongLead
+     * @example
+     * // Get one SongLead
+     * const songLead = await prisma.songLead.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends SongLeadFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadFindFirstArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first SongLead that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadFindFirstOrThrowArgs} args - Arguments to find a SongLead
+     * @example
+     * // Get one SongLead
+     * const songLead = await prisma.songLead.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends SongLeadFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more SongLeads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SongLeads
+     * const songLeads = await prisma.songLead.findMany()
+     * 
+     * // Get first 10 SongLeads
+     * const songLeads = await prisma.songLead.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const songLeadWithIdOnly = await prisma.songLead.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends SongLeadFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a SongLead.
+     * @param {SongLeadCreateArgs} args - Arguments to create a SongLead.
+     * @example
+     * // Create one SongLead
+     * const SongLead = await prisma.songLead.create({
+     *   data: {
+     *     // ... data to create a SongLead
+     *   }
+     * })
+     * 
+    **/
+    create<T extends SongLeadCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadCreateArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many SongLeads.
+     *     @param {SongLeadCreateManyArgs} args - Arguments to create many SongLeads.
+     *     @example
+     *     // Create many SongLeads
+     *     const songLead = await prisma.songLead.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends SongLeadCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SongLead.
+     * @param {SongLeadDeleteArgs} args - Arguments to delete one SongLead.
+     * @example
+     * // Delete one SongLead
+     * const SongLead = await prisma.songLead.delete({
+     *   where: {
+     *     // ... filter to delete one SongLead
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends SongLeadDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadDeleteArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one SongLead.
+     * @param {SongLeadUpdateArgs} args - Arguments to update one SongLead.
+     * @example
+     * // Update one SongLead
+     * const songLead = await prisma.songLead.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends SongLeadUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadUpdateArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more SongLeads.
+     * @param {SongLeadDeleteManyArgs} args - Arguments to filter SongLeads to delete.
+     * @example
+     * // Delete a few SongLeads
+     * const { count } = await prisma.songLead.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends SongLeadDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SongLeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SongLeads
+     * const songLead = await prisma.songLead.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends SongLeadUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SongLead.
+     * @param {SongLeadUpsertArgs} args - Arguments to update or create a SongLead.
+     * @example
+     * // Update or create a SongLead
+     * const songLead = await prisma.songLead.upsert({
+     *   create: {
+     *     // ... data to create a SongLead
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SongLead we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends SongLeadUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, SongLeadUpsertArgs<ExtArgs>>
+    ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of SongLeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadCountArgs} args - Arguments to filter SongLeads to count.
+     * @example
+     * // Count the number of SongLeads
+     * const count = await prisma.songLead.count({
+     *   where: {
+     *     // ... the filter for the SongLeads we want to count
+     *   }
+     * })
+    **/
+    count<T extends SongLeadCountArgs>(
+      args?: Subset<T, SongLeadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SongLeadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SongLead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SongLeadAggregateArgs>(args: Subset<T, SongLeadAggregateArgs>): Prisma.PrismaPromise<GetSongLeadAggregateType<T>>
+
+    /**
+     * Group by SongLead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SongLeadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SongLeadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SongLeadGroupByArgs['orderBy'] }
+        : { orderBy?: SongLeadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SongLeadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSongLeadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SongLead model
+   */
+  readonly fields: SongLeadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SongLead.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SongLeadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    Schedule<T extends SongLead$ScheduleArgs<ExtArgs> = {}>(args?: Subset<T, SongLead$ScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    Location<T extends SongLead$LocationArgs<ExtArgs> = {}>(args?: Subset<T, SongLead$LocationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    LocationSongLead<T extends SongLead$LocationSongLeadArgs<ExtArgs> = {}>(args?: Subset<T, SongLead$LocationSongLeadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the SongLead model
+   */ 
+  interface SongLeadFieldRefs {
+    readonly id: FieldRef<"SongLead", 'Int'>
+    readonly firstName: FieldRef<"SongLead", 'String'>
+    readonly lastName: FieldRef<"SongLead", 'String'>
+    readonly locationId: FieldRef<"SongLead", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * SongLead findUnique
+   */
+  export type SongLeadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which SongLead to fetch.
+     */
+    where: SongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * SongLead findUniqueOrThrow
+   */
+  export type SongLeadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which SongLead to fetch.
+     */
+    where: SongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * SongLead findFirst
+   */
+  export type SongLeadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which SongLead to fetch.
+     */
+    where?: SongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SongLeads to fetch.
+     */
+    orderBy?: SongLeadOrderByWithRelationInput | SongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SongLeads.
+     */
+    cursor?: SongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SongLeads.
+     */
+    distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * SongLead findFirstOrThrow
+   */
+  export type SongLeadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which SongLead to fetch.
+     */
+    where?: SongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SongLeads to fetch.
+     */
+    orderBy?: SongLeadOrderByWithRelationInput | SongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SongLeads.
+     */
+    cursor?: SongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SongLeads.
+     */
+    distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * SongLead findMany
+   */
+  export type SongLeadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which SongLeads to fetch.
+     */
+    where?: SongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SongLeads to fetch.
+     */
+    orderBy?: SongLeadOrderByWithRelationInput | SongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SongLeads.
+     */
+    cursor?: SongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SongLeads.
+     */
+    skip?: number
+    distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * SongLead create
+   */
+  export type SongLeadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SongLead.
+     */
+    data: XOR<SongLeadCreateInput, SongLeadUncheckedCreateInput>
+  }
+
+
+  /**
+   * SongLead createMany
+   */
+  export type SongLeadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SongLeads.
+     */
+    data: SongLeadCreateManyInput | SongLeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * SongLead update
+   */
+  export type SongLeadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SongLead.
+     */
+    data: XOR<SongLeadUpdateInput, SongLeadUncheckedUpdateInput>
+    /**
+     * Choose, which SongLead to update.
+     */
+    where: SongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * SongLead updateMany
+   */
+  export type SongLeadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SongLeads.
+     */
+    data: XOR<SongLeadUpdateManyMutationInput, SongLeadUncheckedUpdateManyInput>
+    /**
+     * Filter which SongLeads to update
+     */
+    where?: SongLeadWhereInput
+  }
+
+
+  /**
+   * SongLead upsert
+   */
+  export type SongLeadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SongLead to update in case it exists.
+     */
+    where: SongLeadWhereUniqueInput
+    /**
+     * In case the SongLead found by the `where` argument doesn't exist, create a new SongLead with this data.
+     */
+    create: XOR<SongLeadCreateInput, SongLeadUncheckedCreateInput>
+    /**
+     * In case the SongLead was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SongLeadUpdateInput, SongLeadUncheckedUpdateInput>
+  }
+
+
+  /**
+   * SongLead delete
+   */
+  export type SongLeadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    /**
+     * Filter which SongLead to delete.
+     */
+    where: SongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * SongLead deleteMany
+   */
+  export type SongLeadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SongLeads to delete
+     */
+    where?: SongLeadWhereInput
+  }
+
+
+  /**
+   * SongLead.Schedule
+   */
+  export type SongLead$ScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+    orderBy?: ScheduleOrderByWithRelationInput | ScheduleOrderByWithRelationInput[]
+    cursor?: ScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
+  }
+
+
+  /**
+   * SongLead.Location
+   */
+  export type SongLead$LocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    where?: LocationWhereInput
+  }
+
+
+  /**
+   * SongLead.LocationSongLead
+   */
+  export type SongLead$LocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    where?: LocationSongLeadWhereInput
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    cursor?: LocationSongLeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * SongLead without action
+   */
+  export type SongLeadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Location
+   */
+
+  export type AggregateLocation = {
+    _count: LocationCountAggregateOutputType | null
+    _avg: LocationAvgAggregateOutputType | null
+    _sum: LocationSumAggregateOutputType | null
+    _min: LocationMinAggregateOutputType | null
+    _max: LocationMaxAggregateOutputType | null
+  }
+
+  export type LocationAvgAggregateOutputType = {
+    id: number | null
+    lat: Decimal | null
+    long: Decimal | null
+  }
+
+  export type LocationSumAggregateOutputType = {
+    id: number | null
+    lat: Decimal | null
+    long: Decimal | null
+  }
+
+  export type LocationMinAggregateOutputType = {
+    id: number | null
+    address: string | null
+    lat: Decimal | null
+    long: Decimal | null
+  }
+
+  export type LocationMaxAggregateOutputType = {
+    id: number | null
+    address: string | null
+    lat: Decimal | null
+    long: Decimal | null
+  }
+
+  export type LocationCountAggregateOutputType = {
+    id: number
+    address: number
+    lat: number
+    long: number
+    _all: number
+  }
+
+
+  export type LocationAvgAggregateInputType = {
+    id?: true
+    lat?: true
+    long?: true
+  }
+
+  export type LocationSumAggregateInputType = {
+    id?: true
+    lat?: true
+    long?: true
+  }
+
+  export type LocationMinAggregateInputType = {
+    id?: true
+    address?: true
+    lat?: true
+    long?: true
+  }
+
+  export type LocationMaxAggregateInputType = {
+    id?: true
+    address?: true
+    lat?: true
+    long?: true
+  }
+
+  export type LocationCountAggregateInputType = {
+    id?: true
+    address?: true
+    lat?: true
+    long?: true
+    _all?: true
+  }
+
+  export type LocationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Location to aggregate.
+     */
+    where?: LocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Locations to fetch.
+     */
+    orderBy?: LocationOrderByWithRelationInput | LocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Locations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Locations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Locations
+    **/
+    _count?: true | LocationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LocationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LocationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LocationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LocationMaxAggregateInputType
+  }
+
+  export type GetLocationAggregateType<T extends LocationAggregateArgs> = {
+        [P in keyof T & keyof AggregateLocation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLocation[P]>
+      : GetScalarType<T[P], AggregateLocation[P]>
+  }
+
+
+
+
+  export type LocationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LocationWhereInput
+    orderBy?: LocationOrderByWithAggregationInput | LocationOrderByWithAggregationInput[]
+    by: LocationScalarFieldEnum[] | LocationScalarFieldEnum
+    having?: LocationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LocationCountAggregateInputType | true
+    _avg?: LocationAvgAggregateInputType
+    _sum?: LocationSumAggregateInputType
+    _min?: LocationMinAggregateInputType
+    _max?: LocationMaxAggregateInputType
+  }
+
+  export type LocationGroupByOutputType = {
+    id: number
+    address: string
+    lat: Decimal
+    long: Decimal
+    _count: LocationCountAggregateOutputType | null
+    _avg: LocationAvgAggregateOutputType | null
+    _sum: LocationSumAggregateOutputType | null
+    _min: LocationMinAggregateOutputType | null
+    _max: LocationMaxAggregateOutputType | null
+  }
+
+  type GetLocationGroupByPayload<T extends LocationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LocationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LocationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LocationGroupByOutputType[P]>
+            : GetScalarType<T[P], LocationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LocationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    address?: boolean
+    lat?: boolean
+    long?: boolean
+    locationSongLead?: boolean | Location$locationSongLeadArgs<ExtArgs>
+    SongLead?: boolean | Location$SongLeadArgs<ExtArgs>
+    Schedule?: boolean | Location$ScheduleArgs<ExtArgs>
+    _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["location"]>
+
+  export type LocationSelectScalar = {
+    id?: boolean
+    address?: boolean
+    lat?: boolean
+    long?: boolean
+  }
+
+  export type LocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    locationSongLead?: boolean | Location$locationSongLeadArgs<ExtArgs>
+    SongLead?: boolean | Location$SongLeadArgs<ExtArgs>
+    Schedule?: boolean | Location$ScheduleArgs<ExtArgs>
+    _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Location"
+    objects: {
+      locationSongLead: Prisma.$LocationSongLeadPayload<ExtArgs>[]
+      SongLead: Prisma.$SongLeadPayload<ExtArgs>[]
+      Schedule: Prisma.$SchedulePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      address: string
+      lat: Prisma.Decimal
+      long: Prisma.Decimal
+    }, ExtArgs["result"]["location"]>
+    composites: {}
+  }
+
+
+  type LocationGetPayload<S extends boolean | null | undefined | LocationDefaultArgs> = $Result.GetResult<Prisma.$LocationPayload, S>
+
+  type LocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LocationFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: LocationCountAggregateInputType | true
+    }
+
+  export interface LocationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Location'], meta: { name: 'Location' } }
+    /**
+     * Find zero or one Location that matches the filter.
+     * @param {LocationFindUniqueArgs} args - Arguments to find a Location
+     * @example
+     * // Get one Location
+     * const location = await prisma.location.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends LocationFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationFindUniqueArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Location that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {LocationFindUniqueOrThrowArgs} args - Arguments to find a Location
+     * @example
+     * // Get one Location
+     * const location = await prisma.location.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends LocationFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Location that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationFindFirstArgs} args - Arguments to find a Location
+     * @example
+     * // Get one Location
+     * const location = await prisma.location.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends LocationFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationFindFirstArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Location that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationFindFirstOrThrowArgs} args - Arguments to find a Location
+     * @example
+     * // Get one Location
+     * const location = await prisma.location.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends LocationFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Locations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Locations
+     * const locations = await prisma.location.findMany()
+     * 
+     * // Get first 10 Locations
+     * const locations = await prisma.location.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const locationWithIdOnly = await prisma.location.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends LocationFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Location.
+     * @param {LocationCreateArgs} args - Arguments to create a Location.
+     * @example
+     * // Create one Location
+     * const Location = await prisma.location.create({
+     *   data: {
+     *     // ... data to create a Location
+     *   }
+     * })
+     * 
+    **/
+    create<T extends LocationCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationCreateArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Locations.
+     *     @param {LocationCreateManyArgs} args - Arguments to create many Locations.
+     *     @example
+     *     // Create many Locations
+     *     const location = await prisma.location.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends LocationCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Location.
+     * @param {LocationDeleteArgs} args - Arguments to delete one Location.
+     * @example
+     * // Delete one Location
+     * const Location = await prisma.location.delete({
+     *   where: {
+     *     // ... filter to delete one Location
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends LocationDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationDeleteArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Location.
+     * @param {LocationUpdateArgs} args - Arguments to update one Location.
+     * @example
+     * // Update one Location
+     * const location = await prisma.location.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends LocationUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationUpdateArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Locations.
+     * @param {LocationDeleteManyArgs} args - Arguments to filter Locations to delete.
+     * @example
+     * // Delete a few Locations
+     * const { count } = await prisma.location.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends LocationDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Locations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Locations
+     * const location = await prisma.location.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends LocationUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Location.
+     * @param {LocationUpsertArgs} args - Arguments to update or create a Location.
+     * @example
+     * // Update or create a Location
+     * const location = await prisma.location.upsert({
+     *   create: {
+     *     // ... data to create a Location
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Location we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends LocationUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationUpsertArgs<ExtArgs>>
+    ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Locations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationCountArgs} args - Arguments to filter Locations to count.
+     * @example
+     * // Count the number of Locations
+     * const count = await prisma.location.count({
+     *   where: {
+     *     // ... the filter for the Locations we want to count
+     *   }
+     * })
+    **/
+    count<T extends LocationCountArgs>(
+      args?: Subset<T, LocationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LocationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Location.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LocationAggregateArgs>(args: Subset<T, LocationAggregateArgs>): Prisma.PrismaPromise<GetLocationAggregateType<T>>
+
+    /**
+     * Group by Location.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LocationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LocationGroupByArgs['orderBy'] }
+        : { orderBy?: LocationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LocationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLocationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Location model
+   */
+  readonly fields: LocationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Location.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    locationSongLead<T extends Location$locationSongLeadArgs<ExtArgs> = {}>(args?: Subset<T, Location$locationSongLeadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    SongLead<T extends Location$SongLeadArgs<ExtArgs> = {}>(args?: Subset<T, Location$SongLeadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    Schedule<T extends Location$ScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Location$ScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Location model
+   */ 
+  interface LocationFieldRefs {
+    readonly id: FieldRef<"Location", 'Int'>
+    readonly address: FieldRef<"Location", 'String'>
+    readonly lat: FieldRef<"Location", 'Decimal'>
+    readonly long: FieldRef<"Location", 'Decimal'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Location findUnique
+   */
+  export type LocationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter, which Location to fetch.
+     */
+    where: LocationWhereUniqueInput
+  }
+
+
+  /**
+   * Location findUniqueOrThrow
+   */
+  export type LocationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter, which Location to fetch.
+     */
+    where: LocationWhereUniqueInput
+  }
+
+
+  /**
+   * Location findFirst
+   */
+  export type LocationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter, which Location to fetch.
+     */
+    where?: LocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Locations to fetch.
+     */
+    orderBy?: LocationOrderByWithRelationInput | LocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Locations.
+     */
+    cursor?: LocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Locations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Locations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Locations.
+     */
+    distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location findFirstOrThrow
+   */
+  export type LocationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter, which Location to fetch.
+     */
+    where?: LocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Locations to fetch.
+     */
+    orderBy?: LocationOrderByWithRelationInput | LocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Locations.
+     */
+    cursor?: LocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Locations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Locations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Locations.
+     */
+    distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location findMany
+   */
+  export type LocationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter, which Locations to fetch.
+     */
+    where?: LocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Locations to fetch.
+     */
+    orderBy?: LocationOrderByWithRelationInput | LocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Locations.
+     */
+    cursor?: LocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Locations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Locations.
+     */
+    skip?: number
+    distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location create
+   */
+  export type LocationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Location.
+     */
+    data: XOR<LocationCreateInput, LocationUncheckedCreateInput>
+  }
+
+
+  /**
+   * Location createMany
+   */
+  export type LocationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Locations.
+     */
+    data: LocationCreateManyInput | LocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Location update
+   */
+  export type LocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Location.
+     */
+    data: XOR<LocationUpdateInput, LocationUncheckedUpdateInput>
+    /**
+     * Choose, which Location to update.
+     */
+    where: LocationWhereUniqueInput
+  }
+
+
+  /**
+   * Location updateMany
+   */
+  export type LocationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Locations.
+     */
+    data: XOR<LocationUpdateManyMutationInput, LocationUncheckedUpdateManyInput>
+    /**
+     * Filter which Locations to update
+     */
+    where?: LocationWhereInput
+  }
+
+
+  /**
+   * Location upsert
+   */
+  export type LocationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Location to update in case it exists.
+     */
+    where: LocationWhereUniqueInput
+    /**
+     * In case the Location found by the `where` argument doesn't exist, create a new Location with this data.
+     */
+    create: XOR<LocationCreateInput, LocationUncheckedCreateInput>
+    /**
+     * In case the Location was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LocationUpdateInput, LocationUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Location delete
+   */
+  export type LocationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * Filter which Location to delete.
+     */
+    where: LocationWhereUniqueInput
+  }
+
+
+  /**
+   * Location deleteMany
+   */
+  export type LocationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Locations to delete
+     */
+    where?: LocationWhereInput
+  }
+
+
+  /**
+   * Location.locationSongLead
+   */
+  export type Location$locationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    where?: LocationSongLeadWhereInput
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    cursor?: LocationSongLeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location.SongLead
+   */
+  export type Location$SongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SongLeadInclude<ExtArgs> | null
+    where?: SongLeadWhereInput
+    orderBy?: SongLeadOrderByWithRelationInput | SongLeadOrderByWithRelationInput[]
+    cursor?: SongLeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location.Schedule
+   */
+  export type Location$ScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+    orderBy?: ScheduleOrderByWithRelationInput | ScheduleOrderByWithRelationInput[]
+    cursor?: ScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
+  }
+
+
+  /**
+   * Location without action
+   */
+  export type LocationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model LocationSongLead
+   */
+
+  export type AggregateLocationSongLead = {
+    _count: LocationSongLeadCountAggregateOutputType | null
+    _avg: LocationSongLeadAvgAggregateOutputType | null
+    _sum: LocationSongLeadSumAggregateOutputType | null
+    _min: LocationSongLeadMinAggregateOutputType | null
+    _max: LocationSongLeadMaxAggregateOutputType | null
+  }
+
+  export type LocationSongLeadAvgAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+    songLeadId: number | null
+  }
+
+  export type LocationSongLeadSumAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+    songLeadId: number | null
+  }
+
+  export type LocationSongLeadMinAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+    songLeadId: number | null
+  }
+
+  export type LocationSongLeadMaxAggregateOutputType = {
+    id: number | null
+    locationId: number | null
+    songLeadId: number | null
+  }
+
+  export type LocationSongLeadCountAggregateOutputType = {
+    id: number
+    locationId: number
+    songLeadId: number
+    _all: number
+  }
+
+
+  export type LocationSongLeadAvgAggregateInputType = {
+    id?: true
+    locationId?: true
+    songLeadId?: true
+  }
+
+  export type LocationSongLeadSumAggregateInputType = {
+    id?: true
+    locationId?: true
+    songLeadId?: true
+  }
+
+  export type LocationSongLeadMinAggregateInputType = {
+    id?: true
+    locationId?: true
+    songLeadId?: true
+  }
+
+  export type LocationSongLeadMaxAggregateInputType = {
+    id?: true
+    locationId?: true
+    songLeadId?: true
+  }
+
+  export type LocationSongLeadCountAggregateInputType = {
+    id?: true
+    locationId?: true
+    songLeadId?: true
+    _all?: true
+  }
+
+  export type LocationSongLeadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LocationSongLead to aggregate.
+     */
+    where?: LocationSongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LocationSongLeads to fetch.
+     */
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LocationSongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LocationSongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LocationSongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LocationSongLeads
+    **/
+    _count?: true | LocationSongLeadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LocationSongLeadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LocationSongLeadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LocationSongLeadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LocationSongLeadMaxAggregateInputType
+  }
+
+  export type GetLocationSongLeadAggregateType<T extends LocationSongLeadAggregateArgs> = {
+        [P in keyof T & keyof AggregateLocationSongLead]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLocationSongLead[P]>
+      : GetScalarType<T[P], AggregateLocationSongLead[P]>
+  }
+
+
+
+
+  export type LocationSongLeadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LocationSongLeadWhereInput
+    orderBy?: LocationSongLeadOrderByWithAggregationInput | LocationSongLeadOrderByWithAggregationInput[]
+    by: LocationSongLeadScalarFieldEnum[] | LocationSongLeadScalarFieldEnum
+    having?: LocationSongLeadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LocationSongLeadCountAggregateInputType | true
+    _avg?: LocationSongLeadAvgAggregateInputType
+    _sum?: LocationSongLeadSumAggregateInputType
+    _min?: LocationSongLeadMinAggregateInputType
+    _max?: LocationSongLeadMaxAggregateInputType
+  }
+
+  export type LocationSongLeadGroupByOutputType = {
+    id: number
+    locationId: number | null
+    songLeadId: number
+    _count: LocationSongLeadCountAggregateOutputType | null
+    _avg: LocationSongLeadAvgAggregateOutputType | null
+    _sum: LocationSongLeadSumAggregateOutputType | null
+    _min: LocationSongLeadMinAggregateOutputType | null
+    _max: LocationSongLeadMaxAggregateOutputType | null
+  }
+
+  type GetLocationSongLeadGroupByPayload<T extends LocationSongLeadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LocationSongLeadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LocationSongLeadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LocationSongLeadGroupByOutputType[P]>
+            : GetScalarType<T[P], LocationSongLeadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LocationSongLeadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locationId?: boolean
+    songLeadId?: boolean
+    songLead?: boolean | SongLeadDefaultArgs<ExtArgs>
+    Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
+  }, ExtArgs["result"]["locationSongLead"]>
+
+  export type LocationSongLeadSelectScalar = {
+    id?: boolean
+    locationId?: boolean
+    songLeadId?: boolean
+  }
+
+  export type LocationSongLeadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    songLead?: boolean | SongLeadDefaultArgs<ExtArgs>
+    Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
+  }
+
+
+  export type $LocationSongLeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LocationSongLead"
+    objects: {
+      songLead: Prisma.$SongLeadPayload<ExtArgs>
+      Location: Prisma.$LocationPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      locationId: number | null
+      songLeadId: number
+    }, ExtArgs["result"]["locationSongLead"]>
+    composites: {}
+  }
+
+
+  type LocationSongLeadGetPayload<S extends boolean | null | undefined | LocationSongLeadDefaultArgs> = $Result.GetResult<Prisma.$LocationSongLeadPayload, S>
+
+  type LocationSongLeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LocationSongLeadFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: LocationSongLeadCountAggregateInputType | true
+    }
+
+  export interface LocationSongLeadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LocationSongLead'], meta: { name: 'LocationSongLead' } }
+    /**
+     * Find zero or one LocationSongLead that matches the filter.
+     * @param {LocationSongLeadFindUniqueArgs} args - Arguments to find a LocationSongLead
+     * @example
+     * // Get one LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends LocationSongLeadFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadFindUniqueArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one LocationSongLead that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {LocationSongLeadFindUniqueOrThrowArgs} args - Arguments to find a LocationSongLead
+     * @example
+     * // Get one LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends LocationSongLeadFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first LocationSongLead that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadFindFirstArgs} args - Arguments to find a LocationSongLead
+     * @example
+     * // Get one LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends LocationSongLeadFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadFindFirstArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first LocationSongLead that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadFindFirstOrThrowArgs} args - Arguments to find a LocationSongLead
+     * @example
+     * // Get one LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends LocationSongLeadFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more LocationSongLeads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LocationSongLeads
+     * const locationSongLeads = await prisma.locationSongLead.findMany()
+     * 
+     * // Get first 10 LocationSongLeads
+     * const locationSongLeads = await prisma.locationSongLead.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const locationSongLeadWithIdOnly = await prisma.locationSongLead.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends LocationSongLeadFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a LocationSongLead.
+     * @param {LocationSongLeadCreateArgs} args - Arguments to create a LocationSongLead.
+     * @example
+     * // Create one LocationSongLead
+     * const LocationSongLead = await prisma.locationSongLead.create({
+     *   data: {
+     *     // ... data to create a LocationSongLead
+     *   }
+     * })
+     * 
+    **/
+    create<T extends LocationSongLeadCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadCreateArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many LocationSongLeads.
+     *     @param {LocationSongLeadCreateManyArgs} args - Arguments to create many LocationSongLeads.
+     *     @example
+     *     // Create many LocationSongLeads
+     *     const locationSongLead = await prisma.locationSongLead.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends LocationSongLeadCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LocationSongLead.
+     * @param {LocationSongLeadDeleteArgs} args - Arguments to delete one LocationSongLead.
+     * @example
+     * // Delete one LocationSongLead
+     * const LocationSongLead = await prisma.locationSongLead.delete({
+     *   where: {
+     *     // ... filter to delete one LocationSongLead
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends LocationSongLeadDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadDeleteArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one LocationSongLead.
+     * @param {LocationSongLeadUpdateArgs} args - Arguments to update one LocationSongLead.
+     * @example
+     * // Update one LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends LocationSongLeadUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadUpdateArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more LocationSongLeads.
+     * @param {LocationSongLeadDeleteManyArgs} args - Arguments to filter LocationSongLeads to delete.
+     * @example
+     * // Delete a few LocationSongLeads
+     * const { count } = await prisma.locationSongLead.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends LocationSongLeadDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LocationSongLeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LocationSongLeads
+     * const locationSongLead = await prisma.locationSongLead.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends LocationSongLeadUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LocationSongLead.
+     * @param {LocationSongLeadUpsertArgs} args - Arguments to update or create a LocationSongLead.
+     * @example
+     * // Update or create a LocationSongLead
+     * const locationSongLead = await prisma.locationSongLead.upsert({
+     *   create: {
+     *     // ... data to create a LocationSongLead
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LocationSongLead we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends LocationSongLeadUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, LocationSongLeadUpsertArgs<ExtArgs>>
+    ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of LocationSongLeads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadCountArgs} args - Arguments to filter LocationSongLeads to count.
+     * @example
+     * // Count the number of LocationSongLeads
+     * const count = await prisma.locationSongLead.count({
+     *   where: {
+     *     // ... the filter for the LocationSongLeads we want to count
+     *   }
+     * })
+    **/
+    count<T extends LocationSongLeadCountArgs>(
+      args?: Subset<T, LocationSongLeadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LocationSongLeadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LocationSongLead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LocationSongLeadAggregateArgs>(args: Subset<T, LocationSongLeadAggregateArgs>): Prisma.PrismaPromise<GetLocationSongLeadAggregateType<T>>
+
+    /**
+     * Group by LocationSongLead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LocationSongLeadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LocationSongLeadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LocationSongLeadGroupByArgs['orderBy'] }
+        : { orderBy?: LocationSongLeadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LocationSongLeadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLocationSongLeadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LocationSongLead model
+   */
+  readonly fields: LocationSongLeadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LocationSongLead.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LocationSongLeadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    songLead<T extends SongLeadDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SongLeadDefaultArgs<ExtArgs>>): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    Location<T extends LocationSongLead$LocationArgs<ExtArgs> = {}>(args?: Subset<T, LocationSongLead$LocationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the LocationSongLead model
+   */ 
+  interface LocationSongLeadFieldRefs {
+    readonly id: FieldRef<"LocationSongLead", 'Int'>
+    readonly locationId: FieldRef<"LocationSongLead", 'Int'>
+    readonly songLeadId: FieldRef<"LocationSongLead", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * LocationSongLead findUnique
+   */
+  export type LocationSongLeadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which LocationSongLead to fetch.
+     */
+    where: LocationSongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * LocationSongLead findUniqueOrThrow
+   */
+  export type LocationSongLeadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which LocationSongLead to fetch.
+     */
+    where: LocationSongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * LocationSongLead findFirst
+   */
+  export type LocationSongLeadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which LocationSongLead to fetch.
+     */
+    where?: LocationSongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LocationSongLeads to fetch.
+     */
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LocationSongLeads.
+     */
+    cursor?: LocationSongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LocationSongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LocationSongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LocationSongLeads.
+     */
+    distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * LocationSongLead findFirstOrThrow
+   */
+  export type LocationSongLeadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which LocationSongLead to fetch.
+     */
+    where?: LocationSongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LocationSongLeads to fetch.
+     */
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LocationSongLeads.
+     */
+    cursor?: LocationSongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LocationSongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LocationSongLeads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LocationSongLeads.
+     */
+    distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * LocationSongLead findMany
+   */
+  export type LocationSongLeadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter, which LocationSongLeads to fetch.
+     */
+    where?: LocationSongLeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LocationSongLeads to fetch.
+     */
+    orderBy?: LocationSongLeadOrderByWithRelationInput | LocationSongLeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LocationSongLeads.
+     */
+    cursor?: LocationSongLeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LocationSongLeads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LocationSongLeads.
+     */
+    skip?: number
+    distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
+  }
+
+
+  /**
+   * LocationSongLead create
+   */
+  export type LocationSongLeadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LocationSongLead.
+     */
+    data: XOR<LocationSongLeadCreateInput, LocationSongLeadUncheckedCreateInput>
+  }
+
+
+  /**
+   * LocationSongLead createMany
+   */
+  export type LocationSongLeadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LocationSongLeads.
+     */
+    data: LocationSongLeadCreateManyInput | LocationSongLeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * LocationSongLead update
+   */
+  export type LocationSongLeadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LocationSongLead.
+     */
+    data: XOR<LocationSongLeadUpdateInput, LocationSongLeadUncheckedUpdateInput>
+    /**
+     * Choose, which LocationSongLead to update.
+     */
+    where: LocationSongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * LocationSongLead updateMany
+   */
+  export type LocationSongLeadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LocationSongLeads.
+     */
+    data: XOR<LocationSongLeadUpdateManyMutationInput, LocationSongLeadUncheckedUpdateManyInput>
+    /**
+     * Filter which LocationSongLeads to update
+     */
+    where?: LocationSongLeadWhereInput
+  }
+
+
+  /**
+   * LocationSongLead upsert
+   */
+  export type LocationSongLeadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LocationSongLead to update in case it exists.
+     */
+    where: LocationSongLeadWhereUniqueInput
+    /**
+     * In case the LocationSongLead found by the `where` argument doesn't exist, create a new LocationSongLead with this data.
+     */
+    create: XOR<LocationSongLeadCreateInput, LocationSongLeadUncheckedCreateInput>
+    /**
+     * In case the LocationSongLead was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LocationSongLeadUpdateInput, LocationSongLeadUncheckedUpdateInput>
+  }
+
+
+  /**
+   * LocationSongLead delete
+   */
+  export type LocationSongLeadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+    /**
+     * Filter which LocationSongLead to delete.
+     */
+    where: LocationSongLeadWhereUniqueInput
+  }
+
+
+  /**
+   * LocationSongLead deleteMany
+   */
+  export type LocationSongLeadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LocationSongLeads to delete
+     */
+    where?: LocationSongLeadWhereInput
+  }
+
+
+  /**
+   * LocationSongLead.Location
+   */
+  export type LocationSongLead$LocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationInclude<ExtArgs> | null
+    where?: LocationWhereInput
+  }
+
+
+  /**
+   * LocationSongLead without action
+   */
+  export type LocationSongLeadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: LocationSongLeadInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -4134,7 +7548,9 @@ export namespace Prisma {
 
   export const ScheduleScalarFieldEnum: {
     id: 'id',
-    date: 'date'
+    date: 'date',
+    songLeadId: 'songLeadId',
+    locationId: 'locationId'
   };
 
   export type ScheduleScalarFieldEnum = (typeof ScheduleScalarFieldEnum)[keyof typeof ScheduleScalarFieldEnum]
@@ -4148,6 +7564,35 @@ export namespace Prisma {
   };
 
   export type ScheduleSongsScalarFieldEnum = (typeof ScheduleSongsScalarFieldEnum)[keyof typeof ScheduleSongsScalarFieldEnum]
+
+
+  export const SongLeadScalarFieldEnum: {
+    id: 'id',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    locationId: 'locationId'
+  };
+
+  export type SongLeadScalarFieldEnum = (typeof SongLeadScalarFieldEnum)[keyof typeof SongLeadScalarFieldEnum]
+
+
+  export const LocationScalarFieldEnum: {
+    id: 'id',
+    address: 'address',
+    lat: 'lat',
+    long: 'long'
+  };
+
+  export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+  export const LocationSongLeadScalarFieldEnum: {
+    id: 'id',
+    locationId: 'locationId',
+    songLeadId: 'songLeadId'
+  };
+
+  export type LocationSongLeadScalarFieldEnum = (typeof LocationSongLeadScalarFieldEnum)[keyof typeof LocationSongLeadScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4218,6 +7663,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -4324,15 +7783,23 @@ export namespace Prisma {
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
     id?: IntFilter<"Schedule"> | number
     date?: DateTimeFilter<"Schedule"> | Date | string
+    songLeadId?: IntNullableFilter<"Schedule"> | number | null
+    locationId?: IntNullableFilter<"Schedule"> | number | null
     scheduleSongs?: ScheduleSongsListRelationFilter
     Song?: SongListRelationFilter
+    songLead?: XOR<SongLeadNullableRelationFilter, SongLeadWhereInput> | null
+    location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
   }
 
   export type ScheduleOrderByWithRelationInput = {
     id?: SortOrder
     date?: SortOrder
+    songLeadId?: SortOrderInput | SortOrder
+    locationId?: SortOrderInput | SortOrder
     scheduleSongs?: ScheduleSongsOrderByRelationAggregateInput
     Song?: SongOrderByRelationAggregateInput
+    songLead?: SongLeadOrderByWithRelationInput
+    location?: LocationOrderByWithRelationInput
   }
 
   export type ScheduleWhereUniqueInput = Prisma.AtLeast<{
@@ -4341,13 +7808,19 @@ export namespace Prisma {
     OR?: ScheduleWhereInput[]
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
     date?: DateTimeFilter<"Schedule"> | Date | string
+    songLeadId?: IntNullableFilter<"Schedule"> | number | null
+    locationId?: IntNullableFilter<"Schedule"> | number | null
     scheduleSongs?: ScheduleSongsListRelationFilter
     Song?: SongListRelationFilter
+    songLead?: XOR<SongLeadNullableRelationFilter, SongLeadWhereInput> | null
+    location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
   }, "id">
 
   export type ScheduleOrderByWithAggregationInput = {
     id?: SortOrder
     date?: SortOrder
+    songLeadId?: SortOrderInput | SortOrder
+    locationId?: SortOrderInput | SortOrder
     _count?: ScheduleCountOrderByAggregateInput
     _avg?: ScheduleAvgOrderByAggregateInput
     _max?: ScheduleMaxOrderByAggregateInput
@@ -4361,6 +7834,8 @@ export namespace Prisma {
     NOT?: ScheduleScalarWhereWithAggregatesInput | ScheduleScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Schedule"> | number
     date?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
+    songLeadId?: IntNullableWithAggregatesFilter<"Schedule"> | number | null
+    locationId?: IntNullableWithAggregatesFilter<"Schedule"> | number | null
   }
 
   export type ScheduleSongsWhereInput = {
@@ -4416,6 +7891,172 @@ export namespace Prisma {
     songId?: IntWithAggregatesFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableWithAggregatesFilter<"ScheduleSongs"> | number | null
     order?: IntWithAggregatesFilter<"ScheduleSongs"> | number
+  }
+
+  export type SongLeadWhereInput = {
+    AND?: SongLeadWhereInput | SongLeadWhereInput[]
+    OR?: SongLeadWhereInput[]
+    NOT?: SongLeadWhereInput | SongLeadWhereInput[]
+    id?: IntFilter<"SongLead"> | number
+    firstName?: StringFilter<"SongLead"> | string
+    lastName?: StringFilter<"SongLead"> | string
+    locationId?: IntNullableFilter<"SongLead"> | number | null
+    Schedule?: ScheduleListRelationFilter
+    Location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
+    LocationSongLead?: LocationSongLeadListRelationFilter
+  }
+
+  export type SongLeadOrderByWithRelationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    locationId?: SortOrderInput | SortOrder
+    Schedule?: ScheduleOrderByRelationAggregateInput
+    Location?: LocationOrderByWithRelationInput
+    LocationSongLead?: LocationSongLeadOrderByRelationAggregateInput
+  }
+
+  export type SongLeadWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: SongLeadWhereInput | SongLeadWhereInput[]
+    OR?: SongLeadWhereInput[]
+    NOT?: SongLeadWhereInput | SongLeadWhereInput[]
+    firstName?: StringFilter<"SongLead"> | string
+    lastName?: StringFilter<"SongLead"> | string
+    locationId?: IntNullableFilter<"SongLead"> | number | null
+    Schedule?: ScheduleListRelationFilter
+    Location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
+    LocationSongLead?: LocationSongLeadListRelationFilter
+  }, "id">
+
+  export type SongLeadOrderByWithAggregationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    locationId?: SortOrderInput | SortOrder
+    _count?: SongLeadCountOrderByAggregateInput
+    _avg?: SongLeadAvgOrderByAggregateInput
+    _max?: SongLeadMaxOrderByAggregateInput
+    _min?: SongLeadMinOrderByAggregateInput
+    _sum?: SongLeadSumOrderByAggregateInput
+  }
+
+  export type SongLeadScalarWhereWithAggregatesInput = {
+    AND?: SongLeadScalarWhereWithAggregatesInput | SongLeadScalarWhereWithAggregatesInput[]
+    OR?: SongLeadScalarWhereWithAggregatesInput[]
+    NOT?: SongLeadScalarWhereWithAggregatesInput | SongLeadScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SongLead"> | number
+    firstName?: StringWithAggregatesFilter<"SongLead"> | string
+    lastName?: StringWithAggregatesFilter<"SongLead"> | string
+    locationId?: IntNullableWithAggregatesFilter<"SongLead"> | number | null
+  }
+
+  export type LocationWhereInput = {
+    AND?: LocationWhereInput | LocationWhereInput[]
+    OR?: LocationWhereInput[]
+    NOT?: LocationWhereInput | LocationWhereInput[]
+    id?: IntFilter<"Location"> | number
+    address?: StringFilter<"Location"> | string
+    lat?: DecimalFilter<"Location"> | Decimal | DecimalJsLike | number | string
+    long?: DecimalFilter<"Location"> | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadListRelationFilter
+    SongLead?: SongLeadListRelationFilter
+    Schedule?: ScheduleListRelationFilter
+  }
+
+  export type LocationOrderByWithRelationInput = {
+    id?: SortOrder
+    address?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+    locationSongLead?: LocationSongLeadOrderByRelationAggregateInput
+    SongLead?: SongLeadOrderByRelationAggregateInput
+    Schedule?: ScheduleOrderByRelationAggregateInput
+  }
+
+  export type LocationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: LocationWhereInput | LocationWhereInput[]
+    OR?: LocationWhereInput[]
+    NOT?: LocationWhereInput | LocationWhereInput[]
+    address?: StringFilter<"Location"> | string
+    lat?: DecimalFilter<"Location"> | Decimal | DecimalJsLike | number | string
+    long?: DecimalFilter<"Location"> | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadListRelationFilter
+    SongLead?: SongLeadListRelationFilter
+    Schedule?: ScheduleListRelationFilter
+  }, "id">
+
+  export type LocationOrderByWithAggregationInput = {
+    id?: SortOrder
+    address?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+    _count?: LocationCountOrderByAggregateInput
+    _avg?: LocationAvgOrderByAggregateInput
+    _max?: LocationMaxOrderByAggregateInput
+    _min?: LocationMinOrderByAggregateInput
+    _sum?: LocationSumOrderByAggregateInput
+  }
+
+  export type LocationScalarWhereWithAggregatesInput = {
+    AND?: LocationScalarWhereWithAggregatesInput | LocationScalarWhereWithAggregatesInput[]
+    OR?: LocationScalarWhereWithAggregatesInput[]
+    NOT?: LocationScalarWhereWithAggregatesInput | LocationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Location"> | number
+    address?: StringWithAggregatesFilter<"Location"> | string
+    lat?: DecimalWithAggregatesFilter<"Location"> | Decimal | DecimalJsLike | number | string
+    long?: DecimalWithAggregatesFilter<"Location"> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type LocationSongLeadWhereInput = {
+    AND?: LocationSongLeadWhereInput | LocationSongLeadWhereInput[]
+    OR?: LocationSongLeadWhereInput[]
+    NOT?: LocationSongLeadWhereInput | LocationSongLeadWhereInput[]
+    id?: IntFilter<"LocationSongLead"> | number
+    locationId?: IntNullableFilter<"LocationSongLead"> | number | null
+    songLeadId?: IntFilter<"LocationSongLead"> | number
+    songLead?: XOR<SongLeadRelationFilter, SongLeadWhereInput>
+    Location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
+  }
+
+  export type LocationSongLeadOrderByWithRelationInput = {
+    id?: SortOrder
+    locationId?: SortOrderInput | SortOrder
+    songLeadId?: SortOrder
+    songLead?: SongLeadOrderByWithRelationInput
+    Location?: LocationOrderByWithRelationInput
+  }
+
+  export type LocationSongLeadWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: LocationSongLeadWhereInput | LocationSongLeadWhereInput[]
+    OR?: LocationSongLeadWhereInput[]
+    NOT?: LocationSongLeadWhereInput | LocationSongLeadWhereInput[]
+    locationId?: IntNullableFilter<"LocationSongLead"> | number | null
+    songLeadId?: IntFilter<"LocationSongLead"> | number
+    songLead?: XOR<SongLeadRelationFilter, SongLeadWhereInput>
+    Location?: XOR<LocationNullableRelationFilter, LocationWhereInput> | null
+  }, "id">
+
+  export type LocationSongLeadOrderByWithAggregationInput = {
+    id?: SortOrder
+    locationId?: SortOrderInput | SortOrder
+    songLeadId?: SortOrder
+    _count?: LocationSongLeadCountOrderByAggregateInput
+    _avg?: LocationSongLeadAvgOrderByAggregateInput
+    _max?: LocationSongLeadMaxOrderByAggregateInput
+    _min?: LocationSongLeadMinOrderByAggregateInput
+    _sum?: LocationSongLeadSumOrderByAggregateInput
+  }
+
+  export type LocationSongLeadScalarWhereWithAggregatesInput = {
+    AND?: LocationSongLeadScalarWhereWithAggregatesInput | LocationSongLeadScalarWhereWithAggregatesInput[]
+    OR?: LocationSongLeadScalarWhereWithAggregatesInput[]
+    NOT?: LocationSongLeadScalarWhereWithAggregatesInput | LocationSongLeadScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"LocationSongLead"> | number
+    locationId?: IntNullableWithAggregatesFilter<"LocationSongLead"> | number | null
+    songLeadId?: IntWithAggregatesFilter<"LocationSongLead"> | number
   }
 
   export type SongCreateInput = {
@@ -4506,11 +8147,15 @@ export namespace Prisma {
     date: Date | string
     scheduleSongs?: ScheduleSongsCreateNestedManyWithoutScheduleInput
     Song?: SongCreateNestedManyWithoutScheduleInput
+    songLead?: SongLeadCreateNestedOneWithoutScheduleInput
+    location?: LocationCreateNestedOneWithoutScheduleInput
   }
 
   export type ScheduleUncheckedCreateInput = {
     id?: number
     date: Date | string
+    songLeadId?: number | null
+    locationId?: number | null
     scheduleSongs?: ScheduleSongsUncheckedCreateNestedManyWithoutScheduleInput
     Song?: SongUncheckedCreateNestedManyWithoutScheduleInput
   }
@@ -4519,11 +8164,15 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleSongs?: ScheduleSongsUpdateManyWithoutScheduleNestedInput
     Song?: SongUpdateManyWithoutScheduleNestedInput
+    songLead?: SongLeadUpdateOneWithoutScheduleNestedInput
+    location?: LocationUpdateOneWithoutScheduleNestedInput
   }
 
   export type ScheduleUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
     scheduleSongs?: ScheduleSongsUncheckedUpdateManyWithoutScheduleNestedInput
     Song?: SongUncheckedUpdateManyWithoutScheduleNestedInput
   }
@@ -4531,6 +8180,8 @@ export namespace Prisma {
   export type ScheduleCreateManyInput = {
     id?: number
     date: Date | string
+    songLeadId?: number | null
+    locationId?: number | null
   }
 
   export type ScheduleUpdateManyMutationInput = {
@@ -4540,6 +8191,8 @@ export namespace Prisma {
   export type ScheduleUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ScheduleSongsCreateInput = {
@@ -4584,6 +8237,155 @@ export namespace Prisma {
     songId?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SongLeadCreateInput = {
+    firstName: string
+    lastName: string
+    Schedule?: ScheduleCreateNestedManyWithoutSongLeadInput
+    Location?: LocationCreateNestedOneWithoutSongLeadInput
+    LocationSongLead?: LocationSongLeadCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadUncheckedCreateInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    locationId?: number | null
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutSongLeadInput
+    LocationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadUpdateInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    Schedule?: ScheduleUpdateManyWithoutSongLeadNestedInput
+    Location?: LocationUpdateOneWithoutSongLeadNestedInput
+    LocationSongLead?: LocationSongLeadUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    Schedule?: ScheduleUncheckedUpdateManyWithoutSongLeadNestedInput
+    LocationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadCreateManyInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    locationId?: number | null
+  }
+
+  export type SongLeadUpdateManyMutationInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SongLeadUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LocationCreateInput = {
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadCreateNestedManyWithoutLocationInput
+    SongLead?: SongLeadCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationUncheckedCreateInput = {
+    id?: number
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutLocationInput
+    SongLead?: SongLeadUncheckedCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationUpdateInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUpdateManyWithoutLocationNestedInput
+    SongLead?: SongLeadUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutLocationNestedInput
+    SongLead?: SongLeadUncheckedUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUncheckedUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationCreateManyInput = {
+    id?: number
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type LocationUpdateManyMutationInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type LocationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type LocationSongLeadCreateInput = {
+    songLead: SongLeadCreateNestedOneWithoutLocationSongLeadInput
+    Location?: LocationCreateNestedOneWithoutLocationSongLeadInput
+  }
+
+  export type LocationSongLeadUncheckedCreateInput = {
+    id?: number
+    locationId?: number | null
+    songLeadId: number
+  }
+
+  export type LocationSongLeadUpdateInput = {
+    songLead?: SongLeadUpdateOneRequiredWithoutLocationSongLeadNestedInput
+    Location?: LocationUpdateOneWithoutLocationSongLeadNestedInput
+  }
+
+  export type LocationSongLeadUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    songLeadId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LocationSongLeadCreateManyInput = {
+    id?: number
+    locationId?: number | null
+    songLeadId: number
+  }
+
+  export type LocationSongLeadUpdateManyMutationInput = {
+
+  }
+
+  export type LocationSongLeadUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    songLeadId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4772,6 +8574,16 @@ export namespace Prisma {
     none?: SongWhereInput
   }
 
+  export type SongLeadNullableRelationFilter = {
+    is?: SongLeadWhereInput | null
+    isNot?: SongLeadWhereInput | null
+  }
+
+  export type LocationNullableRelationFilter = {
+    is?: LocationWhereInput | null
+    isNot?: LocationWhereInput | null
+  }
+
   export type SongOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -4779,24 +8591,34 @@ export namespace Prisma {
   export type ScheduleCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    songLeadId?: SortOrder
+    locationId?: SortOrder
   }
 
   export type ScheduleAvgOrderByAggregateInput = {
     id?: SortOrder
+    songLeadId?: SortOrder
+    locationId?: SortOrder
   }
 
   export type ScheduleMaxOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    songLeadId?: SortOrder
+    locationId?: SortOrder
   }
 
   export type ScheduleMinOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    songLeadId?: SortOrder
+    locationId?: SortOrder
   }
 
   export type ScheduleSumOrderByAggregateInput = {
     id?: SortOrder
+    songLeadId?: SortOrder
+    locationId?: SortOrder
   }
 
   export type SongNullableRelationFilter = {
@@ -4837,6 +8659,162 @@ export namespace Prisma {
     songId?: SortOrder
     scheduleId?: SortOrder
     order?: SortOrder
+  }
+
+  export type ScheduleListRelationFilter = {
+    every?: ScheduleWhereInput
+    some?: ScheduleWhereInput
+    none?: ScheduleWhereInput
+  }
+
+  export type LocationSongLeadListRelationFilter = {
+    every?: LocationSongLeadWhereInput
+    some?: LocationSongLeadWhereInput
+    none?: LocationSongLeadWhereInput
+  }
+
+  export type ScheduleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LocationSongLeadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SongLeadCountOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    locationId?: SortOrder
+  }
+
+  export type SongLeadAvgOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+  }
+
+  export type SongLeadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    locationId?: SortOrder
+  }
+
+  export type SongLeadMinOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    locationId?: SortOrder
+  }
+
+  export type SongLeadSumOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type SongLeadListRelationFilter = {
+    every?: SongLeadWhereInput
+    some?: SongLeadWhereInput
+    none?: SongLeadWhereInput
+  }
+
+  export type SongLeadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LocationCountOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+  }
+
+  export type LocationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+  }
+
+  export type LocationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+  }
+
+  export type LocationMinOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+  }
+
+  export type LocationSumOrderByAggregateInput = {
+    id?: SortOrder
+    lat?: SortOrder
+    long?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type SongLeadRelationFilter = {
+    is?: SongLeadWhereInput
+    isNot?: SongLeadWhereInput
+  }
+
+  export type LocationSongLeadCountOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+    songLeadId?: SortOrder
+  }
+
+  export type LocationSongLeadAvgOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+    songLeadId?: SortOrder
+  }
+
+  export type LocationSongLeadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+    songLeadId?: SortOrder
+  }
+
+  export type LocationSongLeadMinOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+    songLeadId?: SortOrder
+  }
+
+  export type LocationSongLeadSumOrderByAggregateInput = {
+    id?: SortOrder
+    locationId?: SortOrder
+    songLeadId?: SortOrder
   }
 
   export type ScheduleCreateNestedOneWithoutSongInput = {
@@ -4935,6 +8913,18 @@ export namespace Prisma {
     connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
   }
 
+  export type SongLeadCreateNestedOneWithoutScheduleInput = {
+    create?: XOR<SongLeadCreateWithoutScheduleInput, SongLeadUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: SongLeadCreateOrConnectWithoutScheduleInput
+    connect?: SongLeadWhereUniqueInput
+  }
+
+  export type LocationCreateNestedOneWithoutScheduleInput = {
+    create?: XOR<LocationCreateWithoutScheduleInput, LocationUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutScheduleInput
+    connect?: LocationWhereUniqueInput
+  }
+
   export type ScheduleSongsUncheckedCreateNestedManyWithoutScheduleInput = {
     create?: XOR<ScheduleSongsCreateWithoutScheduleInput, ScheduleSongsUncheckedCreateWithoutScheduleInput> | ScheduleSongsCreateWithoutScheduleInput[] | ScheduleSongsUncheckedCreateWithoutScheduleInput[]
     connectOrCreate?: ScheduleSongsCreateOrConnectWithoutScheduleInput | ScheduleSongsCreateOrConnectWithoutScheduleInput[]
@@ -4975,6 +8965,26 @@ export namespace Prisma {
     update?: SongUpdateWithWhereUniqueWithoutScheduleInput | SongUpdateWithWhereUniqueWithoutScheduleInput[]
     updateMany?: SongUpdateManyWithWhereWithoutScheduleInput | SongUpdateManyWithWhereWithoutScheduleInput[]
     deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
+  }
+
+  export type SongLeadUpdateOneWithoutScheduleNestedInput = {
+    create?: XOR<SongLeadCreateWithoutScheduleInput, SongLeadUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: SongLeadCreateOrConnectWithoutScheduleInput
+    upsert?: SongLeadUpsertWithoutScheduleInput
+    disconnect?: SongLeadWhereInput | boolean
+    delete?: SongLeadWhereInput | boolean
+    connect?: SongLeadWhereUniqueInput
+    update?: XOR<XOR<SongLeadUpdateToOneWithWhereWithoutScheduleInput, SongLeadUpdateWithoutScheduleInput>, SongLeadUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type LocationUpdateOneWithoutScheduleNestedInput = {
+    create?: XOR<LocationCreateWithoutScheduleInput, LocationUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutScheduleInput
+    upsert?: LocationUpsertWithoutScheduleInput
+    disconnect?: LocationWhereInput | boolean
+    delete?: LocationWhereInput | boolean
+    connect?: LocationWhereUniqueInput
+    update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutScheduleInput, LocationUpdateWithoutScheduleInput>, LocationUncheckedUpdateWithoutScheduleInput>
   }
 
   export type ScheduleSongsUncheckedUpdateManyWithoutScheduleNestedInput = {
@@ -5035,6 +9045,270 @@ export namespace Prisma {
     delete?: ScheduleWhereInput | boolean
     connect?: ScheduleWhereUniqueInput
     update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutScheduleSongsInput, ScheduleUpdateWithoutScheduleSongsInput>, ScheduleUncheckedUpdateWithoutScheduleSongsInput>
+  }
+
+  export type ScheduleCreateNestedManyWithoutSongLeadInput = {
+    create?: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput> | ScheduleCreateWithoutSongLeadInput[] | ScheduleUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSongLeadInput | ScheduleCreateOrConnectWithoutSongLeadInput[]
+    createMany?: ScheduleCreateManySongLeadInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type LocationCreateNestedOneWithoutSongLeadInput = {
+    create?: XOR<LocationCreateWithoutSongLeadInput, LocationUncheckedCreateWithoutSongLeadInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutSongLeadInput
+    connect?: LocationWhereUniqueInput
+  }
+
+  export type LocationSongLeadCreateNestedManyWithoutSongLeadInput = {
+    create?: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput> | LocationSongLeadCreateWithoutSongLeadInput[] | LocationSongLeadUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutSongLeadInput | LocationSongLeadCreateOrConnectWithoutSongLeadInput[]
+    createMany?: LocationSongLeadCreateManySongLeadInputEnvelope
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+  }
+
+  export type ScheduleUncheckedCreateNestedManyWithoutSongLeadInput = {
+    create?: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput> | ScheduleCreateWithoutSongLeadInput[] | ScheduleUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSongLeadInput | ScheduleCreateOrConnectWithoutSongLeadInput[]
+    createMany?: ScheduleCreateManySongLeadInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type LocationSongLeadUncheckedCreateNestedManyWithoutSongLeadInput = {
+    create?: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput> | LocationSongLeadCreateWithoutSongLeadInput[] | LocationSongLeadUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutSongLeadInput | LocationSongLeadCreateOrConnectWithoutSongLeadInput[]
+    createMany?: LocationSongLeadCreateManySongLeadInputEnvelope
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+  }
+
+  export type ScheduleUpdateManyWithoutSongLeadNestedInput = {
+    create?: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput> | ScheduleCreateWithoutSongLeadInput[] | ScheduleUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSongLeadInput | ScheduleCreateOrConnectWithoutSongLeadInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutSongLeadInput | ScheduleUpsertWithWhereUniqueWithoutSongLeadInput[]
+    createMany?: ScheduleCreateManySongLeadInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutSongLeadInput | ScheduleUpdateWithWhereUniqueWithoutSongLeadInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutSongLeadInput | ScheduleUpdateManyWithWhereWithoutSongLeadInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type LocationUpdateOneWithoutSongLeadNestedInput = {
+    create?: XOR<LocationCreateWithoutSongLeadInput, LocationUncheckedCreateWithoutSongLeadInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutSongLeadInput
+    upsert?: LocationUpsertWithoutSongLeadInput
+    disconnect?: LocationWhereInput | boolean
+    delete?: LocationWhereInput | boolean
+    connect?: LocationWhereUniqueInput
+    update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutSongLeadInput, LocationUpdateWithoutSongLeadInput>, LocationUncheckedUpdateWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadUpdateManyWithoutSongLeadNestedInput = {
+    create?: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput> | LocationSongLeadCreateWithoutSongLeadInput[] | LocationSongLeadUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutSongLeadInput | LocationSongLeadCreateOrConnectWithoutSongLeadInput[]
+    upsert?: LocationSongLeadUpsertWithWhereUniqueWithoutSongLeadInput | LocationSongLeadUpsertWithWhereUniqueWithoutSongLeadInput[]
+    createMany?: LocationSongLeadCreateManySongLeadInputEnvelope
+    set?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    disconnect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    delete?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    update?: LocationSongLeadUpdateWithWhereUniqueWithoutSongLeadInput | LocationSongLeadUpdateWithWhereUniqueWithoutSongLeadInput[]
+    updateMany?: LocationSongLeadUpdateManyWithWhereWithoutSongLeadInput | LocationSongLeadUpdateManyWithWhereWithoutSongLeadInput[]
+    deleteMany?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutSongLeadNestedInput = {
+    create?: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput> | ScheduleCreateWithoutSongLeadInput[] | ScheduleUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSongLeadInput | ScheduleCreateOrConnectWithoutSongLeadInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutSongLeadInput | ScheduleUpsertWithWhereUniqueWithoutSongLeadInput[]
+    createMany?: ScheduleCreateManySongLeadInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutSongLeadInput | ScheduleUpdateWithWhereUniqueWithoutSongLeadInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutSongLeadInput | ScheduleUpdateManyWithWhereWithoutSongLeadInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type LocationSongLeadUncheckedUpdateManyWithoutSongLeadNestedInput = {
+    create?: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput> | LocationSongLeadCreateWithoutSongLeadInput[] | LocationSongLeadUncheckedCreateWithoutSongLeadInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutSongLeadInput | LocationSongLeadCreateOrConnectWithoutSongLeadInput[]
+    upsert?: LocationSongLeadUpsertWithWhereUniqueWithoutSongLeadInput | LocationSongLeadUpsertWithWhereUniqueWithoutSongLeadInput[]
+    createMany?: LocationSongLeadCreateManySongLeadInputEnvelope
+    set?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    disconnect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    delete?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    update?: LocationSongLeadUpdateWithWhereUniqueWithoutSongLeadInput | LocationSongLeadUpdateWithWhereUniqueWithoutSongLeadInput[]
+    updateMany?: LocationSongLeadUpdateManyWithWhereWithoutSongLeadInput | LocationSongLeadUpdateManyWithWhereWithoutSongLeadInput[]
+    deleteMany?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+  }
+
+  export type LocationSongLeadCreateNestedManyWithoutLocationInput = {
+    create?: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput> | LocationSongLeadCreateWithoutLocationInput[] | LocationSongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutLocationInput | LocationSongLeadCreateOrConnectWithoutLocationInput[]
+    createMany?: LocationSongLeadCreateManyLocationInputEnvelope
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+  }
+
+  export type SongLeadCreateNestedManyWithoutLocationInput = {
+    create?: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput> | SongLeadCreateWithoutLocationInput[] | SongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationInput | SongLeadCreateOrConnectWithoutLocationInput[]
+    createMany?: SongLeadCreateManyLocationInputEnvelope
+    connect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+  }
+
+  export type ScheduleCreateNestedManyWithoutLocationInput = {
+    create?: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput> | ScheduleCreateWithoutLocationInput[] | ScheduleUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutLocationInput | ScheduleCreateOrConnectWithoutLocationInput[]
+    createMany?: ScheduleCreateManyLocationInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type LocationSongLeadUncheckedCreateNestedManyWithoutLocationInput = {
+    create?: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput> | LocationSongLeadCreateWithoutLocationInput[] | LocationSongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutLocationInput | LocationSongLeadCreateOrConnectWithoutLocationInput[]
+    createMany?: LocationSongLeadCreateManyLocationInputEnvelope
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+  }
+
+  export type SongLeadUncheckedCreateNestedManyWithoutLocationInput = {
+    create?: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput> | SongLeadCreateWithoutLocationInput[] | SongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationInput | SongLeadCreateOrConnectWithoutLocationInput[]
+    createMany?: SongLeadCreateManyLocationInputEnvelope
+    connect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+  }
+
+  export type ScheduleUncheckedCreateNestedManyWithoutLocationInput = {
+    create?: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput> | ScheduleCreateWithoutLocationInput[] | ScheduleUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutLocationInput | ScheduleCreateOrConnectWithoutLocationInput[]
+    createMany?: ScheduleCreateManyLocationInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type LocationSongLeadUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput> | LocationSongLeadCreateWithoutLocationInput[] | LocationSongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutLocationInput | LocationSongLeadCreateOrConnectWithoutLocationInput[]
+    upsert?: LocationSongLeadUpsertWithWhereUniqueWithoutLocationInput | LocationSongLeadUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: LocationSongLeadCreateManyLocationInputEnvelope
+    set?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    disconnect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    delete?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    update?: LocationSongLeadUpdateWithWhereUniqueWithoutLocationInput | LocationSongLeadUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: LocationSongLeadUpdateManyWithWhereWithoutLocationInput | LocationSongLeadUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+  }
+
+  export type SongLeadUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput> | SongLeadCreateWithoutLocationInput[] | SongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationInput | SongLeadCreateOrConnectWithoutLocationInput[]
+    upsert?: SongLeadUpsertWithWhereUniqueWithoutLocationInput | SongLeadUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: SongLeadCreateManyLocationInputEnvelope
+    set?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    disconnect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    delete?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    connect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    update?: SongLeadUpdateWithWhereUniqueWithoutLocationInput | SongLeadUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: SongLeadUpdateManyWithWhereWithoutLocationInput | SongLeadUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: SongLeadScalarWhereInput | SongLeadScalarWhereInput[]
+  }
+
+  export type ScheduleUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput> | ScheduleCreateWithoutLocationInput[] | ScheduleUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutLocationInput | ScheduleCreateOrConnectWithoutLocationInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutLocationInput | ScheduleUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: ScheduleCreateManyLocationInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutLocationInput | ScheduleUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutLocationInput | ScheduleUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type LocationSongLeadUncheckedUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput> | LocationSongLeadCreateWithoutLocationInput[] | LocationSongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: LocationSongLeadCreateOrConnectWithoutLocationInput | LocationSongLeadCreateOrConnectWithoutLocationInput[]
+    upsert?: LocationSongLeadUpsertWithWhereUniqueWithoutLocationInput | LocationSongLeadUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: LocationSongLeadCreateManyLocationInputEnvelope
+    set?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    disconnect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    delete?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    connect?: LocationSongLeadWhereUniqueInput | LocationSongLeadWhereUniqueInput[]
+    update?: LocationSongLeadUpdateWithWhereUniqueWithoutLocationInput | LocationSongLeadUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: LocationSongLeadUpdateManyWithWhereWithoutLocationInput | LocationSongLeadUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+  }
+
+  export type SongLeadUncheckedUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput> | SongLeadCreateWithoutLocationInput[] | SongLeadUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationInput | SongLeadCreateOrConnectWithoutLocationInput[]
+    upsert?: SongLeadUpsertWithWhereUniqueWithoutLocationInput | SongLeadUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: SongLeadCreateManyLocationInputEnvelope
+    set?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    disconnect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    delete?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    connect?: SongLeadWhereUniqueInput | SongLeadWhereUniqueInput[]
+    update?: SongLeadUpdateWithWhereUniqueWithoutLocationInput | SongLeadUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: SongLeadUpdateManyWithWhereWithoutLocationInput | SongLeadUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: SongLeadScalarWhereInput | SongLeadScalarWhereInput[]
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput> | ScheduleCreateWithoutLocationInput[] | ScheduleUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutLocationInput | ScheduleCreateOrConnectWithoutLocationInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutLocationInput | ScheduleUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: ScheduleCreateManyLocationInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutLocationInput | ScheduleUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutLocationInput | ScheduleUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type SongLeadCreateNestedOneWithoutLocationSongLeadInput = {
+    create?: XOR<SongLeadCreateWithoutLocationSongLeadInput, SongLeadUncheckedCreateWithoutLocationSongLeadInput>
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationSongLeadInput
+    connect?: SongLeadWhereUniqueInput
+  }
+
+  export type LocationCreateNestedOneWithoutLocationSongLeadInput = {
+    create?: XOR<LocationCreateWithoutLocationSongLeadInput, LocationUncheckedCreateWithoutLocationSongLeadInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutLocationSongLeadInput
+    connect?: LocationWhereUniqueInput
+  }
+
+  export type SongLeadUpdateOneRequiredWithoutLocationSongLeadNestedInput = {
+    create?: XOR<SongLeadCreateWithoutLocationSongLeadInput, SongLeadUncheckedCreateWithoutLocationSongLeadInput>
+    connectOrCreate?: SongLeadCreateOrConnectWithoutLocationSongLeadInput
+    upsert?: SongLeadUpsertWithoutLocationSongLeadInput
+    connect?: SongLeadWhereUniqueInput
+    update?: XOR<XOR<SongLeadUpdateToOneWithWhereWithoutLocationSongLeadInput, SongLeadUpdateWithoutLocationSongLeadInput>, SongLeadUncheckedUpdateWithoutLocationSongLeadInput>
+  }
+
+  export type LocationUpdateOneWithoutLocationSongLeadNestedInput = {
+    create?: XOR<LocationCreateWithoutLocationSongLeadInput, LocationUncheckedCreateWithoutLocationSongLeadInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutLocationSongLeadInput
+    upsert?: LocationUpsertWithoutLocationSongLeadInput
+    disconnect?: LocationWhereInput | boolean
+    delete?: LocationWhereInput | boolean
+    connect?: LocationWhereUniqueInput
+    update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutLocationSongLeadInput, LocationUpdateWithoutLocationSongLeadInput>, LocationUncheckedUpdateWithoutLocationSongLeadInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5169,14 +9443,45 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type ScheduleCreateWithoutSongInput = {
     date: Date | string
     scheduleSongs?: ScheduleSongsCreateNestedManyWithoutScheduleInput
+    songLead?: SongLeadCreateNestedOneWithoutScheduleInput
+    location?: LocationCreateNestedOneWithoutScheduleInput
   }
 
   export type ScheduleUncheckedCreateWithoutSongInput = {
     id?: number
     date: Date | string
+    songLeadId?: number | null
+    locationId?: number | null
     scheduleSongs?: ScheduleSongsUncheckedCreateNestedManyWithoutScheduleInput
   }
 
@@ -5220,11 +9525,15 @@ export namespace Prisma {
   export type ScheduleUpdateWithoutSongInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleSongs?: ScheduleSongsUpdateManyWithoutScheduleNestedInput
+    songLead?: SongLeadUpdateOneWithoutScheduleNestedInput
+    location?: LocationUpdateOneWithoutScheduleNestedInput
   }
 
   export type ScheduleUncheckedUpdateWithoutSongInput = {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
     scheduleSongs?: ScheduleSongsUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
@@ -5308,6 +9617,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SongLeadCreateWithoutScheduleInput = {
+    firstName: string
+    lastName: string
+    Location?: LocationCreateNestedOneWithoutSongLeadInput
+    LocationSongLead?: LocationSongLeadCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    locationId?: number | null
+    LocationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadCreateOrConnectWithoutScheduleInput = {
+    where: SongLeadWhereUniqueInput
+    create: XOR<SongLeadCreateWithoutScheduleInput, SongLeadUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type LocationCreateWithoutScheduleInput = {
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadCreateNestedManyWithoutLocationInput
+    SongLead?: SongLeadCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutLocationInput
+    SongLead?: SongLeadUncheckedCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationCreateOrConnectWithoutScheduleInput = {
+    where: LocationWhereUniqueInput
+    create: XOR<LocationCreateWithoutScheduleInput, LocationUncheckedCreateWithoutScheduleInput>
+  }
+
   export type ScheduleSongsUpsertWithWhereUniqueWithoutScheduleInput = {
     where: ScheduleSongsWhereUniqueInput
     update: XOR<ScheduleSongsUpdateWithoutScheduleInput, ScheduleSongsUncheckedUpdateWithoutScheduleInput>
@@ -5355,6 +9706,60 @@ export namespace Prisma {
     scheduleId?: IntNullableFilter<"Song"> | number | null
   }
 
+  export type SongLeadUpsertWithoutScheduleInput = {
+    update: XOR<SongLeadUpdateWithoutScheduleInput, SongLeadUncheckedUpdateWithoutScheduleInput>
+    create: XOR<SongLeadCreateWithoutScheduleInput, SongLeadUncheckedCreateWithoutScheduleInput>
+    where?: SongLeadWhereInput
+  }
+
+  export type SongLeadUpdateToOneWithWhereWithoutScheduleInput = {
+    where?: SongLeadWhereInput
+    data: XOR<SongLeadUpdateWithoutScheduleInput, SongLeadUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type SongLeadUpdateWithoutScheduleInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    Location?: LocationUpdateOneWithoutSongLeadNestedInput
+    LocationSongLead?: LocationSongLeadUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    LocationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type LocationUpsertWithoutScheduleInput = {
+    update: XOR<LocationUpdateWithoutScheduleInput, LocationUncheckedUpdateWithoutScheduleInput>
+    create: XOR<LocationCreateWithoutScheduleInput, LocationUncheckedCreateWithoutScheduleInput>
+    where?: LocationWhereInput
+  }
+
+  export type LocationUpdateToOneWithWhereWithoutScheduleInput = {
+    where?: LocationWhereInput
+    data: XOR<LocationUpdateWithoutScheduleInput, LocationUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type LocationUpdateWithoutScheduleInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUpdateManyWithoutLocationNestedInput
+    SongLead?: SongLeadUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutLocationNestedInput
+    SongLead?: SongLeadUncheckedUpdateManyWithoutLocationNestedInput
+  }
+
   export type SongCreateWithoutScheduleSongsInput = {
     name: string
     author: string
@@ -5386,11 +9791,15 @@ export namespace Prisma {
   export type ScheduleCreateWithoutScheduleSongsInput = {
     date: Date | string
     Song?: SongCreateNestedManyWithoutScheduleInput
+    songLead?: SongLeadCreateNestedOneWithoutScheduleInput
+    location?: LocationCreateNestedOneWithoutScheduleInput
   }
 
   export type ScheduleUncheckedCreateWithoutScheduleSongsInput = {
     id?: number
     date: Date | string
+    songLeadId?: number | null
+    locationId?: number | null
     Song?: SongUncheckedCreateNestedManyWithoutScheduleInput
   }
 
@@ -5447,12 +9856,384 @@ export namespace Prisma {
   export type ScheduleUpdateWithoutScheduleSongsInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     Song?: SongUpdateManyWithoutScheduleNestedInput
+    songLead?: SongLeadUpdateOneWithoutScheduleNestedInput
+    location?: LocationUpdateOneWithoutScheduleNestedInput
   }
 
   export type ScheduleUncheckedUpdateWithoutScheduleSongsInput = {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
     Song?: SongUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleCreateWithoutSongLeadInput = {
+    date: Date | string
+    scheduleSongs?: ScheduleSongsCreateNestedManyWithoutScheduleInput
+    Song?: SongCreateNestedManyWithoutScheduleInput
+    location?: LocationCreateNestedOneWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutSongLeadInput = {
+    id?: number
+    date: Date | string
+    locationId?: number | null
+    scheduleSongs?: ScheduleSongsUncheckedCreateNestedManyWithoutScheduleInput
+    Song?: SongUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutSongLeadInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput>
+  }
+
+  export type ScheduleCreateManySongLeadInputEnvelope = {
+    data: ScheduleCreateManySongLeadInput | ScheduleCreateManySongLeadInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LocationCreateWithoutSongLeadInput = {
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationUncheckedCreateWithoutSongLeadInput = {
+    id?: number
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationCreateOrConnectWithoutSongLeadInput = {
+    where: LocationWhereUniqueInput
+    create: XOR<LocationCreateWithoutSongLeadInput, LocationUncheckedCreateWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadCreateWithoutSongLeadInput = {
+    Location?: LocationCreateNestedOneWithoutLocationSongLeadInput
+  }
+
+  export type LocationSongLeadUncheckedCreateWithoutSongLeadInput = {
+    id?: number
+    locationId?: number | null
+  }
+
+  export type LocationSongLeadCreateOrConnectWithoutSongLeadInput = {
+    where: LocationSongLeadWhereUniqueInput
+    create: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadCreateManySongLeadInputEnvelope = {
+    data: LocationSongLeadCreateManySongLeadInput | LocationSongLeadCreateManySongLeadInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleUpsertWithWhereUniqueWithoutSongLeadInput = {
+    where: ScheduleWhereUniqueInput
+    update: XOR<ScheduleUpdateWithoutSongLeadInput, ScheduleUncheckedUpdateWithoutSongLeadInput>
+    create: XOR<ScheduleCreateWithoutSongLeadInput, ScheduleUncheckedCreateWithoutSongLeadInput>
+  }
+
+  export type ScheduleUpdateWithWhereUniqueWithoutSongLeadInput = {
+    where: ScheduleWhereUniqueInput
+    data: XOR<ScheduleUpdateWithoutSongLeadInput, ScheduleUncheckedUpdateWithoutSongLeadInput>
+  }
+
+  export type ScheduleUpdateManyWithWhereWithoutSongLeadInput = {
+    where: ScheduleScalarWhereInput
+    data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutSongLeadInput>
+  }
+
+  export type ScheduleScalarWhereInput = {
+    AND?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+    OR?: ScheduleScalarWhereInput[]
+    NOT?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+    id?: IntFilter<"Schedule"> | number
+    date?: DateTimeFilter<"Schedule"> | Date | string
+    songLeadId?: IntNullableFilter<"Schedule"> | number | null
+    locationId?: IntNullableFilter<"Schedule"> | number | null
+  }
+
+  export type LocationUpsertWithoutSongLeadInput = {
+    update: XOR<LocationUpdateWithoutSongLeadInput, LocationUncheckedUpdateWithoutSongLeadInput>
+    create: XOR<LocationCreateWithoutSongLeadInput, LocationUncheckedCreateWithoutSongLeadInput>
+    where?: LocationWhereInput
+  }
+
+  export type LocationUpdateToOneWithWhereWithoutSongLeadInput = {
+    where?: LocationWhereInput
+    data: XOR<LocationUpdateWithoutSongLeadInput, LocationUncheckedUpdateWithoutSongLeadInput>
+  }
+
+  export type LocationUpdateWithoutSongLeadInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationUncheckedUpdateWithoutSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    locationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUncheckedUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationSongLeadUpsertWithWhereUniqueWithoutSongLeadInput = {
+    where: LocationSongLeadWhereUniqueInput
+    update: XOR<LocationSongLeadUpdateWithoutSongLeadInput, LocationSongLeadUncheckedUpdateWithoutSongLeadInput>
+    create: XOR<LocationSongLeadCreateWithoutSongLeadInput, LocationSongLeadUncheckedCreateWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadUpdateWithWhereUniqueWithoutSongLeadInput = {
+    where: LocationSongLeadWhereUniqueInput
+    data: XOR<LocationSongLeadUpdateWithoutSongLeadInput, LocationSongLeadUncheckedUpdateWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadUpdateManyWithWhereWithoutSongLeadInput = {
+    where: LocationSongLeadScalarWhereInput
+    data: XOR<LocationSongLeadUpdateManyMutationInput, LocationSongLeadUncheckedUpdateManyWithoutSongLeadInput>
+  }
+
+  export type LocationSongLeadScalarWhereInput = {
+    AND?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+    OR?: LocationSongLeadScalarWhereInput[]
+    NOT?: LocationSongLeadScalarWhereInput | LocationSongLeadScalarWhereInput[]
+    id?: IntFilter<"LocationSongLead"> | number
+    locationId?: IntNullableFilter<"LocationSongLead"> | number | null
+    songLeadId?: IntFilter<"LocationSongLead"> | number
+  }
+
+  export type LocationSongLeadCreateWithoutLocationInput = {
+    songLead: SongLeadCreateNestedOneWithoutLocationSongLeadInput
+  }
+
+  export type LocationSongLeadUncheckedCreateWithoutLocationInput = {
+    id?: number
+    songLeadId: number
+  }
+
+  export type LocationSongLeadCreateOrConnectWithoutLocationInput = {
+    where: LocationSongLeadWhereUniqueInput
+    create: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput>
+  }
+
+  export type LocationSongLeadCreateManyLocationInputEnvelope = {
+    data: LocationSongLeadCreateManyLocationInput | LocationSongLeadCreateManyLocationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SongLeadCreateWithoutLocationInput = {
+    firstName: string
+    lastName: string
+    Schedule?: ScheduleCreateNestedManyWithoutSongLeadInput
+    LocationSongLead?: LocationSongLeadCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadUncheckedCreateWithoutLocationInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutSongLeadInput
+    LocationSongLead?: LocationSongLeadUncheckedCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadCreateOrConnectWithoutLocationInput = {
+    where: SongLeadWhereUniqueInput
+    create: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput>
+  }
+
+  export type SongLeadCreateManyLocationInputEnvelope = {
+    data: SongLeadCreateManyLocationInput | SongLeadCreateManyLocationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleCreateWithoutLocationInput = {
+    date: Date | string
+    scheduleSongs?: ScheduleSongsCreateNestedManyWithoutScheduleInput
+    Song?: SongCreateNestedManyWithoutScheduleInput
+    songLead?: SongLeadCreateNestedOneWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutLocationInput = {
+    id?: number
+    date: Date | string
+    songLeadId?: number | null
+    scheduleSongs?: ScheduleSongsUncheckedCreateNestedManyWithoutScheduleInput
+    Song?: SongUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutLocationInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput>
+  }
+
+  export type ScheduleCreateManyLocationInputEnvelope = {
+    data: ScheduleCreateManyLocationInput | ScheduleCreateManyLocationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LocationSongLeadUpsertWithWhereUniqueWithoutLocationInput = {
+    where: LocationSongLeadWhereUniqueInput
+    update: XOR<LocationSongLeadUpdateWithoutLocationInput, LocationSongLeadUncheckedUpdateWithoutLocationInput>
+    create: XOR<LocationSongLeadCreateWithoutLocationInput, LocationSongLeadUncheckedCreateWithoutLocationInput>
+  }
+
+  export type LocationSongLeadUpdateWithWhereUniqueWithoutLocationInput = {
+    where: LocationSongLeadWhereUniqueInput
+    data: XOR<LocationSongLeadUpdateWithoutLocationInput, LocationSongLeadUncheckedUpdateWithoutLocationInput>
+  }
+
+  export type LocationSongLeadUpdateManyWithWhereWithoutLocationInput = {
+    where: LocationSongLeadScalarWhereInput
+    data: XOR<LocationSongLeadUpdateManyMutationInput, LocationSongLeadUncheckedUpdateManyWithoutLocationInput>
+  }
+
+  export type SongLeadUpsertWithWhereUniqueWithoutLocationInput = {
+    where: SongLeadWhereUniqueInput
+    update: XOR<SongLeadUpdateWithoutLocationInput, SongLeadUncheckedUpdateWithoutLocationInput>
+    create: XOR<SongLeadCreateWithoutLocationInput, SongLeadUncheckedCreateWithoutLocationInput>
+  }
+
+  export type SongLeadUpdateWithWhereUniqueWithoutLocationInput = {
+    where: SongLeadWhereUniqueInput
+    data: XOR<SongLeadUpdateWithoutLocationInput, SongLeadUncheckedUpdateWithoutLocationInput>
+  }
+
+  export type SongLeadUpdateManyWithWhereWithoutLocationInput = {
+    where: SongLeadScalarWhereInput
+    data: XOR<SongLeadUpdateManyMutationInput, SongLeadUncheckedUpdateManyWithoutLocationInput>
+  }
+
+  export type SongLeadScalarWhereInput = {
+    AND?: SongLeadScalarWhereInput | SongLeadScalarWhereInput[]
+    OR?: SongLeadScalarWhereInput[]
+    NOT?: SongLeadScalarWhereInput | SongLeadScalarWhereInput[]
+    id?: IntFilter<"SongLead"> | number
+    firstName?: StringFilter<"SongLead"> | string
+    lastName?: StringFilter<"SongLead"> | string
+    locationId?: IntNullableFilter<"SongLead"> | number | null
+  }
+
+  export type ScheduleUpsertWithWhereUniqueWithoutLocationInput = {
+    where: ScheduleWhereUniqueInput
+    update: XOR<ScheduleUpdateWithoutLocationInput, ScheduleUncheckedUpdateWithoutLocationInput>
+    create: XOR<ScheduleCreateWithoutLocationInput, ScheduleUncheckedCreateWithoutLocationInput>
+  }
+
+  export type ScheduleUpdateWithWhereUniqueWithoutLocationInput = {
+    where: ScheduleWhereUniqueInput
+    data: XOR<ScheduleUpdateWithoutLocationInput, ScheduleUncheckedUpdateWithoutLocationInput>
+  }
+
+  export type ScheduleUpdateManyWithWhereWithoutLocationInput = {
+    where: ScheduleScalarWhereInput
+    data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutLocationInput>
+  }
+
+  export type SongLeadCreateWithoutLocationSongLeadInput = {
+    firstName: string
+    lastName: string
+    Schedule?: ScheduleCreateNestedManyWithoutSongLeadInput
+    Location?: LocationCreateNestedOneWithoutSongLeadInput
+  }
+
+  export type SongLeadUncheckedCreateWithoutLocationSongLeadInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    locationId?: number | null
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutSongLeadInput
+  }
+
+  export type SongLeadCreateOrConnectWithoutLocationSongLeadInput = {
+    where: SongLeadWhereUniqueInput
+    create: XOR<SongLeadCreateWithoutLocationSongLeadInput, SongLeadUncheckedCreateWithoutLocationSongLeadInput>
+  }
+
+  export type LocationCreateWithoutLocationSongLeadInput = {
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    SongLead?: SongLeadCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationUncheckedCreateWithoutLocationSongLeadInput = {
+    id?: number
+    address: string
+    lat?: Decimal | DecimalJsLike | number | string
+    long?: Decimal | DecimalJsLike | number | string
+    SongLead?: SongLeadUncheckedCreateNestedManyWithoutLocationInput
+    Schedule?: ScheduleUncheckedCreateNestedManyWithoutLocationInput
+  }
+
+  export type LocationCreateOrConnectWithoutLocationSongLeadInput = {
+    where: LocationWhereUniqueInput
+    create: XOR<LocationCreateWithoutLocationSongLeadInput, LocationUncheckedCreateWithoutLocationSongLeadInput>
+  }
+
+  export type SongLeadUpsertWithoutLocationSongLeadInput = {
+    update: XOR<SongLeadUpdateWithoutLocationSongLeadInput, SongLeadUncheckedUpdateWithoutLocationSongLeadInput>
+    create: XOR<SongLeadCreateWithoutLocationSongLeadInput, SongLeadUncheckedCreateWithoutLocationSongLeadInput>
+    where?: SongLeadWhereInput
+  }
+
+  export type SongLeadUpdateToOneWithWhereWithoutLocationSongLeadInput = {
+    where?: SongLeadWhereInput
+    data: XOR<SongLeadUpdateWithoutLocationSongLeadInput, SongLeadUncheckedUpdateWithoutLocationSongLeadInput>
+  }
+
+  export type SongLeadUpdateWithoutLocationSongLeadInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    Schedule?: ScheduleUpdateManyWithoutSongLeadNestedInput
+    Location?: LocationUpdateOneWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadUncheckedUpdateWithoutLocationSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    Schedule?: ScheduleUncheckedUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type LocationUpsertWithoutLocationSongLeadInput = {
+    update: XOR<LocationUpdateWithoutLocationSongLeadInput, LocationUncheckedUpdateWithoutLocationSongLeadInput>
+    create: XOR<LocationCreateWithoutLocationSongLeadInput, LocationUncheckedCreateWithoutLocationSongLeadInput>
+    where?: LocationWhereInput
+  }
+
+  export type LocationUpdateToOneWithWhereWithoutLocationSongLeadInput = {
+    where?: LocationWhereInput
+    data: XOR<LocationUpdateWithoutLocationSongLeadInput, LocationUncheckedUpdateWithoutLocationSongLeadInput>
+  }
+
+  export type LocationUpdateWithoutLocationSongLeadInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SongLead?: SongLeadUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUpdateManyWithoutLocationNestedInput
+  }
+
+  export type LocationUncheckedUpdateWithoutLocationSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    lat?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    long?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SongLead?: SongLeadUncheckedUpdateManyWithoutLocationNestedInput
+    Schedule?: ScheduleUncheckedUpdateManyWithoutLocationNestedInput
   }
 
   export type ScheduleSongsCreateManySongInput = {
@@ -5546,6 +10327,125 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ScheduleCreateManySongLeadInput = {
+    id?: number
+    date: Date | string
+    locationId?: number | null
+  }
+
+  export type LocationSongLeadCreateManySongLeadInput = {
+    id?: number
+    locationId?: number | null
+  }
+
+  export type ScheduleUpdateWithoutSongLeadInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleSongs?: ScheduleSongsUpdateManyWithoutScheduleNestedInput
+    Song?: SongUpdateManyWithoutScheduleNestedInput
+    location?: LocationUpdateOneWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    scheduleSongs?: ScheduleSongsUncheckedUpdateManyWithoutScheduleNestedInput
+    Song?: SongUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LocationSongLeadUpdateWithoutSongLeadInput = {
+    Location?: LocationUpdateOneWithoutLocationSongLeadNestedInput
+  }
+
+  export type LocationSongLeadUncheckedUpdateWithoutSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LocationSongLeadUncheckedUpdateManyWithoutSongLeadInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LocationSongLeadCreateManyLocationInput = {
+    id?: number
+    songLeadId: number
+  }
+
+  export type SongLeadCreateManyLocationInput = {
+    id?: number
+    firstName: string
+    lastName: string
+  }
+
+  export type ScheduleCreateManyLocationInput = {
+    id?: number
+    date: Date | string
+    songLeadId?: number | null
+  }
+
+  export type LocationSongLeadUpdateWithoutLocationInput = {
+    songLead?: SongLeadUpdateOneRequiredWithoutLocationSongLeadNestedInput
+  }
+
+  export type LocationSongLeadUncheckedUpdateWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    songLeadId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LocationSongLeadUncheckedUpdateManyWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    songLeadId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SongLeadUpdateWithoutLocationInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    Schedule?: ScheduleUpdateManyWithoutSongLeadNestedInput
+    LocationSongLead?: LocationSongLeadUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadUncheckedUpdateWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    Schedule?: ScheduleUncheckedUpdateManyWithoutSongLeadNestedInput
+    LocationSongLead?: LocationSongLeadUncheckedUpdateManyWithoutSongLeadNestedInput
+  }
+
+  export type SongLeadUncheckedUpdateManyWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ScheduleUpdateWithoutLocationInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleSongs?: ScheduleSongsUpdateManyWithoutScheduleNestedInput
+    Song?: SongUpdateManyWithoutScheduleNestedInput
+    songLead?: SongLeadUpdateOneWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+    scheduleSongs?: ScheduleSongsUncheckedUpdateManyWithoutScheduleNestedInput
+    Song?: SongUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutLocationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    songLeadId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
 
 
   /**
@@ -5560,6 +10460,14 @@ export namespace Prisma {
      */
     export type ScheduleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ScheduleCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use SongLeadCountOutputTypeDefaultArgs instead
+     */
+    export type SongLeadCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SongLeadCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LocationCountOutputTypeDefaultArgs instead
+     */
+    export type LocationCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LocationCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use SongDefaultArgs instead
      */
     export type SongArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SongDefaultArgs<ExtArgs>
@@ -5571,6 +10479,18 @@ export namespace Prisma {
      * @deprecated Use ScheduleSongsDefaultArgs instead
      */
     export type ScheduleSongsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ScheduleSongsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SongLeadDefaultArgs instead
+     */
+    export type SongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SongLeadDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LocationDefaultArgs instead
+     */
+    export type LocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LocationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LocationSongLeadDefaultArgs instead
+     */
+    export type LocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LocationSongLeadDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

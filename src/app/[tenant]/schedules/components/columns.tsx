@@ -3,12 +3,14 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { deleteScheduleById, revalidate } from '@/lib/actions/actions';
 import { Schedule } from '@/models/schedule';
 import { DotsHorizontalIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from 'date-fns';
 import { DeleteIcon } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 
 export const columns: ColumnDef<Schedule>[] = [
@@ -16,11 +18,18 @@ export const columns: ColumnDef<Schedule>[] = [
     accessorKey: "date",
     header: "Date",
     cell: ({ row }) =>
-      <Link href={'/schedules/' + row.original.id}>
+      <Link href={'schedules/' + row.original.id}>
         <Button className='p-0 min-h-0' variant='link'>{format(row.original.date, 'LLL dd, yyyy')}</Button>
       </Link>
 
-  }, 
+  },
+  {
+    accessorKey: "songLead",
+    header: "Song Lead",
+    cell: ({ row }) =>
+      <span className='capitalize'>{row.original.songLead.firstName.toLowerCase()} {row.original.songLead.lastName.toLowerCase()}</span>
+
+  },
   {
     id: 'actions',
     enableHiding: false,
@@ -29,6 +38,9 @@ export const columns: ColumnDef<Schedule>[] = [
 
       async function deleteSchedule(schedule: Schedule) {
         try {
+          await deleteScheduleById(schedule.id);
+          await revalidate('/' + schedule.locationId + '/schedule');
+          toast('Schedule deleted')
           // await deletePatientById(patient.id)
           // await revalidate('/home/patient');
           // toast({
@@ -36,9 +48,7 @@ export const columns: ColumnDef<Schedule>[] = [
           //   description: `${patient.givenName} ${patient.lastName} removed to your database.`
           // });
         } catch (error) {
-          // if (error instanceof ApiError) {
-          //   ApiErrorToaster(error);
-          // }
+          toast(error?.toString())
         }
       }
 
@@ -53,7 +63,7 @@ export const columns: ColumnDef<Schedule>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <Link href={`/schedules/edit/${schedule.id}`}>
+              <Link href={`schedules/edit/${schedule.id}`}>
                 <DropdownMenuItem>
                   <Pencil1Icon className='h-4 w-4 me-2' /> Edit
                 </DropdownMenuItem>
