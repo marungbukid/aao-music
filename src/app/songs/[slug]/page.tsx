@@ -1,22 +1,9 @@
-import { fetcher } from '@/lib/fetch';
 import { Song } from '@/models/song';
 import { redirect } from 'next/navigation';
 import ChordSheetRenderer from '../../../components/chordsheet-renderer';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-
-async function getSong(id: string): Promise<Song | null> {
-  try {
-    const res = await fetcher('/api/songs/' + id, {
-      method: 'get'
-    })
-    return await res.json();
-  } catch (error) {
-    console.log(error)
-  }
-
-  return null;
-}
+import { getSongById } from '@/lib/actions/song.actions';
 
 
 export default async function SongPage({
@@ -26,8 +13,7 @@ export default async function SongPage({
     slug: string
   }
 }) {
-
-  const song = await getSong(params.slug);
+  const song = await getSongById(parseInt(params.slug));
   if (!song) redirect('/songs');
 
   return (

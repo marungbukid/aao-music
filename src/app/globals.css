@@ -60,7 +60,7 @@
 }
 
 div.chord-sheet > div.paragraph {
-  @apply pt-4;
+  @apply pb-10;
 }
 
 div.chord-sheet > div.paragraph > .row {
@@ -72,11 +72,11 @@ div.chord-sheet > div.paragraph > .row > .column {
 }
 
 div.chord-sheet > div.paragraph > .row > .column > .chord {
-  @apply h-6 font-mono font-bold pe-2 text-red-800 dark:text-red-600;
+  @apply h-6 font-mono font-bold pe-2 text-red-800 dark:text-red-600 relative;
 }
 
 div.chord-sheet > div.paragraph > .row > .column > .lyrics {
-  @apply inline-block whitespace-pre font-mono text-muted-foreground;
+  @apply inline-block font-mono text-muted-foreground relative whitespace-pre-wrap;
 }
 
 div.chord-sheet > div.paragraph > .row > .column:has(> div.chord:empty ~ div.lyrics:empty) {
@@ -86,7 +86,7 @@ div.chord-sheet > div.paragraph > .row > .column:has(> div.chord:empty ~ div.lyr
 
 div.chord-sheet > div.paragraph > .row > h3.label,
 div.chord-sheet > div.paragraph > .row > .comment  {
-  @apply inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-blue-700 dark:bg-blue-900 text-primary-foreground shadow hover:bg-blue-600/80;
+  @apply text-sm mb-2 first:mt-0 mt-4  inline-flex items-center rounded-md border px-2.5 py-0.5 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-blue-700 dark:bg-blue-900 text-primary-foreground shadow hover:bg-blue-600/80;
 }
 
 

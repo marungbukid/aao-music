@@ -1,16 +1,14 @@
-import { fetcher } from '@/lib/fetch';
+import { getScheduleById } from '@/lib/actions/schedule.actions';
+import { getSongLeads } from '@/lib/actions/song-lead.actions';
 import { Schedule } from '@/models/schedule';
-import EditScheduleForm from './components/edit-schedule-form';
-import { redirect } from 'next/navigation';
-import { getSongLeads } from '@/lib/actions/actions';
 import { TenantType } from '@/models/tenant-type';
+import { redirect } from 'next/navigation';
+import EditScheduleForm from './edit-schedule-form';
 
-async function getScheduleDetails(id: string): Promise<Schedule | null> {
+async function getScheduleDetails(id: number): Promise<Schedule | null> {
   try {
-    const res = await fetcher('/api/schedules/' + id, {
-      method: 'get'
-    })
-    return await res.json();
+    const res = await getScheduleById(id, false);
+    return res;
   } catch (error) {
     console.error(error)
   }
@@ -26,12 +24,10 @@ export default async function EditSchedulePage({
     tenant: TenantType
   }
 }) {
-  const schedule = await getScheduleDetails(slug);
+  const schedule = await getScheduleDetails(parseInt(slug));
   if (!schedule) redirect('/schedules')
 
-  console.log(schedule)
-
-  const songLeads = await getSongLeads(tenant)
+  const songLeads = await getSongLeads(parseInt(tenant))
 
   return (
     <div>

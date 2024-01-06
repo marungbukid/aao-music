@@ -1,40 +1,8 @@
-import { fetcher } from '@/lib/fetch';
-import { Paged } from '@/models/paged';
-import { Song } from '@/models/song';
+import { Button } from '@/components/ui/button';
+import { getSongs } from '@/lib/actions/song.actions';
+import Link from 'next/link';
 import { DataTable } from '../../components/ui/data-table';
 import { columns } from './components/columns';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-
-async function getSongs(pageNumber: number, query?: string): Promise<Paged<Song>> {
-  const noRes = {
-    pagination: {
-      currentPage: 1,
-      hasNext: false,
-      hasPrevious: false,
-      pageSize: 10,
-      totalCount: 0,
-      totalPages: 0
-    },
-    data: []
-  } as unknown as Paged<Song>;
-
-  try {
-    const res = await fetcher('/api/songs?' + new URLSearchParams({
-      pageNumber: pageNumber.toString(),
-      pageSize: '10',
-      ...(query && { query: query })
-    }), {
-      method: 'get'
-    });
-    if (!res.ok) return noRes;
-    return await res.json();
-  } catch (error) {
-    console.error(error)
-  }
-
-  return noRes
-}
 
 export default async function SongsPage({
   searchParams: { page = '1', query = '' }
@@ -53,7 +21,13 @@ export default async function SongsPage({
     pageNumber = 1;
   }
 
-  const { data, pagination } = await getSongs(pageNumber, query);
+  const { data, pagination } = await getSongs({
+    pagination: {
+      pageNumber: pageNumber,
+      pageSize: 10,
+      query: query
+    }
+  });
 
   return (
     <div className=''>

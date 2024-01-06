@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { addSong, revalidate } from '@/lib/actions/actions';
+import { addSong, revalidate } from '@/lib/actions/song.actions';
 import { possibleNotes } from '@/lib/utils';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import CodeMirror from '@uiw/react-codemirror';

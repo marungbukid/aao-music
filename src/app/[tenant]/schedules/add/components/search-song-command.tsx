@@ -2,7 +2,7 @@
 
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { Skeleton } from '@/components/ui/skeleton';
-import { getSongs } from '@/lib/actions/actions';
+import { getSongs } from '@/lib/actions/song.actions';
 import { Song } from '@/models/song';
 import { CommandLoading } from 'cmdk';
 import { debounce } from 'lodash';

@@ -1,4 +1,3 @@
-import { fetcher } from '@/lib/fetch';
 import { SongLead } from '@/lib/generated/client';
 import { TenantType } from '@/models/tenant-type';
 import AddSongLeadForm from './components/add-song-lead-form';
@@ -11,19 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-async function getSongLeads(tenant: TenantType): Promise<SongLead[] | null> {
-  try {
-    const res = await fetcher('/api/song-leads?' + new URLSearchParams({
-      location: tenant
-    }))
-    return await res.json();
-  } catch (error) {
-    console.error(error)
-  }
-
-  return null;
-}
+import { getSongLeads } from '@/lib/actions/song-lead.actions';
 
 export default async function SongLeadsPage({
   params: { tenant }
@@ -32,9 +19,7 @@ export default async function SongLeadsPage({
     tenant: TenantType
   }
 }) {
-  const songLeads = await getSongLeads(tenant);
-
-
+  const songLeads = await getSongLeads(parseInt(tenant));
 
   return (
     <div>

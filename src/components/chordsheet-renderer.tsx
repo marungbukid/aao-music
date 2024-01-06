@@ -63,7 +63,7 @@ export default function ChordSheetRenderer({
         </div>
       </div>
 
-      <ScrollArea className='h-[640px] p-4 border rounded-md'>
+      <ScrollArea className='h-screen border rounded-md p-2'>
         {renderChordSheet()}
         <ScrollBar orientation='vertical' />
       </ScrollArea>

@@ -1,45 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
-import { fetcher } from '@/lib/fetch';
+import { getScheduleByPage } from '@/lib/actions/schedule.actions';
 import { Paged } from '@/models/paged';
 import { Schedule } from '@/models/schedule';
-import Link from 'next/link';
-import { columns } from './components/columns';
-import LocationSelect from '@/components/ui/location-select';
 import { TenantType } from '@/models/tenant-type';
-
-
-async function getSchedules(locationId: string, pageNumber: number, query?: string): Promise<Paged<Schedule>> {
-  const noRes = {
-    pagination: {
-      currentPage: 1,
-      hasNext: false,
-      hasPrevious: false,
-      pageSize: 10,
-      totalCount: 0,
-      totalPages: 0
-    },
-    data: []
-  } as unknown as Paged<Schedule>;
-
-  try {
-    const res = await fetcher('/api/schedules?' + new URLSearchParams({
-      locationId: locationId,
-      pageNumber: pageNumber.toString(),
-      pageSize: '10',
-      ...(query && { query: query })
-    }), {
-      method: 'get'
-    });
-    if (!res.ok) return noRes;
-    return await res.json();
-  } catch (error) {
-    console.error(error)
-  }
-
-  return noRes
-}
-
+import Link from 'next/link';
+import { columns } from './columns';
 
 export default async function SchedulesPage({
   searchParams: { page = '1', query = '' },
@@ -62,7 +28,14 @@ export default async function SchedulesPage({
     pageNumber = 1;
   }
 
-  const { data, pagination } = await getSchedules(tenant, pageNumber, query);
+  const { data, pagination } = await getScheduleByPage({
+    locationId: parseInt(tenant),
+    pagination: {
+      pageNumber: pageNumber,
+      pageSize: 10,
+      query: query
+    }
+  });
 
   return (
     <div>

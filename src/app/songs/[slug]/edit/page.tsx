@@ -1,33 +1,19 @@
 import { Song } from '@/models/song';
-import { EditSongForm } from './components/edit-song-form';
-import { fetcher } from '@/lib/fetch';
+import { EditSongForm } from './edit-song-form';
 import { redirect } from 'next/navigation';
-
-
-async function getSong(id: string): Promise<Song | null> {
-  try {
-    const res = await fetcher('/api/songs/' + id, {
-      method: 'get'
-    })
-    return await res.json();
-  } catch (error) {
-    console.log(error)
-  }
-
-  return null;
-}
-
+import { getSongById } from '@/lib/actions/song.actions';
 
 
 export default async function EditSongPage({
-  params
+  params: { slug }
 }: {
   params: {
-    slug: string
+    slug?: string
   }
 }) {
+  if (!slug) redirect('/songs');
 
-  const song = await getSong(params.slug);
+  const song = await getSongById(parseInt(slug));
   if (!song) redirect('/songs');
 
 
@@ -41,7 +27,7 @@ export default async function EditSongPage({
       </div>
 
       <EditSongForm
-        id={parseInt(params.slug)}
+        id={parseInt(slug)}
         song={song} />
     </div>
   );

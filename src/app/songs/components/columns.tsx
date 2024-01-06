@@ -9,7 +9,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DeleteIcon } from 'lucide-react';
 import Link from 'next/link';
 import { format } from 'date-fns'
-import { deleteSong, revalidate } from '@/lib/actions/actions';
+import { deleteSong, revalidate } from '@/lib/actions/song.actions';
 import { toast } from '@/components/ui/use-toast';
 
 

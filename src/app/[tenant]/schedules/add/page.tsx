@@ -1,4 +1,4 @@
-import { getSongLeads } from '@/lib/actions/actions';
+import { getSongLeads } from '@/lib/actions/song.actions';
 import AddScheduleForm from './components/add-schedule-form';
 import { TenantType } from '@/models/tenant-type';
 

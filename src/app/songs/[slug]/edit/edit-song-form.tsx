@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { addSong, editSong } from '@/lib/actions/actions';
+import { addSong, editSong } from '@/lib/actions/song.actions';
 import { possibleNotes } from '@/lib/utils';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import CodeMirror from '@uiw/react-codemirror';
@@ -62,7 +62,7 @@ export function EditSongForm({
     switch (form.getValues('chordSheetType')) {
       case 'chordsOverWords': return new ChordSheetJS.ChordsOverWordsParser()
       case 'chordPro': return new ChordSheetJS.ChordProParser()
-      case 'ultimateGuitar': return new ChordSheetJS.UltimateGuitarParser();
+      case 'ultimateGuitar': return new ChordSheetJS.UltimateGuitarParser({ preserveWhitespace: true });
       default: return new ChordSheetJS.ChordProParser()
     }
   }

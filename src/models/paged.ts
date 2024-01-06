@@ -3,8 +3,8 @@ export type Pagination = {
   pageSize: number;
   currentPage: number;
   totalPages: number;
-  hasNext: number;
-  hasPrevious: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
 };
 
 export type Paged<T> = {

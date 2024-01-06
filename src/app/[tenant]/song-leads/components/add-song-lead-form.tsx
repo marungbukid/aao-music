@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { addSongLead, revalidate } from '@/lib/actions/actions';
+import { addSongLead, revalidate } from '@/lib/actions/song.actions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Loader2, Loader2Icon } from 'lucide-react';

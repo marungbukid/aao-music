@@ -1,7 +1,6 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { defaultLocations } from '@/lib/data/default-locations';
-import { fetcher } from '@/lib/fetch';
 import { Location } from '@/lib/generated/client';
 import clsx from 'clsx';
 import { Navigation2Icon } from 'lucide-react';
@@ -38,7 +37,7 @@ export default async function Home() {
 
       <div className='w-full container'>
 
-        <div className='grid grid-flow-row sm:grid-flow-col sm:grid-cols-3 gap-6 w-full'>
+        <div className='grid grid-flow-row md:grid-flow-col sm:grid-cols-3 gap-6 w-full'>
           {locations && locations.map(location => (
             <div key={location.address}
               className={

@@ -7,7 +7,8 @@ import { DroppableSong } from '@/components/ui/droppable-song'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { revalidate, updateScheduleById } from '@/lib/actions/actions'
+import { updateScheduleById } from '@/lib/actions/schedule.actions'
+import { revalidate } from '@/lib/actions/song.actions'
 import { SongLead } from '@/lib/generated/client'
 import { cn } from '@/lib/utils'
 import { Schedule } from '@/models/schedule'
@@ -18,7 +19,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { format, startOfDay } from 'date-fns'
 import { CalendarIcon, Loader2, MusicIcon, SaveIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -34,7 +35,11 @@ const formSchema = z.object({
   songLeadId: z.number(),
 })
 
-export default function EditScheduleForm({ schedule, songLeads, tenant }: { schedule: Schedule, songLeads: SongLead[], tenant: TenantType }) {
+export default function EditScheduleForm({
+  schedule,
+  songLeads,
+  tenant
+}: { schedule: Schedule, songLeads: SongLead[], tenant: TenantType }) {
   const router = useRouter();
   const [popoversState, setPopoverState] = useState<{
     calendarOpen: boolean,
@@ -59,7 +64,7 @@ export default function EditScheduleForm({ schedule, songLeads, tenant }: { sche
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await updateScheduleById(schedule.id, tenant, {
+      await updateScheduleById(schedule.id, parseInt(tenant), {
         date: values.date,
         songs: values.songs.map(s => ({
           id: s.id,
@@ -68,7 +73,6 @@ export default function EditScheduleForm({ schedule, songLeads, tenant }: { sche
         songLeadId: values.songLeadId
       })
       await revalidate('/' + tenant + '/schedules');
-      router.replace('/' + tenant + '/schedules');
     } catch (error) {
       console.error(error)
     }
@@ -252,7 +256,11 @@ export default function EditScheduleForm({ schedule, songLeads, tenant }: { sche
         />
 
 
-        <div className='flex flex-row justify-end'>
+        <div className='flex flex-row justify-end gap-2'>
+          <Button type='button' variant='ghost'
+            onClick={() => router.back()}>
+            Cancel
+          </Button>
           <Button type='submit'>
             {isSubmitting ? <Loader2 className='h-4 w-4 me-2 animate-spin' /> : <SaveIcon className='h-4 w-4 me-2' />}
             Update

@@ -3,7 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { deleteScheduleById, revalidate } from '@/lib/actions/actions';
+import { revalidate } from '@/lib/actions/song.actions';
+import { deleteScheduleById } from '@/lib/actions/schedule.actions';
 import { Schedule } from '@/models/schedule';
 import { DotsHorizontalIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import { ColumnDef } from "@tanstack/react-table";
