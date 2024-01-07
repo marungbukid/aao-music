@@ -24,7 +24,13 @@ export default function SearchSongCommand({
   async function fetchSongs(query: string) {
     console.log('fetching')
     try {
-      const res = await getSongs(1, query);
+      const res = await getSongs({
+        pagination: {
+          pageNumber: 1,
+          pageSize: 10,
+          query
+        }
+      });
       setData([...res.data]);
     } catch (error) {
       console.error(error)
