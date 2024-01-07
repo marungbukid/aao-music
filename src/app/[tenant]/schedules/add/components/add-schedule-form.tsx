@@ -14,7 +14,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import SearchSongCommand from './search-song-command'
-import { addSchedule, revalidate } from '@/lib/actions/song.actions'
+import { revalidate } from '@/lib/actions/song.actions'
 import { useRouter } from 'next/navigation'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import { DroppableSong } from '@/components/ui/droppable-song'
@@ -22,6 +22,7 @@ import { Song } from '@/models/song'
 import { SongLead } from '@/lib/generated/client'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { TenantType } from '@/models/tenant-type'
+import { addSchedule } from '@/lib/actions/schedule.actions'
 
 const formSchema = z.object({
   date: z.date(),
@@ -88,7 +89,7 @@ export default function AddScheduleForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await addSchedule(tenant, {
+      await addSchedule(parseInt(tenant), {
         date: values.date,
         songs: values.songs.map(s => ({
           id: s.id,
