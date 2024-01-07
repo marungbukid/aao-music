@@ -1,11 +1,12 @@
-import { getSongLeads } from '@/lib/actions/song.actions';
+
+import { getSongLeads } from '@/lib/actions/song-lead.actions';
 import AddScheduleForm from './components/add-schedule-form';
 import { TenantType } from '@/models/tenant-type';
 
 export default async function AddSchedulePage({
   params: { tenant }
 }: { params: { tenant: TenantType } }) {
-  const songLeads = await getSongLeads(tenant);
+  const songLeads = await getSongLeads(parseInt(tenant));
 
   return (
     <div>
