@@ -3,7 +3,9 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { addSongLead, revalidate } from '@/lib/actions/song.actions';
+import { addSongLead } from '@/lib/actions/song-lead.actions';
+import { revalidate } from '@/lib/actions/song.actions';
+import { TenantType } from '@/models/tenant-type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Loader2, Loader2Icon } from 'lucide-react';
@@ -16,7 +18,7 @@ const formSchema = z.object({
   lastName: z.string()
 });
 
-export default function AddSongLeadForm({ locationId }: { locationId: string }) {
+export default function AddSongLeadForm({ tenant }: { tenant: TenantType }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,10 +29,10 @@ export default function AddSongLeadForm({ locationId }: { locationId: string }) 
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await addSongLead(locationId, {
+      await addSongLead(parseInt(tenant), {
         ...values
       });
-      await revalidate(locationId + '/song-leads');
+      await revalidate(parseInt(tenant) + '/song-leads');
       toast(`${values.firstName.toUpperCase()} ${values.lastName.toUpperCase()} added to song leads!`)
     } catch (error) {
       toast('Failed to add song lead. Please try again later')

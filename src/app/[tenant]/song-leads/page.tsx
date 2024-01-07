@@ -1,6 +1,6 @@
 import { SongLead } from '@/lib/generated/client';
 import { TenantType } from '@/models/tenant-type';
-import AddSongLeadForm from './components/add-song-lead-form';
+import AddSongLeadForm from './add-song-lead-form';
 import {
   Card,
   CardContent,
@@ -23,7 +23,7 @@ export default async function SongLeadsPage({
 
   return (
     <div>
-      <AddSongLeadForm locationId={tenant} />
+      <AddSongLeadForm tenant={tenant} />
 
       <Separator className='my-4' />
 
