@@ -4,6 +4,7 @@ import { Schedule } from '@/models/schedule';
 import { TenantType } from '@/models/tenant-type';
 import { redirect } from 'next/navigation';
 import EditScheduleForm from './edit-schedule-form';
+import { unstable_noStore } from 'next/cache';
 
 async function getScheduleDetails(id: number): Promise<Schedule | null> {
   try {
@@ -24,6 +25,7 @@ export default async function EditSchedulePage({
     tenant: TenantType
   }
 }) {
+  unstable_noStore();
   const schedule = await getScheduleDetails(parseInt(slug));
   if (!schedule) redirect('/schedules')
 
