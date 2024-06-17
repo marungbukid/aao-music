@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from './runtime/library';
+import * as runtime from './runtime/library.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -282,8 +282,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.7.1
-   * Query Engine version: 0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5
+   * Prisma Client JS version: 5.15.0
+   * Query Engine version: 12e25d8d06f6ea5a0252864dd9a03b1bb51f3022
    */
   export type PrismaVersion = {
     client: string
@@ -410,6 +410,11 @@ export namespace Prisma {
     include: any
   }
 
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
   /**
    * Get the type of the value, that the Promise holds.
    */
@@ -458,7 +463,9 @@ export namespace Prisma {
   } &
     (T extends SelectAndInclude
       ? 'Please either choose `select` or `include`.'
-      : {})
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
 
   /**
    * Subset + Intersection
@@ -753,6 +760,10 @@ export namespace Prisma {
             args: Prisma.SongCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.SongCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongPayload>[]
+          }
           delete: {
             args: Prisma.SongDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$SongPayload>
@@ -818,6 +829,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.ScheduleCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ScheduleCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SchedulePayload>[]
           }
           delete: {
             args: Prisma.ScheduleDeleteArgs<ExtArgs>,
@@ -885,6 +900,10 @@ export namespace Prisma {
             args: Prisma.ScheduleSongsCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.ScheduleSongsCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSongsPayload>[]
+          }
           delete: {
             args: Prisma.ScheduleSongsDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$ScheduleSongsPayload>
@@ -950,6 +969,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.SongLeadCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SongLeadCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SongLeadPayload>[]
           }
           delete: {
             args: Prisma.SongLeadDeleteArgs<ExtArgs>,
@@ -1017,6 +1040,10 @@ export namespace Prisma {
             args: Prisma.LocationCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.LocationCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>[]
+          }
           delete: {
             args: Prisma.LocationDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$LocationPayload>
@@ -1082,6 +1109,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.LocationSongLeadCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LocationSongLeadCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationSongLeadPayload>[]
           }
           delete: {
             args: Prisma.LocationSongLeadDeleteArgs<ExtArgs>,
@@ -1174,6 +1205,16 @@ export namespace Prisma {
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
     log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
   }
 
   /* Types for Logging */
@@ -1212,6 +1253,7 @@ export namespace Prisma {
     | 'findFirstOrThrow'
     | 'create'
     | 'createMany'
+    | 'createManyAndReturn'
     | 'update'
     | 'updateMany'
     | 'upsert'
@@ -1274,7 +1316,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * SongCountOutputType without action
    */
@@ -1285,14 +1326,12 @@ export namespace Prisma {
     select?: SongCountOutputTypeSelect<ExtArgs> | null
   }
 
-
   /**
    * SongCountOutputType without action
    */
   export type SongCountOutputTypeCountScheduleSongsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleSongsWhereInput
   }
-
 
 
   /**
@@ -1310,7 +1349,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * ScheduleCountOutputType without action
    */
@@ -1321,7 +1359,6 @@ export namespace Prisma {
     select?: ScheduleCountOutputTypeSelect<ExtArgs> | null
   }
 
-
   /**
    * ScheduleCountOutputType without action
    */
@@ -1329,14 +1366,12 @@ export namespace Prisma {
     where?: ScheduleSongsWhereInput
   }
 
-
   /**
    * ScheduleCountOutputType without action
    */
   export type ScheduleCountOutputTypeCountSongArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SongWhereInput
   }
-
 
 
   /**
@@ -1354,7 +1389,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * SongLeadCountOutputType without action
    */
@@ -1365,7 +1399,6 @@ export namespace Prisma {
     select?: SongLeadCountOutputTypeSelect<ExtArgs> | null
   }
 
-
   /**
    * SongLeadCountOutputType without action
    */
@@ -1373,14 +1406,12 @@ export namespace Prisma {
     where?: ScheduleWhereInput
   }
 
-
   /**
    * SongLeadCountOutputType without action
    */
   export type SongLeadCountOutputTypeCountLocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LocationSongLeadWhereInput
   }
-
 
 
   /**
@@ -1400,7 +1431,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * LocationCountOutputType without action
    */
@@ -1411,14 +1441,12 @@ export namespace Prisma {
     select?: LocationCountOutputTypeSelect<ExtArgs> | null
   }
 
-
   /**
    * LocationCountOutputType without action
    */
   export type LocationCountOutputTypeCountLocationSongLeadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LocationSongLeadWhereInput
   }
-
 
   /**
    * LocationCountOutputType without action
@@ -1427,14 +1455,12 @@ export namespace Prisma {
     where?: SongLeadWhereInput
   }
 
-
   /**
    * LocationCountOutputType without action
    */
   export type LocationCountOutputTypeCountScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleWhereInput
   }
-
 
 
   /**
@@ -1684,6 +1710,19 @@ export namespace Prisma {
     _count?: boolean | SongCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["song"]>
 
+  export type SongSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    author?: boolean
+    key?: boolean
+    chordSheetType?: boolean
+    version?: boolean
+    lyric?: boolean
+    createdAt?: boolean
+    scheduleId?: boolean
+    Schedule?: boolean | Song$ScheduleArgs<ExtArgs>
+  }, ExtArgs["result"]["song"]>
+
   export type SongSelectScalar = {
     id?: boolean
     name?: boolean
@@ -1701,7 +1740,9 @@ export namespace Prisma {
     ScheduleSongs?: boolean | Song$ScheduleSongsArgs<ExtArgs>
     _count?: boolean | SongCountOutputTypeDefaultArgs<ExtArgs>
   }
-
+  export type SongIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Schedule?: boolean | Song$ScheduleArgs<ExtArgs>
+  }
 
   export type $SongPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Song"
@@ -1723,11 +1764,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type SongGetPayload<S extends boolean | null | undefined | SongDefaultArgs> = $Result.GetResult<Prisma.$SongPayload, S>
 
   type SongCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SongFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<SongFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: SongCountAggregateInputType | true
     }
 
@@ -1749,8 +1789,8 @@ export namespace Prisma {
     ): Prisma__SongClient<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Song that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Song that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SongFindUniqueOrThrowArgs} args - Arguments to find a Song
      * @example
      * // Get one Song
@@ -1803,7 +1843,7 @@ export namespace Prisma {
      * Find zero or more Songs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SongFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SongFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Songs
      * const songs = await prisma.song.findMany()
@@ -1837,19 +1877,45 @@ export namespace Prisma {
 
     /**
      * Create many Songs.
-     *     @param {SongCreateManyArgs} args - Arguments to create many Songs.
-     *     @example
-     *     // Create many Songs
-     *     const song = await prisma.song.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SongCreateManyArgs} args - Arguments to create many Songs.
+     * @example
+     * // Create many Songs
+     * const song = await prisma.song.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SongCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SongCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Songs and returns the data saved in the database.
+     * @param {SongCreateManyAndReturnArgs} args - Arguments to create many Songs.
+     * @example
+     * // Create many Songs
+     * const song = await prisma.song.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Songs and only return the `id`
+     * const songWithIdOnly = await prisma.song.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SongCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Song.
@@ -2129,7 +2195,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * Song findUnique
    */
@@ -2139,7 +2204,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2147,7 +2212,6 @@ export namespace Prisma {
      */
     where: SongWhereUniqueInput
   }
-
 
   /**
    * Song findUniqueOrThrow
@@ -2158,7 +2222,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2166,7 +2230,6 @@ export namespace Prisma {
      */
     where: SongWhereUniqueInput
   }
-
 
   /**
    * Song findFirst
@@ -2177,7 +2240,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2215,7 +2278,6 @@ export namespace Prisma {
      */
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
-
 
   /**
    * Song findFirstOrThrow
@@ -2226,7 +2288,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2265,7 +2327,6 @@ export namespace Prisma {
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
 
-
   /**
    * Song findMany
    */
@@ -2275,7 +2336,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2309,7 +2370,6 @@ export namespace Prisma {
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
 
-
   /**
    * Song create
    */
@@ -2319,7 +2379,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2327,7 +2387,6 @@ export namespace Prisma {
      */
     data: XOR<SongCreateInput, SongUncheckedCreateInput>
   }
-
 
   /**
    * Song createMany
@@ -2340,6 +2399,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * Song createManyAndReturn
+   */
+  export type SongCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Song
+     */
+    select?: SongSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Songs.
+     */
+    data: SongCreateManyInput | SongCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SongIncludeCreateManyAndReturn<ExtArgs> | null
+  }
 
   /**
    * Song update
@@ -2350,7 +2427,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2362,7 +2439,6 @@ export namespace Prisma {
      */
     where: SongWhereUniqueInput
   }
-
 
   /**
    * Song updateMany
@@ -2378,7 +2454,6 @@ export namespace Prisma {
     where?: SongWhereInput
   }
 
-
   /**
    * Song upsert
    */
@@ -2388,7 +2463,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2405,7 +2480,6 @@ export namespace Prisma {
     update: XOR<SongUpdateInput, SongUncheckedUpdateInput>
   }
 
-
   /**
    * Song delete
    */
@@ -2415,7 +2489,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     /**
@@ -2423,7 +2497,6 @@ export namespace Prisma {
      */
     where: SongWhereUniqueInput
   }
-
 
   /**
    * Song deleteMany
@@ -2435,7 +2508,6 @@ export namespace Prisma {
     where?: SongWhereInput
   }
 
-
   /**
    * Song.Schedule
    */
@@ -2445,12 +2517,11 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     where?: ScheduleWhereInput
   }
-
 
   /**
    * Song.ScheduleSongs
@@ -2461,7 +2532,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     where?: ScheduleSongsWhereInput
@@ -2472,7 +2543,6 @@ export namespace Prisma {
     distinct?: ScheduleSongsScalarFieldEnum | ScheduleSongsScalarFieldEnum[]
   }
 
-
   /**
    * Song without action
    */
@@ -2482,11 +2552,10 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -2694,6 +2763,15 @@ export namespace Prisma {
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schedule"]>
 
+  export type ScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    songLeadId?: boolean
+    locationId?: boolean
+    songLead?: boolean | Schedule$songLeadArgs<ExtArgs>
+    location?: boolean | Schedule$locationArgs<ExtArgs>
+  }, ExtArgs["result"]["schedule"]>
+
   export type ScheduleSelectScalar = {
     id?: boolean
     date?: boolean
@@ -2708,7 +2786,10 @@ export namespace Prisma {
     location?: boolean | Schedule$locationArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }
-
+  export type ScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    songLead?: boolean | Schedule$songLeadArgs<ExtArgs>
+    location?: boolean | Schedule$locationArgs<ExtArgs>
+  }
 
   export type $SchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Schedule"
@@ -2727,11 +2808,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type ScheduleGetPayload<S extends boolean | null | undefined | ScheduleDefaultArgs> = $Result.GetResult<Prisma.$SchedulePayload, S>
 
   type ScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ScheduleFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<ScheduleFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: ScheduleCountAggregateInputType | true
     }
 
@@ -2753,8 +2833,8 @@ export namespace Prisma {
     ): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Schedule that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Schedule that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {ScheduleFindUniqueOrThrowArgs} args - Arguments to find a Schedule
      * @example
      * // Get one Schedule
@@ -2807,7 +2887,7 @@ export namespace Prisma {
      * Find zero or more Schedules that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ScheduleFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {ScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Schedules
      * const schedules = await prisma.schedule.findMany()
@@ -2841,19 +2921,45 @@ export namespace Prisma {
 
     /**
      * Create many Schedules.
-     *     @param {ScheduleCreateManyArgs} args - Arguments to create many Schedules.
-     *     @example
-     *     // Create many Schedules
-     *     const schedule = await prisma.schedule.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {ScheduleCreateManyArgs} args - Arguments to create many Schedules.
+     * @example
+     * // Create many Schedules
+     * const schedule = await prisma.schedule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends ScheduleCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ScheduleCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Schedules and returns the data saved in the database.
+     * @param {ScheduleCreateManyAndReturnArgs} args - Arguments to create many Schedules.
+     * @example
+     * // Create many Schedules
+     * const schedule = await prisma.schedule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Schedules and only return the `id`
+     * const scheduleWithIdOnly = await prisma.schedule.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends ScheduleCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, ScheduleCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Schedule.
@@ -3132,7 +3238,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * Schedule findUnique
    */
@@ -3142,7 +3247,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3150,7 +3255,6 @@ export namespace Prisma {
      */
     where: ScheduleWhereUniqueInput
   }
-
 
   /**
    * Schedule findUniqueOrThrow
@@ -3161,7 +3265,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3169,7 +3273,6 @@ export namespace Prisma {
      */
     where: ScheduleWhereUniqueInput
   }
-
 
   /**
    * Schedule findFirst
@@ -3180,7 +3283,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3218,7 +3321,6 @@ export namespace Prisma {
      */
     distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
-
 
   /**
    * Schedule findFirstOrThrow
@@ -3229,7 +3331,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3268,7 +3370,6 @@ export namespace Prisma {
     distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
 
-
   /**
    * Schedule findMany
    */
@@ -3278,7 +3379,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3312,7 +3413,6 @@ export namespace Prisma {
     distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
 
-
   /**
    * Schedule create
    */
@@ -3322,7 +3422,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3330,7 +3430,6 @@ export namespace Prisma {
      */
     data: XOR<ScheduleCreateInput, ScheduleUncheckedCreateInput>
   }
-
 
   /**
    * Schedule createMany
@@ -3343,6 +3442,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * Schedule createManyAndReturn
+   */
+  export type ScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Schedules.
+     */
+    data: ScheduleCreateManyInput | ScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
 
   /**
    * Schedule update
@@ -3353,7 +3470,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3365,7 +3482,6 @@ export namespace Prisma {
      */
     where: ScheduleWhereUniqueInput
   }
-
 
   /**
    * Schedule updateMany
@@ -3381,7 +3497,6 @@ export namespace Prisma {
     where?: ScheduleWhereInput
   }
 
-
   /**
    * Schedule upsert
    */
@@ -3391,7 +3506,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3408,7 +3523,6 @@ export namespace Prisma {
     update: XOR<ScheduleUpdateInput, ScheduleUncheckedUpdateInput>
   }
 
-
   /**
    * Schedule delete
    */
@@ -3418,7 +3532,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     /**
@@ -3426,7 +3540,6 @@ export namespace Prisma {
      */
     where: ScheduleWhereUniqueInput
   }
-
 
   /**
    * Schedule deleteMany
@@ -3438,7 +3551,6 @@ export namespace Prisma {
     where?: ScheduleWhereInput
   }
 
-
   /**
    * Schedule.scheduleSongs
    */
@@ -3448,7 +3560,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     where?: ScheduleSongsWhereInput
@@ -3459,7 +3571,6 @@ export namespace Prisma {
     distinct?: ScheduleSongsScalarFieldEnum | ScheduleSongsScalarFieldEnum[]
   }
 
-
   /**
    * Schedule.Song
    */
@@ -3469,7 +3580,7 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     where?: SongWhereInput
@@ -3480,7 +3591,6 @@ export namespace Prisma {
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
 
-
   /**
    * Schedule.songLead
    */
@@ -3490,12 +3600,11 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     where?: SongLeadWhereInput
   }
-
 
   /**
    * Schedule.location
@@ -3506,12 +3615,11 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     where?: LocationWhereInput
   }
-
 
   /**
    * Schedule without action
@@ -3522,11 +3630,10 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -3559,6 +3666,7 @@ export namespace Prisma {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    preferredKey: string | null
     order: number | null
   }
 
@@ -3566,6 +3674,7 @@ export namespace Prisma {
     id: number | null
     songId: number | null
     scheduleId: number | null
+    preferredKey: string | null
     order: number | null
   }
 
@@ -3573,6 +3682,7 @@ export namespace Prisma {
     id: number
     songId: number
     scheduleId: number
+    preferredKey: number
     order: number
     _all: number
   }
@@ -3596,6 +3706,7 @@ export namespace Prisma {
     id?: true
     songId?: true
     scheduleId?: true
+    preferredKey?: true
     order?: true
   }
 
@@ -3603,6 +3714,7 @@ export namespace Prisma {
     id?: true
     songId?: true
     scheduleId?: true
+    preferredKey?: true
     order?: true
   }
 
@@ -3610,6 +3722,7 @@ export namespace Prisma {
     id?: true
     songId?: true
     scheduleId?: true
+    preferredKey?: true
     order?: true
     _all?: true
   }
@@ -3704,6 +3817,7 @@ export namespace Prisma {
     id: number
     songId: number
     scheduleId: number | null
+    preferredKey: string | null
     order: number
     _count: ScheduleSongsCountAggregateOutputType | null
     _avg: ScheduleSongsAvgAggregateOutputType | null
@@ -3730,6 +3844,17 @@ export namespace Prisma {
     id?: boolean
     songId?: boolean
     scheduleId?: boolean
+    preferredKey?: boolean
+    order?: boolean
+    song?: boolean | ScheduleSongs$songArgs<ExtArgs>
+    Schedule?: boolean | ScheduleSongs$ScheduleArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleSongs"]>
+
+  export type ScheduleSongsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    songId?: boolean
+    scheduleId?: boolean
+    preferredKey?: boolean
     order?: boolean
     song?: boolean | ScheduleSongs$songArgs<ExtArgs>
     Schedule?: boolean | ScheduleSongs$ScheduleArgs<ExtArgs>
@@ -3739,6 +3864,7 @@ export namespace Prisma {
     id?: boolean
     songId?: boolean
     scheduleId?: boolean
+    preferredKey?: boolean
     order?: boolean
   }
 
@@ -3746,7 +3872,10 @@ export namespace Prisma {
     song?: boolean | ScheduleSongs$songArgs<ExtArgs>
     Schedule?: boolean | ScheduleSongs$ScheduleArgs<ExtArgs>
   }
-
+  export type ScheduleSongsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    song?: boolean | ScheduleSongs$songArgs<ExtArgs>
+    Schedule?: boolean | ScheduleSongs$ScheduleArgs<ExtArgs>
+  }
 
   export type $ScheduleSongsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ScheduleSongs"
@@ -3758,16 +3887,16 @@ export namespace Prisma {
       id: number
       songId: number
       scheduleId: number | null
+      preferredKey: string | null
       order: number
     }, ExtArgs["result"]["scheduleSongs"]>
     composites: {}
   }
 
-
   type ScheduleSongsGetPayload<S extends boolean | null | undefined | ScheduleSongsDefaultArgs> = $Result.GetResult<Prisma.$ScheduleSongsPayload, S>
 
   type ScheduleSongsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ScheduleSongsFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<ScheduleSongsFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: ScheduleSongsCountAggregateInputType | true
     }
 
@@ -3789,8 +3918,8 @@ export namespace Prisma {
     ): Prisma__ScheduleSongsClient<$Result.GetResult<Prisma.$ScheduleSongsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one ScheduleSongs that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one ScheduleSongs that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {ScheduleSongsFindUniqueOrThrowArgs} args - Arguments to find a ScheduleSongs
      * @example
      * // Get one ScheduleSongs
@@ -3843,7 +3972,7 @@ export namespace Prisma {
      * Find zero or more ScheduleSongs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ScheduleSongsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {ScheduleSongsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all ScheduleSongs
      * const scheduleSongs = await prisma.scheduleSongs.findMany()
@@ -3877,19 +4006,45 @@ export namespace Prisma {
 
     /**
      * Create many ScheduleSongs.
-     *     @param {ScheduleSongsCreateManyArgs} args - Arguments to create many ScheduleSongs.
-     *     @example
-     *     // Create many ScheduleSongs
-     *     const scheduleSongs = await prisma.scheduleSongs.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {ScheduleSongsCreateManyArgs} args - Arguments to create many ScheduleSongs.
+     * @example
+     * // Create many ScheduleSongs
+     * const scheduleSongs = await prisma.scheduleSongs.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends ScheduleSongsCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ScheduleSongsCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ScheduleSongs and returns the data saved in the database.
+     * @param {ScheduleSongsCreateManyAndReturnArgs} args - Arguments to create many ScheduleSongs.
+     * @example
+     * // Create many ScheduleSongs
+     * const scheduleSongs = await prisma.scheduleSongs.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ScheduleSongs and only return the `id`
+     * const scheduleSongsWithIdOnly = await prisma.scheduleSongs.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends ScheduleSongsCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, ScheduleSongsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSongsPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a ScheduleSongs.
@@ -4159,12 +4314,12 @@ export namespace Prisma {
     readonly id: FieldRef<"ScheduleSongs", 'Int'>
     readonly songId: FieldRef<"ScheduleSongs", 'Int'>
     readonly scheduleId: FieldRef<"ScheduleSongs", 'Int'>
+    readonly preferredKey: FieldRef<"ScheduleSongs", 'String'>
     readonly order: FieldRef<"ScheduleSongs", 'Int'>
   }
     
 
   // Custom InputTypes
-
   /**
    * ScheduleSongs findUnique
    */
@@ -4174,7 +4329,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4182,7 +4337,6 @@ export namespace Prisma {
      */
     where: ScheduleSongsWhereUniqueInput
   }
-
 
   /**
    * ScheduleSongs findUniqueOrThrow
@@ -4193,7 +4347,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4201,7 +4355,6 @@ export namespace Prisma {
      */
     where: ScheduleSongsWhereUniqueInput
   }
-
 
   /**
    * ScheduleSongs findFirst
@@ -4212,7 +4365,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4250,7 +4403,6 @@ export namespace Prisma {
      */
     distinct?: ScheduleSongsScalarFieldEnum | ScheduleSongsScalarFieldEnum[]
   }
-
 
   /**
    * ScheduleSongs findFirstOrThrow
@@ -4261,7 +4413,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4300,7 +4452,6 @@ export namespace Prisma {
     distinct?: ScheduleSongsScalarFieldEnum | ScheduleSongsScalarFieldEnum[]
   }
 
-
   /**
    * ScheduleSongs findMany
    */
@@ -4310,7 +4461,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4344,7 +4495,6 @@ export namespace Prisma {
     distinct?: ScheduleSongsScalarFieldEnum | ScheduleSongsScalarFieldEnum[]
   }
 
-
   /**
    * ScheduleSongs create
    */
@@ -4354,7 +4504,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4362,7 +4512,6 @@ export namespace Prisma {
      */
     data: XOR<ScheduleSongsCreateInput, ScheduleSongsUncheckedCreateInput>
   }
-
 
   /**
    * ScheduleSongs createMany
@@ -4375,6 +4524,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * ScheduleSongs createManyAndReturn
+   */
+  export type ScheduleSongsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSongs
+     */
+    select?: ScheduleSongsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ScheduleSongs.
+     */
+    data: ScheduleSongsCreateManyInput | ScheduleSongsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSongsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
 
   /**
    * ScheduleSongs update
@@ -4385,7 +4552,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4397,7 +4564,6 @@ export namespace Prisma {
      */
     where: ScheduleSongsWhereUniqueInput
   }
-
 
   /**
    * ScheduleSongs updateMany
@@ -4413,7 +4579,6 @@ export namespace Prisma {
     where?: ScheduleSongsWhereInput
   }
 
-
   /**
    * ScheduleSongs upsert
    */
@@ -4423,7 +4588,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4440,7 +4605,6 @@ export namespace Prisma {
     update: XOR<ScheduleSongsUpdateInput, ScheduleSongsUncheckedUpdateInput>
   }
 
-
   /**
    * ScheduleSongs delete
    */
@@ -4450,7 +4614,7 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
     /**
@@ -4458,7 +4622,6 @@ export namespace Prisma {
      */
     where: ScheduleSongsWhereUniqueInput
   }
-
 
   /**
    * ScheduleSongs deleteMany
@@ -4470,7 +4633,6 @@ export namespace Prisma {
     where?: ScheduleSongsWhereInput
   }
 
-
   /**
    * ScheduleSongs.song
    */
@@ -4480,12 +4642,11 @@ export namespace Prisma {
      */
     select?: SongSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongInclude<ExtArgs> | null
     where?: SongWhereInput
   }
-
 
   /**
    * ScheduleSongs.Schedule
@@ -4496,12 +4657,11 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     where?: ScheduleWhereInput
   }
-
 
   /**
    * ScheduleSongs without action
@@ -4512,11 +4672,10 @@ export namespace Prisma {
      */
     select?: ScheduleSongsSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSongsInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -4719,6 +4878,14 @@ export namespace Prisma {
     _count?: boolean | SongLeadCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["songLead"]>
 
+  export type SongLeadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    locationId?: boolean
+    Location?: boolean | SongLead$LocationArgs<ExtArgs>
+  }, ExtArgs["result"]["songLead"]>
+
   export type SongLeadSelectScalar = {
     id?: boolean
     firstName?: boolean
@@ -4732,7 +4899,9 @@ export namespace Prisma {
     LocationSongLead?: boolean | SongLead$LocationSongLeadArgs<ExtArgs>
     _count?: boolean | SongLeadCountOutputTypeDefaultArgs<ExtArgs>
   }
-
+  export type SongLeadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Location?: boolean | SongLead$LocationArgs<ExtArgs>
+  }
 
   export type $SongLeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SongLead"
@@ -4750,11 +4919,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type SongLeadGetPayload<S extends boolean | null | undefined | SongLeadDefaultArgs> = $Result.GetResult<Prisma.$SongLeadPayload, S>
 
   type SongLeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SongLeadFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<SongLeadFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: SongLeadCountAggregateInputType | true
     }
 
@@ -4776,8 +4944,8 @@ export namespace Prisma {
     ): Prisma__SongLeadClient<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one SongLead that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one SongLead that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SongLeadFindUniqueOrThrowArgs} args - Arguments to find a SongLead
      * @example
      * // Get one SongLead
@@ -4830,7 +4998,7 @@ export namespace Prisma {
      * Find zero or more SongLeads that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SongLeadFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SongLeadFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all SongLeads
      * const songLeads = await prisma.songLead.findMany()
@@ -4864,19 +5032,45 @@ export namespace Prisma {
 
     /**
      * Create many SongLeads.
-     *     @param {SongLeadCreateManyArgs} args - Arguments to create many SongLeads.
-     *     @example
-     *     // Create many SongLeads
-     *     const songLead = await prisma.songLead.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SongLeadCreateManyArgs} args - Arguments to create many SongLeads.
+     * @example
+     * // Create many SongLeads
+     * const songLead = await prisma.songLead.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SongLeadCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SongLeadCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SongLeads and returns the data saved in the database.
+     * @param {SongLeadCreateManyAndReturnArgs} args - Arguments to create many SongLeads.
+     * @example
+     * // Create many SongLeads
+     * const songLead = await prisma.songLead.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SongLeads and only return the `id`
+     * const songLeadWithIdOnly = await prisma.songLead.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SongLeadCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SongLeadCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongLeadPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a SongLead.
@@ -5153,7 +5347,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * SongLead findUnique
    */
@@ -5163,7 +5356,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5171,7 +5364,6 @@ export namespace Prisma {
      */
     where: SongLeadWhereUniqueInput
   }
-
 
   /**
    * SongLead findUniqueOrThrow
@@ -5182,7 +5374,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5190,7 +5382,6 @@ export namespace Prisma {
      */
     where: SongLeadWhereUniqueInput
   }
-
 
   /**
    * SongLead findFirst
@@ -5201,7 +5392,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5239,7 +5430,6 @@ export namespace Prisma {
      */
     distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
   }
-
 
   /**
    * SongLead findFirstOrThrow
@@ -5250,7 +5440,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5289,7 +5479,6 @@ export namespace Prisma {
     distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
   }
 
-
   /**
    * SongLead findMany
    */
@@ -5299,7 +5488,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5333,7 +5522,6 @@ export namespace Prisma {
     distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
   }
 
-
   /**
    * SongLead create
    */
@@ -5343,7 +5531,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5351,7 +5539,6 @@ export namespace Prisma {
      */
     data: XOR<SongLeadCreateInput, SongLeadUncheckedCreateInput>
   }
-
 
   /**
    * SongLead createMany
@@ -5364,6 +5551,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * SongLead createManyAndReturn
+   */
+  export type SongLeadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SongLead
+     */
+    select?: SongLeadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SongLeads.
+     */
+    data: SongLeadCreateManyInput | SongLeadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SongLeadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
 
   /**
    * SongLead update
@@ -5374,7 +5579,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5386,7 +5591,6 @@ export namespace Prisma {
      */
     where: SongLeadWhereUniqueInput
   }
-
 
   /**
    * SongLead updateMany
@@ -5402,7 +5606,6 @@ export namespace Prisma {
     where?: SongLeadWhereInput
   }
 
-
   /**
    * SongLead upsert
    */
@@ -5412,7 +5615,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5429,7 +5632,6 @@ export namespace Prisma {
     update: XOR<SongLeadUpdateInput, SongLeadUncheckedUpdateInput>
   }
 
-
   /**
    * SongLead delete
    */
@@ -5439,7 +5641,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     /**
@@ -5447,7 +5649,6 @@ export namespace Prisma {
      */
     where: SongLeadWhereUniqueInput
   }
-
 
   /**
    * SongLead deleteMany
@@ -5459,7 +5660,6 @@ export namespace Prisma {
     where?: SongLeadWhereInput
   }
 
-
   /**
    * SongLead.Schedule
    */
@@ -5469,7 +5669,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     where?: ScheduleWhereInput
@@ -5480,7 +5680,6 @@ export namespace Prisma {
     distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
 
-
   /**
    * SongLead.Location
    */
@@ -5490,12 +5689,11 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     where?: LocationWhereInput
   }
-
 
   /**
    * SongLead.LocationSongLead
@@ -5506,7 +5704,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     where?: LocationSongLeadWhereInput
@@ -5517,7 +5715,6 @@ export namespace Prisma {
     distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
   }
 
-
   /**
    * SongLead without action
    */
@@ -5527,11 +5724,10 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -5738,6 +5934,13 @@ export namespace Prisma {
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["location"]>
 
+  export type LocationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    address?: boolean
+    lat?: boolean
+    long?: boolean
+  }, ExtArgs["result"]["location"]>
+
   export type LocationSelectScalar = {
     id?: boolean
     address?: boolean
@@ -5751,7 +5954,7 @@ export namespace Prisma {
     Schedule?: boolean | Location$ScheduleArgs<ExtArgs>
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }
-
+  export type LocationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Location"
@@ -5769,11 +5972,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type LocationGetPayload<S extends boolean | null | undefined | LocationDefaultArgs> = $Result.GetResult<Prisma.$LocationPayload, S>
 
   type LocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<LocationFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<LocationFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: LocationCountAggregateInputType | true
     }
 
@@ -5795,8 +5997,8 @@ export namespace Prisma {
     ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Location that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Location that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {LocationFindUniqueOrThrowArgs} args - Arguments to find a Location
      * @example
      * // Get one Location
@@ -5849,7 +6051,7 @@ export namespace Prisma {
      * Find zero or more Locations that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {LocationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {LocationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Locations
      * const locations = await prisma.location.findMany()
@@ -5883,19 +6085,45 @@ export namespace Prisma {
 
     /**
      * Create many Locations.
-     *     @param {LocationCreateManyArgs} args - Arguments to create many Locations.
-     *     @example
-     *     // Create many Locations
-     *     const location = await prisma.location.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {LocationCreateManyArgs} args - Arguments to create many Locations.
+     * @example
+     * // Create many Locations
+     * const location = await prisma.location.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends LocationCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, LocationCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Locations and returns the data saved in the database.
+     * @param {LocationCreateManyAndReturnArgs} args - Arguments to create many Locations.
+     * @example
+     * // Create many Locations
+     * const location = await prisma.location.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Locations and only return the `id`
+     * const locationWithIdOnly = await prisma.location.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends LocationCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Location.
@@ -6172,7 +6400,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * Location findUnique
    */
@@ -6182,7 +6409,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6190,7 +6417,6 @@ export namespace Prisma {
      */
     where: LocationWhereUniqueInput
   }
-
 
   /**
    * Location findUniqueOrThrow
@@ -6201,7 +6427,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6209,7 +6435,6 @@ export namespace Prisma {
      */
     where: LocationWhereUniqueInput
   }
-
 
   /**
    * Location findFirst
@@ -6220,7 +6445,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6258,7 +6483,6 @@ export namespace Prisma {
      */
     distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
   }
-
 
   /**
    * Location findFirstOrThrow
@@ -6269,7 +6493,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6308,7 +6532,6 @@ export namespace Prisma {
     distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
   }
 
-
   /**
    * Location findMany
    */
@@ -6318,7 +6541,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6352,7 +6575,6 @@ export namespace Prisma {
     distinct?: LocationScalarFieldEnum | LocationScalarFieldEnum[]
   }
 
-
   /**
    * Location create
    */
@@ -6362,7 +6584,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6370,7 +6592,6 @@ export namespace Prisma {
      */
     data: XOR<LocationCreateInput, LocationUncheckedCreateInput>
   }
-
 
   /**
    * Location createMany
@@ -6383,6 +6604,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * Location createManyAndReturn
+   */
+  export type LocationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Locations.
+     */
+    data: LocationCreateManyInput | LocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
 
   /**
    * Location update
@@ -6393,7 +6628,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6405,7 +6640,6 @@ export namespace Prisma {
      */
     where: LocationWhereUniqueInput
   }
-
 
   /**
    * Location updateMany
@@ -6421,7 +6655,6 @@ export namespace Prisma {
     where?: LocationWhereInput
   }
 
-
   /**
    * Location upsert
    */
@@ -6431,7 +6664,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6448,7 +6681,6 @@ export namespace Prisma {
     update: XOR<LocationUpdateInput, LocationUncheckedUpdateInput>
   }
 
-
   /**
    * Location delete
    */
@@ -6458,7 +6690,7 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     /**
@@ -6466,7 +6698,6 @@ export namespace Prisma {
      */
     where: LocationWhereUniqueInput
   }
-
 
   /**
    * Location deleteMany
@@ -6478,7 +6709,6 @@ export namespace Prisma {
     where?: LocationWhereInput
   }
 
-
   /**
    * Location.locationSongLead
    */
@@ -6488,7 +6718,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     where?: LocationSongLeadWhereInput
@@ -6499,7 +6729,6 @@ export namespace Prisma {
     distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
   }
 
-
   /**
    * Location.SongLead
    */
@@ -6509,7 +6738,7 @@ export namespace Prisma {
      */
     select?: SongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: SongLeadInclude<ExtArgs> | null
     where?: SongLeadWhereInput
@@ -6520,7 +6749,6 @@ export namespace Prisma {
     distinct?: SongLeadScalarFieldEnum | SongLeadScalarFieldEnum[]
   }
 
-
   /**
    * Location.Schedule
    */
@@ -6530,7 +6758,7 @@ export namespace Prisma {
      */
     select?: ScheduleSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
     where?: ScheduleWhereInput
@@ -6541,7 +6769,6 @@ export namespace Prisma {
     distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
 
-
   /**
    * Location without action
    */
@@ -6551,11 +6778,10 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -6752,6 +6978,14 @@ export namespace Prisma {
     Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
   }, ExtArgs["result"]["locationSongLead"]>
 
+  export type LocationSongLeadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locationId?: boolean
+    songLeadId?: boolean
+    songLead?: boolean | SongLeadDefaultArgs<ExtArgs>
+    Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
+  }, ExtArgs["result"]["locationSongLead"]>
+
   export type LocationSongLeadSelectScalar = {
     id?: boolean
     locationId?: boolean
@@ -6762,7 +6996,10 @@ export namespace Prisma {
     songLead?: boolean | SongLeadDefaultArgs<ExtArgs>
     Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
   }
-
+  export type LocationSongLeadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    songLead?: boolean | SongLeadDefaultArgs<ExtArgs>
+    Location?: boolean | LocationSongLead$LocationArgs<ExtArgs>
+  }
 
   export type $LocationSongLeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "LocationSongLead"
@@ -6778,11 +7015,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type LocationSongLeadGetPayload<S extends boolean | null | undefined | LocationSongLeadDefaultArgs> = $Result.GetResult<Prisma.$LocationSongLeadPayload, S>
 
   type LocationSongLeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<LocationSongLeadFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<LocationSongLeadFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: LocationSongLeadCountAggregateInputType | true
     }
 
@@ -6804,8 +7040,8 @@ export namespace Prisma {
     ): Prisma__LocationSongLeadClient<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one LocationSongLead that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one LocationSongLead that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {LocationSongLeadFindUniqueOrThrowArgs} args - Arguments to find a LocationSongLead
      * @example
      * // Get one LocationSongLead
@@ -6858,7 +7094,7 @@ export namespace Prisma {
      * Find zero or more LocationSongLeads that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {LocationSongLeadFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {LocationSongLeadFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all LocationSongLeads
      * const locationSongLeads = await prisma.locationSongLead.findMany()
@@ -6892,19 +7128,45 @@ export namespace Prisma {
 
     /**
      * Create many LocationSongLeads.
-     *     @param {LocationSongLeadCreateManyArgs} args - Arguments to create many LocationSongLeads.
-     *     @example
-     *     // Create many LocationSongLeads
-     *     const locationSongLead = await prisma.locationSongLead.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {LocationSongLeadCreateManyArgs} args - Arguments to create many LocationSongLeads.
+     * @example
+     * // Create many LocationSongLeads
+     * const locationSongLead = await prisma.locationSongLead.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends LocationSongLeadCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, LocationSongLeadCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LocationSongLeads and returns the data saved in the database.
+     * @param {LocationSongLeadCreateManyAndReturnArgs} args - Arguments to create many LocationSongLeads.
+     * @example
+     * // Create many LocationSongLeads
+     * const locationSongLead = await prisma.locationSongLead.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LocationSongLeads and only return the `id`
+     * const locationSongLeadWithIdOnly = await prisma.locationSongLead.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends LocationSongLeadCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationSongLeadCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationSongLeadPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a LocationSongLead.
@@ -7178,7 +7440,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * LocationSongLead findUnique
    */
@@ -7188,7 +7449,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7196,7 +7457,6 @@ export namespace Prisma {
      */
     where: LocationSongLeadWhereUniqueInput
   }
-
 
   /**
    * LocationSongLead findUniqueOrThrow
@@ -7207,7 +7467,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7215,7 +7475,6 @@ export namespace Prisma {
      */
     where: LocationSongLeadWhereUniqueInput
   }
-
 
   /**
    * LocationSongLead findFirst
@@ -7226,7 +7485,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7264,7 +7523,6 @@ export namespace Prisma {
      */
     distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
   }
-
 
   /**
    * LocationSongLead findFirstOrThrow
@@ -7275,7 +7533,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7314,7 +7572,6 @@ export namespace Prisma {
     distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
   }
 
-
   /**
    * LocationSongLead findMany
    */
@@ -7324,7 +7581,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7358,7 +7615,6 @@ export namespace Prisma {
     distinct?: LocationSongLeadScalarFieldEnum | LocationSongLeadScalarFieldEnum[]
   }
 
-
   /**
    * LocationSongLead create
    */
@@ -7368,7 +7624,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7376,7 +7632,6 @@ export namespace Prisma {
      */
     data: XOR<LocationSongLeadCreateInput, LocationSongLeadUncheckedCreateInput>
   }
-
 
   /**
    * LocationSongLead createMany
@@ -7389,6 +7644,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * LocationSongLead createManyAndReturn
+   */
+  export type LocationSongLeadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LocationSongLead
+     */
+    select?: LocationSongLeadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many LocationSongLeads.
+     */
+    data: LocationSongLeadCreateManyInput | LocationSongLeadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LocationSongLeadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
 
   /**
    * LocationSongLead update
@@ -7399,7 +7672,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7411,7 +7684,6 @@ export namespace Prisma {
      */
     where: LocationSongLeadWhereUniqueInput
   }
-
 
   /**
    * LocationSongLead updateMany
@@ -7427,7 +7699,6 @@ export namespace Prisma {
     where?: LocationSongLeadWhereInput
   }
 
-
   /**
    * LocationSongLead upsert
    */
@@ -7437,7 +7708,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7454,7 +7725,6 @@ export namespace Prisma {
     update: XOR<LocationSongLeadUpdateInput, LocationSongLeadUncheckedUpdateInput>
   }
 
-
   /**
    * LocationSongLead delete
    */
@@ -7464,7 +7734,7 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
     /**
@@ -7472,7 +7742,6 @@ export namespace Prisma {
      */
     where: LocationSongLeadWhereUniqueInput
   }
-
 
   /**
    * LocationSongLead deleteMany
@@ -7484,7 +7753,6 @@ export namespace Prisma {
     where?: LocationSongLeadWhereInput
   }
 
-
   /**
    * LocationSongLead.Location
    */
@@ -7494,12 +7762,11 @@ export namespace Prisma {
      */
     select?: LocationSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
     where?: LocationWhereInput
   }
-
 
   /**
    * LocationSongLead without action
@@ -7510,11 +7777,10 @@ export namespace Prisma {
      */
     select?: LocationSongLeadSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: LocationSongLeadInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -7560,6 +7826,7 @@ export namespace Prisma {
     id: 'id',
     songId: 'songId',
     scheduleId: 'scheduleId',
+    preferredKey: 'preferredKey',
     order: 'order'
   };
 
@@ -7845,6 +8112,7 @@ export namespace Prisma {
     id?: IntFilter<"ScheduleSongs"> | number
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    preferredKey?: StringNullableFilter<"ScheduleSongs"> | string | null
     order?: IntFilter<"ScheduleSongs"> | number
     song?: XOR<SongNullableRelationFilter, SongWhereInput> | null
     Schedule?: XOR<ScheduleNullableRelationFilter, ScheduleWhereInput> | null
@@ -7854,6 +8122,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
+    preferredKey?: SortOrderInput | SortOrder
     order?: SortOrder
     song?: SongOrderByWithRelationInput
     Schedule?: ScheduleOrderByWithRelationInput
@@ -7866,6 +8135,7 @@ export namespace Prisma {
     NOT?: ScheduleSongsWhereInput | ScheduleSongsWhereInput[]
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    preferredKey?: StringNullableFilter<"ScheduleSongs"> | string | null
     order?: IntFilter<"ScheduleSongs"> | number
     song?: XOR<SongNullableRelationFilter, SongWhereInput> | null
     Schedule?: XOR<ScheduleNullableRelationFilter, ScheduleWhereInput> | null
@@ -7875,6 +8145,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
+    preferredKey?: SortOrderInput | SortOrder
     order?: SortOrder
     _count?: ScheduleSongsCountOrderByAggregateInput
     _avg?: ScheduleSongsAvgOrderByAggregateInput
@@ -7890,6 +8161,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"ScheduleSongs"> | number
     songId?: IntWithAggregatesFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableWithAggregatesFilter<"ScheduleSongs"> | number | null
+    preferredKey?: StringNullableWithAggregatesFilter<"ScheduleSongs"> | string | null
     order?: IntWithAggregatesFilter<"ScheduleSongs"> | number
   }
 
@@ -8196,6 +8468,7 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsCreateInput = {
+    preferredKey?: string | null
     order?: number
     song?: SongCreateNestedOneWithoutScheduleSongsInput
     Schedule?: ScheduleCreateNestedOneWithoutScheduleSongsInput
@@ -8205,10 +8478,12 @@ export namespace Prisma {
     id?: number
     songId: number
     scheduleId?: number | null
+    preferredKey?: string | null
     order?: number
   }
 
   export type ScheduleSongsUpdateInput = {
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
     song?: SongUpdateOneWithoutScheduleSongsNestedInput
     Schedule?: ScheduleUpdateOneWithoutScheduleSongsNestedInput
@@ -8218,6 +8493,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8225,10 +8501,12 @@ export namespace Prisma {
     id?: number
     songId: number
     scheduleId?: number | null
+    preferredKey?: string | null
     order?: number
   }
 
   export type ScheduleSongsUpdateManyMutationInput = {
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8236,6 +8514,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8621,6 +8900,21 @@ export namespace Prisma {
     locationId?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type SongNullableRelationFilter = {
     is?: SongWhereInput | null
     isNot?: SongWhereInput | null
@@ -8630,6 +8924,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    preferredKey?: SortOrder
     order?: SortOrder
   }
 
@@ -8644,6 +8939,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    preferredKey?: SortOrder
     order?: SortOrder
   }
 
@@ -8651,6 +8947,7 @@ export namespace Prisma {
     id?: SortOrder
     songId?: SortOrder
     scheduleId?: SortOrder
+    preferredKey?: SortOrder
     order?: SortOrder
   }
 
@@ -8659,6 +8956,24 @@ export namespace Prisma {
     songId?: SortOrder
     scheduleId?: SortOrder
     order?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type ScheduleListRelationFilter = {
@@ -9025,6 +9340,10 @@ export namespace Prisma {
     create?: XOR<ScheduleCreateWithoutScheduleSongsInput, ScheduleUncheckedCreateWithoutScheduleSongsInput>
     connectOrCreate?: ScheduleCreateOrConnectWithoutScheduleSongsInput
     connect?: ScheduleWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type SongUpdateOneWithoutScheduleSongsNestedInput = {
@@ -9443,6 +9762,37 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedDecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -9491,6 +9841,7 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsCreateWithoutSongInput = {
+    preferredKey?: string | null
     order?: number
     Schedule?: ScheduleCreateNestedOneWithoutScheduleSongsInput
   }
@@ -9498,6 +9849,7 @@ export namespace Prisma {
   export type ScheduleSongsUncheckedCreateWithoutSongInput = {
     id?: number
     scheduleId?: number | null
+    preferredKey?: string | null
     order?: number
   }
 
@@ -9560,10 +9912,12 @@ export namespace Prisma {
     id?: IntFilter<"ScheduleSongs"> | number
     songId?: IntFilter<"ScheduleSongs"> | number
     scheduleId?: IntNullableFilter<"ScheduleSongs"> | number | null
+    preferredKey?: StringNullableFilter<"ScheduleSongs"> | string | null
     order?: IntFilter<"ScheduleSongs"> | number
   }
 
   export type ScheduleSongsCreateWithoutScheduleInput = {
+    preferredKey?: string | null
     order?: number
     song?: SongCreateNestedOneWithoutScheduleSongsInput
   }
@@ -9571,6 +9925,7 @@ export namespace Prisma {
   export type ScheduleSongsUncheckedCreateWithoutScheduleInput = {
     id?: number
     songId: number
+    preferredKey?: string | null
     order?: number
   }
 
@@ -10239,10 +10594,12 @@ export namespace Prisma {
   export type ScheduleSongsCreateManySongInput = {
     id?: number
     scheduleId?: number | null
+    preferredKey?: string | null
     order?: number
   }
 
   export type ScheduleSongsUpdateWithoutSongInput = {
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
     Schedule?: ScheduleUpdateOneWithoutScheduleSongsNestedInput
   }
@@ -10250,18 +10607,21 @@ export namespace Prisma {
   export type ScheduleSongsUncheckedUpdateWithoutSongInput = {
     id?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsUncheckedUpdateManyWithoutSongInput = {
     id?: IntFieldUpdateOperationsInput | number
     scheduleId?: NullableIntFieldUpdateOperationsInput | number | null
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsCreateManyScheduleInput = {
     id?: number
     songId: number
+    preferredKey?: string | null
     order?: number
   }
 
@@ -10277,6 +10637,7 @@ export namespace Prisma {
   }
 
   export type ScheduleSongsUpdateWithoutScheduleInput = {
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
     song?: SongUpdateOneWithoutScheduleSongsNestedInput
   }
@@ -10284,12 +10645,14 @@ export namespace Prisma {
   export type ScheduleSongsUncheckedUpdateWithoutScheduleInput = {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 
   export type ScheduleSongsUncheckedUpdateManyWithoutScheduleInput = {
     id?: IntFieldUpdateOperationsInput | number
     songId?: IntFieldUpdateOperationsInput | number
+    preferredKey?: NullableStringFieldUpdateOperationsInput | string | null
     order?: IntFieldUpdateOperationsInput | number
   }
 

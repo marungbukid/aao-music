@@ -1,0 +1,27 @@
+{
+  "name": "AAO Music Team Song Database",
+  "short_name": "AAO Lyrics & Chords",
+  "theme_color": "#DC2626",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "orientation": "natural",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

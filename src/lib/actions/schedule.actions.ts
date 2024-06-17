@@ -17,10 +17,9 @@ export async function getScheduleByPage({
 }) {
   const totalCount = await prisma.schedule.count({
     where: {
+      locationId: locationId,
       ...(query && {
-        date: {
-          equals: query!,
-        },
+        date: query
       }),
     },
   });
@@ -37,9 +36,7 @@ export async function getScheduleByPage({
           equals: query!,
         },
       }),
-      locationId: {
-        equals: locationId,
-      },
+      locationId: locationId,
     },
     include: {
       songLead: true,
