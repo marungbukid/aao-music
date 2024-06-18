@@ -28,7 +28,7 @@ export default async function SongPage({
         <Button>Edit</Button>
       </Link>
 
-      <ChordSheetRenderer song={song} />
+      <ChordSheetRenderer song={song} preferredKey={song.key} />
     </div>
 
   );
