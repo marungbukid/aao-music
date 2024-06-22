@@ -3,10 +3,10 @@
   "short_name": "AAO Lyrics & Chords",
   "theme_color": "#DC2626",
   "background_color": "#ffffff",
-  "display": "browser",
-  "orientation": "natural",
-  "scope": "/",
-  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "https://music.aaoministry.com",
+  "start_url": "https://music.aaoministry.com",
   "icons": [
     {
       "src": "/icons-192.png",
