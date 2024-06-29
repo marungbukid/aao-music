@@ -11,6 +11,13 @@ export default function ScheduleSongsView({ scheduleSongs }: { scheduleSongs: Sc
     localStorage.setItem(`prefKey_${scheduleSongId}`, preferredKey);
   };
 
+  const getPreferredKey = (id: number) => {
+    if (typeof window !== 'undefined') {
+      return  window?.localStorage?.getItem(`prefKey_${id}`);
+    }
+
+    return null;
+  }
 
   return (
     <Carousel className='-mx-4 min-h-screen'>
@@ -26,7 +33,7 @@ export default function ScheduleSongsView({ scheduleSongs }: { scheduleSongs: Sc
                 <p className='mb-4 text-sm text-muted-foreground'>Orig Key: {item.song.key}</p>
               </div>
               <div className=''>
-                <ChordSheetRenderer song={item.song} preferredKey={localStorage.getItem(`prefKey_${item.id}`) ?? item.song.key}
+                <ChordSheetRenderer song={item.song} preferredKey={getPreferredKey(item.id) ?? item.song.key}
                   onPreferredKeyChanged={(async function (key: string) {
                     console.log('Preferred key changed: ', key);
                     // await updatePreferredKey(item.id, key);

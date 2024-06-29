@@ -15,16 +15,19 @@ import {revalidate} from "@/lib/actions/song.actions";
 type ChordSheetRendererProps = {
     song: Song;
     preferredKey: string;
-    onPreferredKeyChanged?(preferredKey: string): Promise<void>;
+    onPreferredKeyChanged?(preferredKey: string): void;
 }
 
-export default function ChordSheetRenderer(
-    {song, preferredKey, onPreferredKeyChanged}: ChordSheetRendererProps) {
+export default function ChordSheetRenderer({
+    song, 
+    preferredKey, 
+    onPreferredKeyChanged
+}: ChordSheetRendererProps) {
     const parser = chordSheetParserFactory(song.chordSheetType);
 
     const [fontSize, setFontSize] = useState(1.0)
-    const [currentKey, setCurrentKey] = useState<string>(preferredKey);
-    const [parsedSong, setParsedSong] = useState(parser.parse(song.lyric).setKey(preferredKey))
+    const [currentKey, setCurrentKey] = useState<string>(song.key);
+    const [parsedSong, setParsedSong] = useState(parser.parse(song.lyric).setKey(song.key))
 
     function renderChordSheet() {
         const formatter = new ChordSheetJS.HtmlDivFormatter();
@@ -41,10 +44,12 @@ export default function ChordSheetRenderer(
     }
 
     useEffect(() => {
-        setParsedSong(_ => parsedSong.changeKey(preferredKey));
-        console.log('changed key', parsedSong.key)
-
-    }, [preferredKey]);
+        if (song.key !== preferredKey) {
+            console.log('changing current key to ', preferredKey)
+            // setCurrentKey(preferredKey);
+            // setParsedSong(_ => parsedSong.changeKey(preferredKey));
+        }
+    }, [])
 
     return (
         <div className=''>
@@ -52,13 +57,12 @@ export default function ChordSheetRenderer(
                 <div className='inline-flex items-center gap-2'>
                     <span className='text-sm whitespace-nowrap'>Current Key:</span>
                     <Select onValueChange={e => {
+                        console.log()
                         setCurrentKey(e)
                         setParsedSong(_ => parsedSong.changeKey(e));
                         if (onPreferredKeyChanged) {
-                            (async function() {
-                                console.log('preferred key changed')
-                                await onPreferredKeyChanged(e);
-                            })();
+                            console.log('preferred key changed')
+                            onPreferredKeyChanged(e);
                         }
                     }} defaultValue={currentKey}>
                         <SelectTrigger>
